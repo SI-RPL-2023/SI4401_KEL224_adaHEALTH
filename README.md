@@ -26,7 +26,7 @@ _Copy this command on your terminal or git bash_
 Clone project from github
 
 ```bash
-git clone https://github.com/SI-RPL-2023/SI4401-223-DoFun.git
+git clone https://github.com/SI-RPL-2023/SI4401_KEL224_adaHEALTH.git
 ```
 
 -   copy the .env.example file to .env
