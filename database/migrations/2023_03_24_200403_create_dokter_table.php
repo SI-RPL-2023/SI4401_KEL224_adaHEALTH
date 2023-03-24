@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('dokter', function (Blueprint $table) {
+        Schema::create('dokters', function (Blueprint $table) {
             $table->id();
             $table->string('nama_dokter');
             $table->string('email');
@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('password');
             $table->string('no_telp');
             $table->string('gender');
-            $table->string('tanggal_lahir');
+            $table->date('tanggal_lahir');
             $table->string('role')->default('dokter');
             $table->timestamps();
         });

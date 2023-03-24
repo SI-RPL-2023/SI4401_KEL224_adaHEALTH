@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('password');
             $table->string('no_telp');
             $table->string('gender');
-            $table->string('tanggal_lahir');
+            $table->date('tanggal_lahir');
             $table->string('role')->default('user');
             $table->timestamps();
         });
