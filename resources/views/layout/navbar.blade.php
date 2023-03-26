@@ -9,12 +9,12 @@
                     <div class="w-[5px] h-[40px] bg-[#FFFFFF] ml-[95px]"></div>
                     <label for="default-search" class="mb-2 text-sm font-medium  sr-only dark:text-white">Search</label>
                     <div class="relative">
-                        <div class="absolute inset-y-0 ml-[50px] flex items-center ml-[20px] pointer-events-none">
-                            <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400 text-[#ffffff]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <div class="absolute inset-y-0 ml-[20px] flex items-center pointer-events-none">
+                            <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                             </svg>
                         </div>
-                        <input class=" w-[500px] ml-[10px] p-4 pl-10 text-sm bg-transparent placeholder:text-white " placeholder="Search">
+                        <input class=" w-[500px] ml-[10px] p-4 pl-10 text-sm bg-transparent focus:outline-none text-white placeholder:text-white " placeholder="Search">
 
                     </div>
                     <div class="flex flex-shrink-0 items-center">
