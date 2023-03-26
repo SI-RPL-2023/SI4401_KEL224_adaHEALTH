@@ -17,6 +17,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/rekomendasirs', function () {
-    return view('rekomendasirs');
+Route::get('/home', function () {
+    return view('LandingPage');
 });
