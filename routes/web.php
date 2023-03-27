@@ -20,3 +20,7 @@ Route::get('/', function () {
 Route::get('/home', function () {
     return view('LandingPage');
 });
+
+Route::get('/rekomendasirs', function () {
+    return view('rekomendasirs');
+});
