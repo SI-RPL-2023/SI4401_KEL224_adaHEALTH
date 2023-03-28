@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\HomeController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,10 +15,25 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
-Route::get('/home', function () {
-    return view('LandingPage');
+// Route::get('/', function () {
+//     return view('LandingPage', ['title' => 'Home']);
+// });
+
+route::get('/', [HomeController::class, "show"]);
+route::get('/redirects', [HomeController::class, "index"]);
+
+route::post('/logout', [HomeController::class, "logout"])->name('logout');
+
+Route::middleware([
+    'auth:sanctum',
+    config('jetstream.auth_session'),
+    'verified'
+])->group(function () {
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->name('dashboard');
 });
