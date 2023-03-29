@@ -1,4 +1,4 @@
-    <nav class="bg-[#6A62C4]">
+    <nav class="bg-[#6A62C4] w-screen">
         <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
             <div class="relative flex h-16 items-center justify-between">
                 <img class="w-[100px] h-[80px] ml-[-97px] " src="{{url('asset/logonavbar.png')}}" alt="">
