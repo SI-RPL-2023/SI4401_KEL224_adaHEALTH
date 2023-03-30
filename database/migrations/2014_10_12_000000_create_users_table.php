@@ -23,7 +23,6 @@ return new class extends Migration
             $table->string('photo', 2048)->nullable();
             $table->string('roles')->default('0');
             $table->timestamp('email_verified_at')->nullable();
-            $table->rememberToken();
             $table->timestamps();
 
         });
