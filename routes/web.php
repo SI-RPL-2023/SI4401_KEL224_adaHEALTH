@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\HospitalController;
+use App\Http\Controllers\ApotekController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -33,6 +34,8 @@ route::post('/logout', [HomeController::class, "logout"])->name('logout');
 Route::get('/rekomendasirs', [HospitalController::class, 'index']);
 Route::get('/detail/{id}', [HospitalController::class, 'show'])->name('hospital.show');
 
+Route::get('/apotek', [ApotekController::class, 'index']);
+Route::get('/detail/{id}', [ApotekController::class, 'show'])->name('apotek.show');
 
 Route::middleware([
     'auth:sanctum',
