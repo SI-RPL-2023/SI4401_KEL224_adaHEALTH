@@ -47,3 +47,8 @@ Route::middleware([
 Route::get('/apotek', function () {
     return view('rekomendasi-apotek');
 });
+
+
+Route::get('/detailapotek', function () {
+    return view('detailapotek');
+});
