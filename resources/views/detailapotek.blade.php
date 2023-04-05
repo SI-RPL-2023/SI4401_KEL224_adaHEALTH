@@ -24,7 +24,7 @@
           </li>
 
           <li class="text-sm">
-            <a href="#" aria-current="page" class="font-medium text-gray-500 hover:text-gray-600">Kimia Farma</a>
+            <a href="#" aria-current="page" class="font-medium text-gray-500 hover:text-gray-600">{{ $apotek->name }}</a>
           </li>
         </ol>
       </nav>
@@ -49,7 +49,7 @@
       <!-- Product info -->
       <div class="mx-auto max-w-2xl px-4 pb-16 pt-10 sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:grid-rows-[auto,auto,1fr] lg:gap-x-8 lg:px-8 lg:pb-24 lg:pt-16">
         <div class="lg:col-span-2 lg:border-r lg:border-gray-200 lg:pr-8">
-          <h1 class="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">Kimia Farma</h1>
+          <h1 class="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">{{ $apotek->name }}</h1>
         </div>
 
         <!-- Options -->
@@ -149,7 +149,7 @@
             <h3 class="sr-only">Description</h3>
 
             <div class="space-y-6">
-              <p class="text-base text-gray-900">Ini apotek kimia farma bosku</p>
+              <p class="text-base text-gray-900">{{ $apotek->description }}</p>
             </div>
           </div>
 
@@ -158,7 +158,7 @@
 
             <div class="mt-4">
               <ul role="list" class="list-disc space-y-2 pl-4 text-sm">
-                <li class="text-gray-400"><span class="text-gray-600">bandung</span></li>
+                <li class="text-gray-400"><span class="text-gray-600">{{ $apotek->address }}</span></li>
                 <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d506820.922159171!2d107.31028985804836!3d-7.063388480586449!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e68eeb88c17d7b1%3A0x301e8f1fc28b8e0!2sBandung%20Regency%2C%20West%20Java!5e0!3m2!1sen!2sid!4v1680188149240!5m2!1sen!2sid" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
 
               </ul>
@@ -169,7 +169,7 @@
             <h2 class="text-sm font-medium text-gray-900">Contact Us</h2>
 
             <div class="mt-4 space-y-6">
-              <p class="text-sm text-blue-600">081234567890</p>
+              <p class="text-sm text-blue-600">{{ $apotek->phone_number }}</p>
             </div>
           </div>
         </div>

@@ -11,7 +11,7 @@ class ApotekController extends Controller
     {
         $apoteks = Apotek::all();
 
-        return view('rekomendasiapotek', ['apoteks' => $apoteks], ['title'=>'Apotek']);
+        return view('rekomendasi-apotek', ['apoteks' => $apoteks], ['title'=>'Apotek']);
     }
     public function show($id)
     {
