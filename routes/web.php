@@ -2,9 +2,10 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\HelpController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\HospitalController;
 use App\Http\Controllers\ApotekController;
+use App\Http\Controllers\HospitalController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -19,6 +20,9 @@ use App\Http\Controllers\ApotekController;
 // Route::get('/', function () {
 //     return view('welcome');
 // });
+Route::get('/help', function () {
+    return view('help', ['title'=>'Help']);
+});
 
 // Route::get('/', function () {
 //     return view('LandingPage', ['title' => 'Home']);
@@ -36,6 +40,9 @@ Route::get('/detail/{id}', [HospitalController::class, 'show'])->name('hospital.
 
 Route::get('/apotek', [ApotekController::class, 'index']);
 Route::get('/detail/{id}', [ApotekController::class, 'show'])->name('apotek.show');
+
+Route::get('/help', [HelpController::class, 'index'])->name('help.index');
+
 
 Route::middleware([
     'auth:sanctum',
