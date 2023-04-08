@@ -32,14 +32,23 @@
             <input type="text" id="simple-search" class="bg-gray-50 border focus:outline-none    border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 " placeholder="Search" required>
         </div>
     </form>
-    <div class="mt-[141px]">
-        <h1 class=" top-72 text-center font-bold text-black text-[24px]">Kategori</h1>
+    <div class="mt-[120px]">
+        <h1 class="mt-[-20px] text-center font-bold text-black text-[24px]">Kategori</h1>
         <div class="flex justify-center mt-[62px] items-center">
-            <div class=" top-80 bg-[#6A62C4] w-[184px] h-[124px] m-8 rounded-[5px]">fasdasf</div>
-            <div class=" top-80 bg-[#6A62C4] w-[184px] h-[124px] m-8 rounded-[5px]">fasdasf</div>
-            <div class=" top-80 bg-[#6A62C4] w-[184px] h-[124px] m-8 rounded-[5px]">fasdasf</div>
-            <div class=" top-80 bg-[#6A62C4] w-[184px] h-[124px] m-8 rounded-[5px]">fasdasf</div>
+            <div class="mt-[20px] bg-[#6A62C4] w-[251px] h-[124px] m-8 rounded-[5px]">
+                <p class="grid justify-items-center m-12 font-bold text-[16px] text-white">FLU</p>
+            </div>
+            <div class="mt-[20px] bg-[#6A62C4] w-[251px] h-[124px] m-8 rounded-[5px]">
+                <p class="grid justify-items-center m-12 font-bold text-[16px] text-white">SAKIT GIGI</p>
+            </div>
+            <div class="mt-[20px] bg-[#6A62C4] w-[251px] h-[124px] m-8 rounded-[5px]">
+                <p class="grid justify-items-center m-12 font-bold text-[16px] text-white">LUKA KULIT</p>
+            </div>
+            <div class="mt-[20px] bg-[#6A62C4] w-[251px] h-[124px] m-8 rounded-[5px]">
+                <p class="grid justify-items-center m-12 font-bold text-[16px] text-white">COVID-19</p>
+            </div>
         </div>
+        <h1 class=" top-110 text-center font-bold text-[#6A62C4] text-[16px]">Lainnya ></h1>
     </div>
 </div>
 
