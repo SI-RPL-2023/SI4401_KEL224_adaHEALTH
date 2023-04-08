@@ -8,6 +8,16 @@
     @vite('resources/css/app.css')
 </head>
 <body>
+    @if (session('success'))
+    <div class="toast">
+        <div class="alert alert-info">
+            <div>
+                <span>{{ session('success') }}</span>
+            </div>
+        </div>
+    </div>
+    @endif
+
     <div class="bg-[#665EBB] w-screen h-screen flex justify-center items-center">
 
         <div class=" card bg-[#3F55AC] w-[1200px] h-[500px] rounded-[35px] flex justify-center items-center flex-col drop-shadow-2xl">
@@ -16,14 +26,27 @@
                     <img class="w-[200px] h-[200px] mt-[-40px]" src="{{url('asset/logo.png')}}" alt="">
                     <h1 class="font-bold text-[#909090] text-[20px] mt-[-12px]">Welcome Back !</h1>
 
-                    <form action="{{ route('login') }}" method="POST" class="flex justify-center items-center flex-col text-start">
+                    <form action="{{ url('login/proses') }}" method="POST" class="flex justify-center items-center flex-col text-start">
                         @csrf
                         <label class="text-[#909090] mt-[17px]" for="">Email</label>
-                        <input type="text" class="w-[400px] h-[38px] border-b-2 border-[#909090] focus:outline-none" type="email" name="email" :value="old('email')" required autofocus autocomplete="username">
+                        <input autofocus type="text" class="w-[400px] h-[38px] border-b-2 border-[#909090] focus:outline-none  @error('email') is-invalid @enderror" type="email" name="email" :value="old('email')" autofocus autocomplete="email">
+                        @error('email')
+                        <div class="alert alert-error shadow-lg">
+                            <div>
+                              <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current flex-shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                              <span>{{ $message }}</span>
+                            </div>
+                        </div>
+                        @enderror
 
                         <label class="text-[#909090]" for="password">Password</label>
-                        <input type="password" class="w-[400px] h-[38px] border-b-2 border-[#909090] focus:outline-none"  type="password" name="password" required autocomplete="current-password">
+                        <input type="password" class="w-[400px] h-[38px] border-b-2 border-[#909090] focus:outline-none  @error('password') is-invalid @enderror"  type="password" name="password"  autocomplete="current-password">
 
+                        @error('password')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                        @enderror
                         <button class="bg-[#665ebb] w-[400px] h-[51px] mt-[36px] text-white text-[16px] rounded-[15px]" type="submit">Login</button>
                         <div class="flex mt-[36px]">
                             <p class="text-[#909090] pr-[20px]">Term of use</p>
