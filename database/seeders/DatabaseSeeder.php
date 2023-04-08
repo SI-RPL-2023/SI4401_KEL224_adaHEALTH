@@ -16,6 +16,8 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             DokterSeeder::class,
             AdminSeeder::class,
+            HospitalSeeder::class,
+            // HospitalRatingSeeder::class,
         ]);
     }
 }
