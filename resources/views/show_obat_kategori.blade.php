@@ -33,24 +33,21 @@
         </div>
     </form>
     <div class="mt-[120px]">
-        <h1 class="mt-[-20px] text-center font-bold text-black text-[24px]">Kategori</h1>
+        <h1 class="mt-[-20px] text-center font-bold text-black text-[24px]">{{ $kategori }}</h1>
         <div class="flex justify-center mt-[62px] items-center">
-            @if ($kategori_obat->isEmpty())
+            @if ($obats->isEmpty())
                 <p>Tidak terdapat data obat.</p>
             @else
-                @foreach($kategori_obat as $obat)
+                @foreach($obats as $obat)
                     <div class="mt-[20px] bg-[#6A62C4] w-[251px] h-[124px] m-8 rounded-[5px]">
-                        <a href="{{ route('obat.kategori', $obat->kategori) }}">
-                            <p class="grid justify-items-center m-12 font-bold text-[16px] text-white">{{ $obat->kategori }}</p>
+                        <a href="{{ route('obat.detail', $obat->id) }}">
+                            <p class="grid justify-items-center m-12 font-bold text-[16px] text-white">{{ $obat->nama }}</p>
                         </a>
                     </div>
                 @endforeach
             @endif
         </div>
-        <h1 class=" top-110 text-center font-bold text-[#6A62C4] text-[16px]">Lainnya ></h1>
     </div>
-
-
 </div>
 
 
