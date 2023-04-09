@@ -28,7 +28,7 @@
 
                             <a href="{{ url('/') }}" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">AboutUs</a>
 
-                            <a href="{{ url('/') }}" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Help </a>
+                            <a href="{{ url('/help') }}" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Help </a>
                         </div>
                     </div>
                 </div>

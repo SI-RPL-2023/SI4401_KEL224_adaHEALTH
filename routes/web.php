@@ -34,7 +34,7 @@ Route::get('/', function () {
 });
 
 // route::get('/', [HomeController::class, "show"]);
-route::get('/redirects', [HomeController::class, "index"]);
+// route::get('/redirects', [HomeController::class, "index"]);
 
 route::post('/logout', [HomeController::class, "logout"])->name('logout');
 
@@ -76,7 +76,7 @@ Route::get('/hargadanjenisobat', function () {
 });
 
 Route::get('/obats', [ObatController::class, 'index']);
-Route::get('/obats', [ObatController::class, 'showKategori']);
+
 Route::get('/obat/{kategori}', [ObatController::class, 'kategori'])->name('obat.kategori');
 Route::get('/obat/{obat}/detail', [ObatController::class, 'detail'])->name('obat.detail');
 
@@ -89,4 +89,31 @@ Route::middleware([
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
+});
+
+Route::get('login', [LoginController::class, 'index'])->name('login');
+//Middleware Login,Logout,
+Route::controller(LoginController::class)->group(function () {
+    Route::get('login', 'index')->name('login');
+    Route::post('login/proses', 'proses');
+    Route::get('logout', 'logout');
+});
+
+//Middleware Group setelah login
+Route::group(['middleware' => ['auth']], function () {
+
+
+    Route::group(['middleware' => ['CekRoleMiddleware:0']], function () {
+        Route::resource('/user', UserController::class);
+
+    });
+
+    Route::group(['middleware' => ['CekRoleMiddleware:1']], function () {
+        Route::resource('dashboard', AdminController::class);
+    });
+
+    Route::group(['middleware' => ['CekRoleMiddleware:2']], function () {
+        Route::resource('dokter', DokterController::class);
+    });
+
 });

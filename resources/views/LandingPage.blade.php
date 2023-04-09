@@ -46,11 +46,13 @@
                             </div>
                         </button>
                     </a>
+                    <a href="{{ url('/obats') }}">
                     <button>
                         <div class="bg-white w-[174px] h-[103px] rounded-[15px] text-start flex items-end p-[15px]">
                             Rekomendasi</br>Obat
                         </div>
                     </button>
+                    </a>
                     <button>
                         <div class="bg-white bg-opacity-50 w-[174px] h-[103px] rounded-[15px] flex items-end p-[15px]">
                             Show All
