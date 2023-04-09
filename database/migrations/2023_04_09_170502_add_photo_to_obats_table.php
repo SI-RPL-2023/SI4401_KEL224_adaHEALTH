@@ -11,14 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('obat', function (Blueprint $table) {
-            $table->id();
-            $table->string('nama');
-            $table->string('jenis');
-            $table->string('kategori');
-            $table->string('harga');
-            $table->string('qty');
-            $table->timestamps();
+        Schema::table('obats', function (Blueprint $table) {
+            $table->string('photo')->nullable();
         });
     }
 
@@ -27,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('obat');
+        Schema::table('obats', function (Blueprint $table) {
+            //
+        });
     }
 };
