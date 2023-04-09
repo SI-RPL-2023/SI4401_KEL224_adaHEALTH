@@ -14,10 +14,12 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             UserSeeder::class,
-            DokterSeeder::class,
-            AdminSeeder::class,
-            HospitalSeeder::class,
-            // HospitalRatingSeeder::class,
+            // DokterSeeder::class,
+            // AdminSeeder::class,
+            ObatFluSeeder::class,
+            ObatLukaKulitSeeder::class,
+            ObatSakitGigiSeeder::class,
+            ObatCovid19Seeder::class,
         ]);
     }
 }

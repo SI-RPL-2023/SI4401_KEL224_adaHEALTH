@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\ObatController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
@@ -66,7 +66,28 @@ Route::middleware([
     })->name('dashboard');
 });
 
+Route::get('/hargadanjenisobat', function () {
+    return view('hargadanjenisobat');
+});
 
+Route::get('/obats', [ObatController::class, 'index']);
+Route::get('/obats', [ObatController::class, 'showKategori']);
+Route::get('/obat/{kategori}', [ObatController::class, 'kategori'])->name('obat.kategori');
+Route::get('/obat/{obat}/detail', [ObatController::class, 'detail'])->name('obat.detail');
+
+
+
+
+
+Route::middleware([
+    'auth:sanctum',
+    config('jetstream.auth_session'),
+    'verified'
+])->group(function () {
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->name('dashboard');
+});
 // Route::get('login', [LoginController::class, 'index'])->name('login');
 
 //Middleware Login,Logout,
