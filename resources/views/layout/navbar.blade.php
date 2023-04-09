@@ -22,19 +22,18 @@
                     <div class="hidden sm:ml-6 sm:block">
                         <div class="flex space-x-4">
                             <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-                            <a href="#" class="text-gray-300 hover:bg-gray-700 text-white rounded-md px-3 py-2 text-sm font-medium" aria-current="page">Home</a>
+                            <a href="{{ url('/') }}" class="text-gray-300 hover:bg-gray-700 text-white rounded-md px-3 py-2 text-sm font-medium" aria-current="page">Home</a>
 
-                            <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Service</a>
+                            <a href="{{ url('/') }}" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Service</a>
 
-                            <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">AboutUs</a>
+                            <a href="{{ url('/') }}" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">AboutUs</a>
 
-                            <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Help </a>
+                            <a href="{{ url('/') }}" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Help </a>
                         </div>
                     </div>
                 </div>
+                @auth
                 <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-
-
                     <!-- Profile dropdown -->
                     <div class="relative ml-3">
                         <div>
@@ -46,7 +45,7 @@
                         </div>
                         <!--
                   Dropdown menu, show/hide based on menu state.
-      
+
                   Entering: "transition ease-out duration-100"
                     From: "transform opacity-0 scale-95"
                     To: "transform opacity-100 scale-100"
@@ -57,12 +56,26 @@
 
                     </div>
                     <div class="group">
-                        <a href="#" class="text-gray-300 text-white rounded-md px-3 py-2 text-sm font-medium" aria-current="page">Bayusatrio</a>
+                        <a href="#" class="text-gray-300 text-white rounded-md px-3 py-2 text-sm font-medium" aria-current="page">{{ Auth::user()->email }}</a>
                         <div class="group-hover:block hidden w-[100px] h-[60px] bg-white shadow-lg absolute mt-[5px]">
                             <button class="border-b border-black w-full flex items-center justify-center">Profile</button>
-                            <button class="w-full">Logout</button>
+                            <form action="{{ route('logout') }}" method="post">
+                                @csrf
+                                <button class="w-full" type="submit">
+                                    Logout
+                                </button>
+                            </form>
                         </div>
                     </div>
+                    @else
+                    <button class="bg-sky-500 hover:bg-sky-700 p-1.5 ml-1.5 rounded-lg">
+                        <a href="{{ url('/login') }}">Login</a>
+                    </button>
+                    <button class="bg-[#4c1d95] text-white hover:bg-sky-700 p-1.5 ml-1.5 rounded-lg">
+                        <a href="{{ url('/register') }}">Register</a>
+                    </button>
+
+                    @endauth
                 </div>
             </div>
         </div>

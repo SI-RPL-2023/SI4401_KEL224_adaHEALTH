@@ -31,5 +31,10 @@ class CreateNewUser implements CreatesNewUsers
             'email' => $input['email'],
             'password' => Hash::make($input['password']),
         ]);
+
+    }
+    protected function registered(Request $request, $user)
+    {
+        return redirect('/login')->with('status', 'Silahkan login untuk melanjutkan');
     }
 }
