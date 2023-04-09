@@ -115,3 +115,7 @@ Route::group(['middleware' => ['auth']], function () {
     });
 
 });
+
+Route::get('/rekomendasirs', function () {
+    return view('rekomendasirs');
+});
