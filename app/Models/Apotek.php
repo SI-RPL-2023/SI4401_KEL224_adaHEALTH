@@ -19,4 +19,14 @@ class Apotek extends Model
     protected $hidden = [
         'created_at', 'updated_at',
     ];
+    
+    public function ratings()
+    {
+        return $this->hasMany(ApotekRating::class);
+    }
+
+    public function averageRating()
+    {
+        return $this->ratings()->avg('rating');
+    }
 }

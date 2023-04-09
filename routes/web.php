@@ -53,6 +53,8 @@ Route::post('register', [RegisterController::class, 'register']);
 Route::get('/apotek', [ApotekController::class, 'index']);
 Route::get('/detail/{id}', [ApotekController::class, 'show'])->name('apotek.show');
 
+Route::get('apotek/{id}/rate', [ApotekController::class, 'createRating'])->name('apotek.createRating');
+Route::post('apotek/{id}/rate', [ApotekController::class, 'storeRating'])->name('apotek.storeRating');
 
 Route::middleware([
     'auth:sanctum',
