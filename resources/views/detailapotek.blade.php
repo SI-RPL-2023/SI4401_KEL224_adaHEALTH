@@ -84,9 +84,34 @@
                 </svg>
               </div>
               <p class="sr-only">4 out of 5 stars</p>
-              <a href="#" class="ml-3 text-sm font-medium text-indigo-600 hover:text-indigo-500">117 reviews</a>
+              <a href="#" class="ml-3 text-sm font-medium text-indigo-600 hover:text-indigo-500">
+
+                @if($reviewCount > 0)
+                    <h2>{{ $apotek->name }}</h2>
+                    <p>Review count: {{ $reviewCount }}</p>
+                @else
+                    <h6 class="text-secondary mb-0">Kosong</h6>
+                @endif
+
+
+
+
+              </a>
             </div>
           </div>
+          <h2>{{ $apotek->name }}</h2>
+
+          @php
+              $ratingCounts = $apotek->ratings->groupBy('rating')->map(function ($ratings) {
+                  return $ratings->count();
+              })->toArray();
+
+              $stars = [5, 4, 3, 2, 1];
+          @endphp
+
+          @foreach ($stars as $star)
+              <p>{{ $star }} star: {{ $ratingCounts[$star] ?? 0 }} ratings</p>
+          @endforeach
 
           <form class="mt-10">
 
@@ -138,8 +163,24 @@
                 </div>
               </fieldset>
             </div>
+            @if(session('success'))
+                <div class="alert alert-success">
+                    {{ session('success') }}
+                </div>
+            @endif
+            <h2>Nilai Rata-rata: {{ $hospital->averageRating() }}</h2>
 
-            <button type="submit" class="mt-10 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Beri Nilai</button>
+            <form method="POST" action="{{ route('hospital.storeRating', ['id' => $hospital->id]) }}">
+                @csrf
+                <h2>Beri Nilai Rumah Sakit</h2>
+                <input type="number" name="rating" step="1" min="0" max="5" required>
+                <button type="submit" class="mt-10 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Beri Nilai</button>
+            </form>
+                @if (session('error'))
+                <div class="alert alert-danger">
+                    {{ session('error') }}
+                </div>
+            @endif
           </form>
         </div>
 
