@@ -18,12 +18,11 @@ class ApotekController extends Controller
     public function show($id)
     {
         $apotek = Apotek::find($id);
-        return view('detailapotek', ['apotek' => $apotek], ['title'=>'Detail Apotek']);
 
         $ratingCount = ApotekRating::where('apotek_id', $id)->count();
         $reviewCount = ApotekRating::where('apotek_id', $id)->whereNotNull('rating')->count();
 
-        return view('detailrs', ['apotek' => $apotek], ['title'=>'Detail RS',
+        return view('detailapotek', ['apotek' => $apotek], ['title'=>'Detail Apotek',
         'sum' => ApotekRating::count('apotek_id'),
         'ratingCount' => $ratingCount,
         'reviewCount' => $reviewCount,

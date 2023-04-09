@@ -41,10 +41,6 @@ Route::get('/hospitals/{id}', [HospitalController::class, 'show'])->name('hospit
 
 Route::get('hospital/{id}/rate', [HospitalController::class, 'createRating'])->name('hospital.createRating');
 Route::post('hospital/{id}/rate', [HospitalController::class, 'storeRating'])->name('hospital.storeRating');
-
-
-Route::get('apotek/{id}/rate', [ApotekController::class, 'createRating'])->name('apotek.createRating');
-Route::post('apotek/{id}/rate', [ApotekController::class, 'storeRating'])->name('apotek.storeRating');
 //End Route -----------------------------------------------------------------------------------
 
 

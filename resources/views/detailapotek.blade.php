@@ -86,9 +86,9 @@
               <p class="sr-only">4 out of 5 stars</p>
               <a href="#" class="ml-3 text-sm font-medium text-indigo-600 hover:text-indigo-500">
 
-                @if($reviewCount > 0)
+                @if( $reviewCount > 0)
                     <h2>{{ $apotek->name }}</h2>
-                    <p>Review count: {{ $reviewCount }}</p>
+                    <p>Review count: {{  $reviewCount }}</p>
                 @else
                     <h6 class="text-secondary mb-0">Kosong</h6>
                 @endif
@@ -168,11 +168,11 @@
                     {{ session('success') }}
                 </div>
             @endif
-            <h2>Nilai Rata-rata: {{ $hospital->averageRating() }}</h2>
+            <h2>Nilai Rata-rata: {{ $apotek->averageRating() }}</h2>
 
-            <form method="POST" action="{{ route('hospital.storeRating', ['id' => $hospital->id]) }}">
+            <form method="POST" action="{{ route('apotek.storeRating', ['id' => $apotek->id]) }}">
                 @csrf
-                <h2>Beri Nilai Rumah Sakit</h2>
+                <h2>Beri Nilai Apotek</h2>
                 <input type="number" name="rating" step="1" min="0" max="5" required>
                 <button type="submit" class="mt-10 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Beri Nilai</button>
             </form>
