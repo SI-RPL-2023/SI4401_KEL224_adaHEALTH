@@ -17,7 +17,8 @@ class ObatSakitGigiSeeder extends Seeder
                 'kategori' => 'Sakit Gigi',
                 'deskripsi' => 'Digunakan untuk meredakan rasa sakit akibat sakit gigi.',
                 'harga' => 10000,
-                'qty' => 50
+                'qty' => 50,
+                'photo' => 'https://picsum.photos/200/300'
             ]);
 
             Obat::create([
@@ -26,7 +27,8 @@ class ObatSakitGigiSeeder extends Seeder
                 'kategori' => 'Sakit Gigi',
                 'deskripsi' => 'Digunakan untuk membunuh bakteri di sekitar area gigi yang sakit, sehingga dapat membantu mengurangi rasa sakit dan peradangan.',
                 'harga' => 15000,
-                'qty' => 30
+                'qty' => 30,
+                'photo' => 'https://picsum.photos/200/300'
             ]);
 
             Obat::create([
@@ -35,7 +37,8 @@ class ObatSakitGigiSeeder extends Seeder
                 'kategori' => 'Sakit Gigi',
                 'deskripsi' => 'Digunakan untuk meredakan rasa sakit dan peradangan yang terkait dengan sakit gigi.',
                 'harga' => 20000,
-                'qty' => 100
+                'qty' => 100,
+                'photo' => 'https://picsum.photos/200/300'
             ]);
 
             Obat::create([
@@ -44,7 +47,8 @@ class ObatSakitGigiSeeder extends Seeder
                 'kategori' => 'Sakit Gigi',
                 'deskripsi' => 'Digunakan untuk meredakan rasa sakit di area gigi dan gusi.',
                 'harga' => 12000,
-                'qty' => 40
+                'qty' => 40,
+                'photo' => 'https://picsum.photos/200/300'
             ]);
 
             Obat::create([
@@ -53,7 +57,9 @@ class ObatSakitGigiSeeder extends Seeder
                 'kategori' => 'Sakit Gigi',
                 'deskripsi' => 'Digunakan untuk mengobati infeksi gigi yang parah dan memerlukan pengobatan medis.',
                 'harga' => 30000,
-                'qty' => 10
+                'qty' => 10,
+                'photo' => 'https://picsum.photos/200/300'
             ]);
+
         }
 }

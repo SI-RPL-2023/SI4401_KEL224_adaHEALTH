@@ -32,7 +32,30 @@
             <input type="text" id="simple-search" class="bg-gray-50 border focus:outline-none    border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 " placeholder="Search" required>
         </div>
     </form>
-    <div class="mt-[20px]">
+    <div class="container mx-auto py-8">
+        <h1 class="text-2xl font-bold mb-4">{{ $title }}</h1>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          @foreach($obats as $obat)
+          <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+            <img class="object-cover h-56 w-full" src="{{ $obat->photo }}" alt="{{ $obat->nama }}">
+            <div class="p-4">
+              <h2 class="text-xl font-bold mb-2">{{ $obat->nama }}</h2>
+              <p class="text-gray-700 text-base">{{ $obat->deskripsi }}</p>
+              <p class="text-gray-700 text-base mt-2">Harga: {{ $obat->harga }}</p>
+              <p class="text-gray-700 text-base mt-2">Kategori: {{ $obat->kategori }}</p>
+            </div>
+          </div>
+          @endforeach
+        </div>
+      </div>
+
+
+
+
+
+
+
+    {{-- <div class="mt-[20px]">
         <div class="drawer">
             <input id="my-drawer" type="checkbox" class="drawer-toggle" />
             <div class="drawer-content">
@@ -74,7 +97,7 @@
 
             </div>
         </div>
-    </div>
+    </div> --}}
 </div>
 
 

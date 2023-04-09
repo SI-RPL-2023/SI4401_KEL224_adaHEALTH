@@ -10,18 +10,8 @@ class ObatController extends Controller
     public function index()
     {
         $obats = Obat::all();
-        if ($obats->isEmpty()) {
-            throw new \Exception('Tidak terdapat data obat.');
-        }
-        $kategori_obat = collect();
-        $kategori_groups = $obats->groupBy('kategori');
-        foreach ($kategori_groups as $kategori => $group) {
-            $kategori_obat->push($group->first());
-            if ($kategori_obat->count() >= 5) {
-                break;
-            }
-        }
-        return view('hargadanjenisobat', ['kategori_obat' => $kategori_obat, 'title'=>'Obat']);
+
+        return view('hargadanjenisobat', ['obats' => $obats, 'title'=>'Obat']);
     }
 
 

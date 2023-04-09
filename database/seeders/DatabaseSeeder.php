@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
             ObatFluSeeder::class,
             ObatLukaKulitSeeder::class,
             ObatSakitGigiSeeder::class,
+            ObatCovid19Seeder::class,
         ]);
     }
 }

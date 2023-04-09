@@ -21,13 +21,16 @@ Route::get('/home', function () {
     return view('LandingPage');
 });
 
-// Route::get('/hargadanjenisobat', function () {
-//     return view('hargadanjenisobat');
-// });
+Route::get('/hargadanjenisobat', function () {
+    return view('hargadanjenisobat');
+});
 
 Route::get('/obats', [ObatController::class, 'index']);
+Route::get('/obats', [ObatController::class, 'showKategori']);
 Route::get('/obat/{kategori}', [ObatController::class, 'kategori'])->name('obat.kategori');
 Route::get('/obat/{obat}/detail', [ObatController::class, 'detail'])->name('obat.detail');
+
+
 
 
 
