@@ -18,6 +18,7 @@ class Obat extends Model
         'nama',
         'jenis',
         'kategori',
+        'deskripsi',
         'harga',
         'qty',
     ];

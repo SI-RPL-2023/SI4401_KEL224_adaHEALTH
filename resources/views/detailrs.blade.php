@@ -54,6 +54,8 @@
         <div class="lg:col-span-2 lg:border-r lg:border-gray-200 lg:pr-8">
           <h1 class="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">{{ $hospital->name }}</h1>
         </div>
+        @auth
+
 
         <!-- Options -->
         <div class="mt-4 lg:row-span-3 lg:mt-0">
@@ -86,12 +88,42 @@
                   <path fill-rule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z" clip-rule="evenodd" />
                 </svg>
               </div>
+
+
+
+
+
               <p class="sr-only">4 out of 5 stars</p>
-              <a href="#" class="ml-3 text-sm font-medium text-indigo-600 hover:text-indigo-500">117 reviews</a>
+              <a href="#" class="ml-3 text-sm font-medium text-indigo-600 hover:text-indigo-500">
+
+                @if($reviewCount > 0)
+                    <h2>{{ $hospital->name }}</h2>
+                    <p>Review count: {{ $reviewCount }}</p>
+                @else
+                    <h6 class="text-secondary mb-0">Kosong</h6>
+                @endif
+
+
+
+
+              </a>
             </div>
           </div>
+          <h2>{{ $hospital->name }}</h2>
 
-          <form class="mt-10">
+          @php
+              $ratingCounts = $hospital->ratings->groupBy('rating')->map(function ($ratings) {
+                  return $ratings->count();
+              })->toArray();
+
+              $stars = [5, 4, 3, 2, 1];
+          @endphp
+
+          @foreach ($stars as $star)
+              <p>{{ $star }} star: {{ $ratingCounts[$star] ?? 0 }} ratings</p>
+          @endforeach
+
+          <div class="mt-10">
 
             <!-- Sizes -->
             <div class="mt-10">
@@ -240,9 +272,25 @@
                 </div>
               </fieldset>
             </div>
+            @if(session('success'))
+                <div class="alert alert-success">
+                    {{ session('success') }}
+                </div>
+            @endif
+            <h2>Nilai Rata-rata: {{ $hospital->averageRating() }}</h2>
 
-            <button type="submit" class="mt-10 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Beri Nilai</button>
-          </form>
+            <form method="POST" action="{{ route('hospital.storeRating', ['id' => $hospital->id]) }}">
+                @csrf
+                <h2>Beri Nilai Rumah Sakit</h2>
+                <input type="number" name="rating" step="1" min="0" max="5" required>
+                <button type="submit" class="mt-10 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Beri Nilai</button>
+            </form>
+                @if (session('error'))
+                <div class="alert alert-danger">
+                    {{ session('error') }}
+                </div>
+            @endif
+        </div>
         </div>
 
         <div class="py-10 lg:col-span-2 lg:col-start-1 lg:border-r lg:border-gray-200 lg:pb-16 lg:pr-8 lg:pt-6">
@@ -278,4 +326,7 @@
       </div>
     </div>
   </div>
+  @else
+  <p>Jika ingin melihat detail, Silahkan <a href="{{ url('login') }}" class="text-[#1600FF]">Login </a> dahulu.</p>
+  @endauth
 @endsection

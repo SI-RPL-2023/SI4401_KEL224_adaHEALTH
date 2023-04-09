@@ -13,4 +13,3 @@
         </div>
     </div>
 </x-app-layout>
-<h1>HALAMAN DOKTER DAN ADMIN</h1>

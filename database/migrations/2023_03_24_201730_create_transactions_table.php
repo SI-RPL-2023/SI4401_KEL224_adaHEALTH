@@ -11,11 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('transaksi', function (Blueprint $table) {
+        Schema::create('transactions', function (Blueprint $table) {
             $table->id();
             $table->foreignId('id_user')->references('id')->on('users');
-            $table->foreignId('id_dokter')->references('id')->on('dokters');
-            $table->foreignId('id_obat')->references('id')->on('obat');
+            $table->foreignId('id_dokter')->references('id')->on('users');
+            $table->foreignId('id_obat')->references('id')->on('obats');
             $table->integer('total');
             $table->timestamps();
         });
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('transaksi');
+        Schema::dropIfExists('transactions');
     }
 };
