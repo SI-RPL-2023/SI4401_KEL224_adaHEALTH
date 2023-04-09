@@ -32,26 +32,52 @@
             <input type="text" id="simple-search" class="bg-gray-50 border focus:outline-none    border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 " placeholder="Search" required>
         </div>
     </form>
-    <div class="mt-[120px]">
-        <h1 class="mt-[-20px] text-center font-bold text-black text-[24px]">Kategori</h1>
-        <div class="flex justify-center mt-[62px] items-center">
-            @if ($kategori_obat->isEmpty())
-                <p>Tidak terdapat data obat.</p>
-            @else
-                @foreach($kategori_obat as $obat)
-                    <div class="mt-[20px] bg-[#6A62C4] w-[251px] h-[124px] m-8 rounded-[5px]">
-                        <a href="{{ route('obat.kategori', $obat->kategori) }}">
-                            <p class="grid justify-items-center m-12 font-bold text-[16px] text-white">{{ $obat->kategori }}</p>
-                        </a>
+    <div class="mt-[20px]">
+        <div class="drawer">
+            <input id="my-drawer" type="checkbox" class="drawer-toggle" />
+            <div class="drawer-content">
+                <!-- Page content here -->
+                <label for="my-drawer" class="btn btn-primary drawer-button">Tampilkan Jenis Penyakit</label>
+            </div>
+            <div class="drawer-side">
+                <label for="my-drawer" class="drawer-overlay"></label>
+                <div class="menu p-4 w-80 text-base-content bg-[#6A62C4]">
+                    <label for="my-modal" class="text-white">FLU</label>
+
+                    <!-- Put this part before </body> tag -->
+                    <input type="checkbox" id="my-modal" class="modal-toggle" />
+                    <div class="modal">
+                        <div class="modal-box">
+                            <h3 class="font-bold text-lg">Jenis Obat Untuk Sakit FLU</h3>
+                            <ul class="menu text-base-content">
+                                <li><a>Loratadine</a></li>
+                                <li><a>Pseudoephedrine</a></li>
+                                <li><a>Paracetamol</a></li>
+                                <li><a>Guaifenesin</a></li>
+                                <li><a>Oseltamivir</a></li>
+                            <div class="modal-action">
+                                <label for="my-modal" class="btn">tutup</label>
+                            </div>
+                        </div>
                     </div>
-                @endforeach
-            @endif
+                    <li>
+                        <a class="text-white">Sakit Gigi</a>
+                    </li>
+                    <li>
+                        <a class="text-white">Luka Kulit</a>
+                    </li>
+                    <li>
+                        <a class="text-white">Covid-19</a>
+                    </li>
+                    <label for="my-drawer" class="btn">Tutup</label>
+                </div>
+
+            </div>
         </div>
-        <h1 class=" top-110 text-center font-bold text-[#6A62C4] text-[16px]">Lainnya ></h1>
     </div>
-
-
 </div>
+
+
 
 
 @endsection
