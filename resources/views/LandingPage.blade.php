@@ -59,11 +59,11 @@
         <div class="flex">
             <img src="{{ url('asset/icon-icon.png') }}" alt="">
             <div>
-                <h1 class="text-[14px] font-semibold">Pelatihan (sertifikasi)</h1>
-                <h1 class="font-medium text-[12px] mt-[46px]">Pelatihan secara online</br> atau daring</h1>
-                <h1 class="text-[12px] text-[#8F8989] mt-[26px]">Anda bisa mendapatkan</br>
-                    promo menarik untuk mengikuti</br>
-                    sesi pelatihan ini !
+                <h1 class="text-[14px] font-semibold">BMI</h1>
+                <h1 class="font-medium text-[12px] mt-[46px]">Kalkulator</br> BMI</h1>
+                <h1 class="text-[12px] text-[#8F8989] mt-[26px]">Anda dapat menghitung</br>
+                    Indeks Massa Tubuh (IMT)</br>
+                    pada Kalkulator BMI ini !
                 </h1>
                 <button class="w-[111px] h-[38px] rounded-[10px] mt-[54px] bg-[#B982FF] text-white">Join Now</button>
             </div>
