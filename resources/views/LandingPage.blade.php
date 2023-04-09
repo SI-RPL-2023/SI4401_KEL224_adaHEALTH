@@ -39,11 +39,13 @@
                             </div>
                         </button>
                     </a>
-                    <button>
-                        <div class="bg-white w-[174px] h-[103px] rounded-[15px] flex text-start items-end p-[15px]">
-                            Rekomendasi</br>Apotek
-                        </div>
-                    </button>
+                    <a href="{{ url('/apotek') }}">
+                        <button>
+                            <div class="bg-white w-[174px] h-[103px] rounded-[15px] flex text-start items-end p-[15px]">
+                                Rekomendasi</br>Apotek
+                            </div>
+                        </button>
+                    </a>
                     <button>
                         <div class="bg-white w-[174px] h-[103px] rounded-[15px] text-start flex items-end p-[15px]">
                             Rekomendasi</br>Obat
