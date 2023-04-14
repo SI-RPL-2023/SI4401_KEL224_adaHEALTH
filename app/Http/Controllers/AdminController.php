@@ -8,6 +8,6 @@ class AdminController extends Controller
 {
     public function index()
     {
-        echo 'Ini adalah halaman berandanya Administrator';
+        return view('admin.dashboard');
     }
 }
