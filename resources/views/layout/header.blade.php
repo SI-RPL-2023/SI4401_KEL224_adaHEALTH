@@ -4,7 +4,7 @@
     <div class="flex items-center">
       <div class="mr-2 text-white">Hello, Admin</div>
       <button class="bg-white text-blue-600 hover:bg-blue-100 font-bold py-2 px-4 rounded">
-        Logout
+       <a href="{{ route('logout') }}">Logout</a>
       </button>
     </div>
 </div>

@@ -12,6 +12,6 @@
     @include('layout.navbar')
 
     @yield('content')
-    @include('layout.header')
+
 </body>
 </html>

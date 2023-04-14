@@ -11,7 +11,7 @@ class Hospital extends Model
     protected $table = 'hospitals';
 
     protected $fillable = [
-        'name', 'address', 'phone_number', 'description', 'images', 'user_id',
+        'name', 'address', 'phone_number', 'description', 'images',
     ];
 
     protected $hidden = [

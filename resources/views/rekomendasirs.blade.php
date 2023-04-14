@@ -34,7 +34,7 @@
                 <p class="mt-5 line-clamp-3 text-sm leading-6 text-gray-600 description">{{ $hospital->description}}</p>
               </div>
               <div class="relative mt-8 flex items-center gap-x-4">
-                <img src="asset/{{ $hospital->images }}" alt="" class="h-10 w-10 rounded-full bg-gray-50">
+                <img src="{{ url('images/'.$hospital->images) }}" alt="" class="h-10 w-10 rounded-full bg-gray-50">
                 <div class="text-sm leading-6">
                   <p class="font-semibold text-gray-900">
                     <a href="#">
