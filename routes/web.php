@@ -110,6 +110,8 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::group(['middleware' => ['CekRoleMiddleware:1']], function () {
         Route::resource('dashboard', AdminController::class);
+        Route::get('/dashboard/hospital', [AdminController::class, 'showHospital'])->name('add.hospital');
+
     });
 
     Route::group(['middleware' => ['CekRoleMiddleware:2']], function () {
