@@ -17,47 +17,43 @@
         </div>
 
         <div class="bg-gradient w-full min-h-min p-10 rounded-3xl mt-5 mb-5">
-            <h1 class="text-lg font-serif">Berobat</h1>
-            <p class="text-6xl font-serif mt-4">8</p>
-            <div class="grid grid-cols-4 gap-4 mt-5">
+            <h1 class="text-lg font-serif mb-4">Berobat</h1>
+            <p class="text-6xl font-serif mt-6">8</p>
+            <div class="grid grid-cols-4 gap-4 mt-10">
                 <div>
-                    <div class="stat bg-gradient2 rounded-lg">
+                    <div class="stat bg-gradient2 rounded-lg h-40">
                         <div class="stat-figure text-secondary">
                           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="inline-block w-8 h-8 stroke-current"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"></path></svg>
                         </div>
-                        <div class="stat-title">New Registers</div>
-                        <div class="stat-value">1,200</div>
-                        <div class="stat-desc">↘︎ 90 (14%)</div>
+                        <div class="stat-title">Total Apotek</div>
+                        <div class="stat-value">{{ $totalApotek }}</div>
                     </div>
                 </div>
                 <div>
-                    <div class="stat bg-gradient2 rounded-lg">
+                    <div class="stat bg-gradient2 rounded-lg h-40">
                         <div class="stat-figure text-primary">
                           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="inline-block w-8 h-8 stroke-current"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
                         </div>
-                        <div class="stat-title">Total Likes</div>
-                        <div class="stat-value text-primary">25.6K</div>
-                        <div class="stat-desc">21% more than last month</div>
+                        <div class="stat-title">Total Hospital</div>
+                        <div class="stat-value text-primary">{{  $totalHospital }}</div>
                     </div>
                 </div>
                 <div>
-                    <div class="stat bg-gradient2 rounded-lg">
+                    <div class="stat bg-gradient2 rounded-lg h-40">
                         <div class="stat-figure text-secondary">
                           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="inline-block w-8 h-8 stroke-current"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
                         </div>
-                        <div class="stat-title">Page Views</div>
-                        <div class="stat-value text-secondary">2.6M</div>
-                        <div class="stat-desc">21% more than last month</div>
+                        <div class="stat-title">Total Obat</div>
+                        <div class="stat-value text-secondary">{{ $totalObat }}</div>
                     </div>
                 </div>
                 <div>
-                    <div class="stat bg-gradient2 rounded-lg">
+                    <div class="stat bg-gradient2 rounded-lg h-40">
                         <div class="stat-figure text-secondary">
                           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="inline-block w-8 h-8 stroke-current"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path></svg>
                         </div>
-                        <div class="stat-title">New Users</div>
-                        <div class="stat-value">4,200</div>
-                        <div class="stat-desc">↗︎ 400 (22%)</div>
+                        <div class="stat-title">Total Users</div>
+                        <div class="stat-value">{{ $totalUsers }}</div>
                     </div>
                 </div>
             </div>
