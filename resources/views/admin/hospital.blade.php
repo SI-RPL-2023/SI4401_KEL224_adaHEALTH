@@ -3,8 +3,8 @@
 @section('content')
 
 <div class="flex justify-between items-center mt-6">
-    <h1 class="text-2xl font-bold text-gray-800">Add Hospital</h1>
-    <a href="{{ url('/dashboard') }}" class="bg-gray-200 hover:bg-gray-300 text-gray-800 hover:text-gray-900 rounded-lg py-2 px-4">
+    <h1 class="text-2xl font-bold text-gray-800 ml-60">Add Hospital</h1>
+    <a href="{{ url('/dashboard') }}" class="bg-gray-200 hover:bg-gray-300 text-gray-800 hover:text-gray-900 rounded-lg py-2 px-4 mr-10">
         Back to Dashboard
     </a>
 </div>
@@ -19,7 +19,7 @@
         <div class="w-[20px] border-b-2  border-slate-400 m-4"></div>
 
         <div class="">
-            <h1 class="ml-2 text-base font-semibold text-black">
+            <h1 class="text-base font-semibold text-black">
                 Add Hospital
             </h1>
         </div>
