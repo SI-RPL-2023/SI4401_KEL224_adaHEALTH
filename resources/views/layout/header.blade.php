@@ -21,7 +21,7 @@
     <a href="{{ route('add.hospital') }}" class="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700 hover:text-gray-100">
       Add Hospital
     </a>
-    <a href="#" class="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700 hover:text-gray-100">
+    <a href="{{ route('add.apotek') }}" class="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700 hover:text-gray-100">
       Add Apotek
     </a>
     <a href="#" class="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700 hover:text-gray-100">

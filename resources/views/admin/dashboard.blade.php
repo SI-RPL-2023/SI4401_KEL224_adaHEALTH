@@ -201,7 +201,6 @@
         </div>
         <div class="flex flex-row justify-between items-center py-4">
             <h2 class="text-lg font-bold">Artikel Terbaru</h2>
-            <a href="#" class="text-blue-500 hover:text-blue-700">Lihat Semua</a>
         </div>
           <div class="grid w-full">
             <div class="bg-white rounded-lg overflow-hidden shadow-md">
@@ -209,7 +208,6 @@
                 <div class="p-4">
                     <h3 class="font-bold text-lg mb-2">Judul Artikel Pertama</h3>
                     <p class="text-gray-700 text-base mb-4">Deskripsi artikel pertama. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                    <a href="#" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Selengkapnya</a>
                 </div>
                 </div>
             </div>

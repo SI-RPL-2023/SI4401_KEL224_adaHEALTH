@@ -110,9 +110,19 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::group(['middleware' => ['CekRoleMiddleware:1']], function () {
         Route::resource('dashboard', AdminController::class);
+        //AddHospital
         Route::get('/add/hospital', [\App\Http\Controllers\Admin\HospitalController::class, 'show'])->name('add.hospital');
         Route::post('/add/hospital', [\App\Http\Controllers\Admin\HospitalController::class, 'store'])->name('store.hospital');
+        //AddHospital
 
+        //AddApotek
+        Route::get('/add/apotek', [\App\Http\Controllers\Admin\ApotekController::class, 'show'])->name('add.apotek');
+        Route::post('/add/apotek', [\App\Http\Controllers\Admin\ApotekController::class, 'store'])->name('store.apotek');
+        Route::get('/apotek/{id}/edit', [\App\Http\Controllers\Admin\ApotekController::class, 'edit'])->name('edit.apotek');
+        Route::put('/apotek/{id}', [\App\Http\Controllers\Admin\ApotekController::class, 'update'])->name('update.apotek');
+        Route::delete('/apotek/{id}', [\App\Http\Controllers\Admin\ApotekController::class, 'delete'])->name('delete.apotek');
+
+        //AddApotek
 
     });
 
