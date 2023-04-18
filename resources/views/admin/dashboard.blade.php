@@ -1,156 +1,221 @@
 @extends('layout.layout-admin')
 
 @section('content')
-    <style>
-        .bg-gradient{
-            /* background-image: linear-gradient( 109.6deg,  rgba(79,148,243,0.73) 11.2%, rgba(140,105,193,0.87) 91.2% ); */
-            background-image: linear-gradient( 90.6deg,  rgb(104, 174, 243) -1.2%, rgb(101, 91, 211) 98.6% );
-        }
-        .bg-gradient2{
-            background-image: linear-gradient( 179.7deg,  rgba(197,214,227,1) 2.9%, rgba(144,175,202,1) 97.1% );
-        }
-    </style>
-     <!-- Main Content -->
-    <div class="ml-48 p-8">
-        <div class="bg-[#f8ff27] rounded-full w-100 inline-block align-middle p-2">
-            <span class="text-3xl font-bold text-gray-900">Dashboard</span>
-        </div>
-
+<div class="ml-48 p-8">
+    <div class="bg-[#f8ff27] rounded-full w-100 inline-block align-middle p-2">
+        <span class="text-1xl font-bold text-gray-900">Dashboard</span>
+    </div>
+</div>
+<div class="flex flex-row ml-48 p-8">
+    <div class="basis-5/6">
         <div class="bg-gradient w-full min-h-min p-10 rounded-3xl mt-5 mb-5">
             <h1 class="text-lg font-serif mb-4">Berobat</h1>
-            <p class="text-6xl font-serif mt-6">8</p>
-            <div class="grid grid-cols-4 gap-4 mt-10">
-                <div>
-                    <div class="stat bg-gradient2 rounded-lg h-40">
-                        <div class="stat-figure text-secondary">
-                          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="inline-block w-8 h-8 stroke-current"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"></path></svg>
-                        </div>
-                        <div class="stat-title">Total Apotek</div>
-                        <div class="stat-value">{{ $totalApotek }}</div>
-                    </div>
-                </div>
-                <div>
-                    <div class="stat bg-gradient2 rounded-lg h-40">
-                        <div class="stat-figure text-primary">
-                          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="inline-block w-8 h-8 stroke-current"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
-                        </div>
-                        <div class="stat-title">Total Hospital</div>
-                        <div class="stat-value text-primary">{{  $totalHospital }}</div>
-                    </div>
-                </div>
-                <div>
-                    <div class="stat bg-gradient2 rounded-lg h-40">
-                        <div class="stat-figure text-secondary">
-                          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="inline-block w-8 h-8 stroke-current"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
-                        </div>
-                        <div class="stat-title">Total Obat</div>
-                        <div class="stat-value text-secondary">{{ $totalObat }}</div>
-                    </div>
-                </div>
-                <div>
-                    <div class="stat bg-gradient2 rounded-lg h-40">
-                        <div class="stat-figure text-secondary">
-                          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="inline-block w-8 h-8 stroke-current"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path></svg>
-                        </div>
-                        <div class="stat-title">Total Users</div>
-                        <div class="stat-value">{{ $totalUsers }}</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="flex flex-col lg:flex-row">
-            <div class="grid flex-grow card rounded-box place-items-start">
-                <div class="stats bg-primary text-primary-content mt-5">
-                    <div class="stat">
-                      <div class="stat-title">Account balance</div>
-                      <div class="stat-value">$89,400</div>
-                      <div class="stat-actions">
-                        <button class="btn btn-sm btn-success">Add funds</button>
-                      </div>
-                    </div>
+            <p class="text-6xl font-serif mt-6 mb-6">8</p>
+            <div class="flex flex-row mt-10">
+                <div class="basis-1/4 md:basis-1/3">
+                    <div class="stats shadow">
 
-                    <div class="stat">
-                      <div class="stat-title">Current balance</div>
-                      <div class="stat-value">$89,400</div>
-                      <div class="stat-actions">
-                        <button class="btn btn-sm">Withdrawal</button>
-                        <button class="btn btn-sm">deposit</button>
-                      </div>
+                        <div class="stat relative w-40 h-23">
+                          <div class="stat-title">News patient</div>
+                          <div class="stat-value text-lg font-normal mt-5 mb-5">40</div>
+                          <div class="absolute stat-desc p-2 text-sm top-14 right-0 font-sans bg-success rounded-lg text-white">51% ↗︎</div>
+                        </div>
+
                     </div>
                 </div>
-            </div>
-            <div class="grid flex-grow card rounded-box place-items-center">
-                <div class="overflow-x-auto">
-                    <table class="table table-zebra w-full">
-                      <!-- head -->
-                      <thead>
-                        <tr>
-                          <th></th>
-                          <th>Name</th>
-                          <th>Job</th>
-                          <th>Favorite Color</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <!-- row 1 -->
-                        <tr>
-                          <th>1</th>
-                          <td>Cy Ganderton</td>
-                          <td>Quality Control Specialist</td>
-                          <td>Blue</td>
-                        </tr>
-                        <!-- row 2 -->
-                        <tr>
-                          <th>2</th>
-                          <td>Hart Hagerty</td>
-                          <td>Desktop Support Technician</td>
-                          <td>Purple</td>
-                        </tr>
-                        <!-- row 3 -->
-                        <tr>
-                          <th>3</th>
-                          <td>Brice Swyre</td>
-                          <td>Tax Accountant</td>
-                          <td>Red</td>
-                        </tr>
-                      </tbody>
-                    </table>
+                <div class="basis-1/4 md:basis-1/3 ml-3">
+                    <div class="stats shadow">
+
+                        <div class="stat relative  w-40 h-23">
+                          <div class="stat-title">News patient</div>
+                          <div class="stat-value text-lg font-normal mt-5 mb-5">40</div>
+                          <div class="absolute stat-desc p-2 text-sm top-14 right-0 font-sans bg-success rounded-lg text-white">51% ↗︎</div>
+                        </div>
+
+                    </div>
                 </div>
-            </div>
-        </div>
-        test
-        <div class="row-span-2 col-span-2 flex justify-end mt-10">
-            <div class="card w-96 bg-base-100 shadow-xl image-full ">
-                <figure><img src="https://picsum.photos/400/300" alt="" /></figure>
-                <div class="card-body">
-                    <h2 class="card-title">Shoes!</h2>
-                    <p>If a dog chews shoes whose shoes does he choose?</p>
-                    <div class="card-actions justify-end">
-                    <button class="btn btn-primary">Thanks</button>
+                <div class="basis-1/3 md:basis-1/3 ml-3">
+                    <div class="stats shadow ">
+
+                        <div class="stat relative  w-40 h-23">
+                          <div class="stat-title">News patient</div>
+                          <div class="stat-value text-lg font-normal mt-5 mb-5">40</div>
+                          <div class="absolute stat-desc p-2 text-sm top-14 right-0 font-sans bg-success rounded-lg text-white">51% ↗︎</div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="basis-1/2 md:basis-1/3 ml-3">
+                    <div class="stats shadow">
+
+                        <div class="stat relative  w-32 h-23">
+                          <div class="stat-title">News patient</div>
+                          <div class="stat-value text-lg font-normal mt-5 mb-5">40</div>
+                          <div class="absolute stat-desc p-2 text-sm top-14 right-0 font-sans bg-success rounded-lg text-white">51% ↗︎</div>
+                        </div>
+
                     </div>
                 </div>
             </div>
         </div>
+        <div class="flex flex-row justify-between items-center py-4">
+            <h2 class="text-lg font-bold">List Doctors</h2>
         </div>
-        <footer class="footer footer-center p-10 bg-base-200 text-base-content rounded">
-            <div class="grid grid-flow-col gap-4">
-              <a class="link link-hover">About us</a>
-              <a class="link link-hover">Contact</a>
-              <a class="link link-hover">Jobs</a>
-              <a class="link link-hover">Press kit</a>
-            </div>
-            <div>
-              <div class="grid grid-flow-col gap-4">
-                <a><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="fill-current"><path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"></path></svg></a>
-                <a><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="fill-current"><path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"></path></svg></a>
-                <a><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="fill-current"><path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"></path></svg></a>
+        <div class="flex justify-start mt-8">
+            <div class="w-full md:basis-1/2">
+              <div class="flex justify-between items-center">
+                <div class="relative">
+                  <select class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline" id="grid-state">
+                    <option>All</option>
+                    <option>Today</option>
+                    <option>Tomorrow</option>
+                  </select>
+                  <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                    <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                      <path d="M9 11l3 3l3-3l1.41 1.41L10 16.83l-4.41-4.42L6 11l3 3z" />
+                    </svg>
+                  </div>
+                </div>
+                <div>
+                  <span class="bg-green-500 rounded-full px-2 py-1 text-white font-bold">Available</span>
+                  <span class="bg-red-500 rounded-full px-2 py-1 text-white font-bold ml-2">Busy</span>
+                </div>
+              </div>
+              <div class="mt-4">
+                <div class="flex bg-gray-100 p-4">
+                  <div class="w-1/3 font-bold">Doctor</div>
+                  <div class="w-1/3 font-bold">Status</div>
+                  <div class="w-1/3 font-bold">Total Consultations</div>
+                </div>
+                <div class="flex border-t border-gray-200 p-4">
+                  <div class="w-1/3">Dr. John Doe</div>
+                  <div class="w-1/3"><span class="bg-green-500 rounded-full px-2 py-1 text-white font-bold">Available</span></div>
+                  <div class="w-1/3">10</div>
+                </div>
+                <div class="flex border-t border-gray-200 p-4">
+                  <div class="w-1/3">Dr. Jane Smith</div>
+                  <div class="w-1/3"><span class="bg-red-500 rounded-full px-2 py-1 text-white font-bold">Busy</span></div>
+                  <div class="w-1/3">5</div>
+                </div>
+                <div class="flex border-t border-gray-200 p-4">
+                  <div class="w-1/3">Dr. Bob Johnson</div>
+                  <div class="w-1/3"><span class="bg-green-500 rounded-full px-2 py-1 text-white font-bold">Available</span></div>
+                  <div class="w-1/3">15</div>
+                </div>
               </div>
             </div>
-            <div>
-              <p>Copyright © 2023 - All right reserved by ACME Industries Ltd</p>
+            <div class="md:w-2/4 ml-5 w-full">
+                <div class="text-lg font-bold mb-2">History Consultation</div>
+                <div class="grid w-full">
+                    <div class="bg-white rounded-lg shadow-md p-4">
+                        <div class="text-gray-700 font-bold mb-2">User A</div>
+                        <div class="text-gray-600 mb-2">Type: Video Call</div>
+                        <div class="text-gray-600 mb-2">Description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam euismod, purus non rhoncus lobortis, urna purus tempor mauris, ac imperdiet mauris massa id urna. Sed dictum est at diam iaculis, eu consectetur nunc ultrices.</div>
+                        <div class="text-gray-600">Dated: 2023-04-19 15:30:00</div>
+                    </div>
+                </div>
             </div>
-          </footer>
+        </div>
 
     </div>
+    <div class="basis-2/4 p-4 ml-5">
+        <div class="container">
+            <h1 class="text-2xl font-bold mb-4">Kalender Bulan <?php
+                // mendapatkan bulan dan tahun dari URL atau default ke bulan dan tahun saat ini
+                $month = isset($_GET['month']) ? $_GET['month'] : date('m');
+                echo date('F', strtotime("2023-$month-01"));
+                ?>
+                <div class="badge badge-error gap-2 text-white">
+                    hari ini
+                  </div>
+                  <div class="divider"></div>
+            </h1>
+            <table class="table-auto border-collapse border border-gray-400">
+                <thead>
+                    <tr>
+                        <th class="border border-gray-400 p-2">Minggu</th>
+                        <th class="border border-gray-400 p-2">Senin</th>
+                        <th class="border border-gray-400 p-2">Selasa</th>
+                        <th class="border border-gray-400 p-2">Rabu</th>
+                        <th class="border border-gray-400 p-2">Kamis</th>
+                        <th class="border border-gray-400 p-2">Jumat</th>
+                        <th class="border border-gray-400 p-2">Sabtu</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                        // mendapatkan bulan dan tahun dari URL atau default ke bulan dan tahun saat ini
+
+                        $year = isset($_GET['year']) ? $_GET['year'] : date('Y');
+
+                        // membuat objek Carbon untuk tanggal pertama di bulan dan tahun yang dipilih
+                        $firstDay = Carbon\Carbon::createFromDate($year, $month, 1);
+
+                        // menghitung jumlah hari di bulan dan tahun yang dipilih
+                        $daysInMonth = $firstDay->daysInMonth;
+
+                        // menentukan hari pertama dalam minggu
+                        $firstDayOfWeek = $firstDay->dayOfWeek;
+
+                        // membuat array untuk menampung tanggal
+                        $dates = [];
+
+                        // menambahkan tanggal kosong untuk hari pertama dalam minggu
+                        for ($i = 0; $i < $firstDayOfWeek; $i++) {
+                            $dates[] = null;
+                        }
+
+                        // menambahkan tanggal dari bulan dan tahun yang dipilih ke dalam array
+                        for ($i = 1; $i <= $daysInMonth; $i++) {
+                            $dates[] = Carbon\Carbon::createFromDate($year, $month, $i);
+                        }
+
+                        // menambahkan tanggal kosong untuk hari terakhir dalam minggu
+                        $lastDayOfWeek = end($dates)->dayOfWeek;
+                        for ($i = 0; $i < 6 - $lastDayOfWeek; $i++) {
+                            $dates[] = null;
+                        }
+
+                        // memecah array tanggal menjadi array mingguan
+                        $weeks = array_chunk($dates, 7);
+
+                        // menampilkan tanggal pada setiap sel tabel dan mewarnai tanggal hari ini dengan warna merah
+                        foreach ($weeks as $week) {
+                            echo '<tr>';
+                            foreach ($week as $date) {
+                                if ($date) {
+                                    if ($date->isToday()) {
+                                        echo '<td class="border border-gray-400 p-2 bg-error text-white">' . $date->format('d') . '</td>';
+                                    } else {
+                                        echo '<td class="border border-gray-400 p-2">' . $date->format('d') . '</td>';
+                                    }
+                                } else {
+                                    echo '<td class="border border-gray-400 p-2"></td>';
+                                }
+                            }
+                            echo '</tr>';
+                        }
+                    ?>
+                </tbody>
+            </table>
+        </div>
+        <div class="flex flex-row justify-between items-center py-4">
+            <h2 class="text-lg font-bold">Artikel Terbaru</h2>
+            <a href="#" class="text-blue-500 hover:text-blue-700">Lihat Semua</a>
+        </div>
+          <div class="grid w-full">
+            <div class="bg-white rounded-lg overflow-hidden shadow-md">
+                <img src="https://via.placeholder.com/400x200.png?text=Article+Image" alt="Article Image" class="w-full h-48 object-cover">
+                <div class="p-4">
+                    <h3 class="font-bold text-lg mb-2">Judul Artikel Pertama</h3>
+                    <p class="text-gray-700 text-base mb-4">Deskripsi artikel pertama. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                    <a href="#" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Selengkapnya</a>
+                </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
 
 @endsection
