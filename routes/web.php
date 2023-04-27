@@ -117,3 +117,7 @@ Route::group(['middleware' => ['auth']], function () {
     });
 
 });
+
+Route::get('/kalkulatorbmi', function () {
+    return view('kalkulatorbmi');
+});
