@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use App\Models\Hospital;
 
 class HospitalController extends Controller
@@ -40,11 +41,13 @@ class HospitalController extends Controller
     {
         // Validasi input form
         $test = $request->validate([
-            'name' => 'required|max:255',
+            'images' => 'required|image|max:2048',
+            'name' => 'required',
             'description' => 'required',
             'phone_number' => 'required',
-            'address' => 'required',
-            'images' => 'required|image|max:2048'
+            'provinsi' => 'required',
+            'kota' => 'required',
+            'jalan' => 'required',
         ]);
 
         // Upload gambar ke direktori public/images/hospitals
@@ -56,7 +59,9 @@ class HospitalController extends Controller
             'name' => $request->input('name'),
             'description' => $request->input('description'),
             'phone_number' => $request->input('phone_number'),
-            'address' => $request->input('address'),
+            'alamat_lengkap' => $request->input('jalan'),
+            'provinsi' => $request->input('provinsi'),
+            'kota' => $request->input('kota'),
             'images' => $imageName
         ]);
         return redirect('/add/hospital')->with('success', 'Hospital added successfully.');
@@ -65,17 +70,66 @@ class HospitalController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Hospital $hospital)
     {
-        //
+        return view('admin.hospital_edit', compact('hospital'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Hospital $hospital)
     {
-        //
+        // Validasi input form
+        $validated = $request->validate([
+            'images' => 'nullable|image|max:2048',
+            'name' => 'required',
+            'description' => 'required',
+            'phone_number' => 'required',
+            'provinsi' => 'required',
+            'kota' => 'required',
+            'alamat_lengkap' => 'required',
+        ]);
+
+
+        // Jika ada file gambar yang diupload
+        if ($request->hasFile('images')) {
+            // Hapus gambar yang lama
+            Storage::delete('public/images/' . $hospital->images);
+
+            // Upload gambar yang baru
+            $imageName = time() . '.' . $request->images->getClientOriginalExtension();
+            if (!$request->images->storeAs('images', $imageName, 'public')) {
+                return back()->with('error', 'Gagal upload gambar.');
+            }
+
+            // Simpan nama gambar yang baru ke dalam database
+            $hospital->images = $imageName;
+        }
+        // Update data rumah sakit
+        $hospital->name = $request->name;
+        $hospital->description = $request->description;
+        $hospital->phone_number = $request->phone_number;
+        $hospital->alamat_lengkap = $request->alamat_lengkap;
+        $hospital->provinsi = $request->provinsi;
+        $hospital->kota = $request->kota;
+        $hospital->save();
+
+        // Redirect ke halaman detail rumah sakit
+        return redirect()->route('hospital.update', compact('hospital'))->with('success', 'Data Rumah Sakit berhasil diupdate');
+
+    }
+    public function delete($id)
+    {
+        $hospital = Hospital::findOrFail($id);
+
+        // hapus gambar dari public/images
+        Storage::delete('public/images/'.$hospital->image_path);
+
+        // hapus data hospital dari database
+        $hospital->delete();
+
+        return redirect('/add/hospital')->with('success', 'Data rumah sakit berhasil dihapus!');
     }
 
     /**
