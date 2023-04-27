@@ -129,9 +129,18 @@ Route::group(['middleware' => ['auth']], function () {
 
 
         Route::delete('/apotek/{id}', [\App\Http\Controllers\Admin\ApotekController::class, 'delete'])->name('delete.apotek');
-
         //AddApotek
 
+        //Add Obat
+        Route::get('/add/obat', [\App\Http\Controllers\Admin\ObatController::class, 'show'])->name('add.obat');
+        Route::post('/add/obat', [\App\Http\Controllers\Admin\ObatController::class, 'store'])->name('store.obat');
+
+        Route::get('/obat/{obat}/edit', [\App\Http\Controllers\Admin\ObatController::class, 'edit'])->name('obat.edit');
+        Route::put('/obat/{obat}/edit', [\App\Http\Controllers\Admin\ObatController::class, 'update'])->name('obat.update');
+
+
+        Route::delete('/obat/{id}', [\App\Http\Controllers\Admin\ObatController::class, 'delete'])->name('delete.obat');
+        //Add Obat
     });
 
     Route::group(['middleware' => ['CekRoleMiddleware:2']], function () {
