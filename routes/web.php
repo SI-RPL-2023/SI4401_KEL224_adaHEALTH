@@ -123,8 +123,11 @@ Route::group(['middleware' => ['auth']], function () {
         //AddApotek
         Route::get('/add/apotek', [\App\Http\Controllers\Admin\ApotekController::class, 'show'])->name('add.apotek');
         Route::post('/add/apotek', [\App\Http\Controllers\Admin\ApotekController::class, 'store'])->name('store.apotek');
-        Route::get('/apotek/{id}/edit', [\App\Http\Controllers\Admin\ApotekController::class, 'edit'])->name('edit.apotek');
-        Route::put('/apotek/{id}', [\App\Http\Controllers\Admin\ApotekController::class, 'update'])->name('update.apotek');
+
+        Route::get('/apotek/{apotek}/edit', [\App\Http\Controllers\Admin\ApotekController::class, 'edit'])->name('apotek.edit');
+        Route::put('/apotek/{apotek}/edit', [\App\Http\Controllers\Admin\ApotekController::class, 'update'])->name('apotek.update');
+
+
         Route::delete('/apotek/{id}', [\App\Http\Controllers\Admin\ApotekController::class, 'delete'])->name('delete.apotek');
 
         //AddApotek

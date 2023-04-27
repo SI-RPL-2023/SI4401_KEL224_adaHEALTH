@@ -13,13 +13,13 @@ class Apotek extends Model
     protected $table = 'apotek';
 
     protected $fillable = [
-        'name', 'address', 'phone_number', 'description', 'images',
+        'name', 'phone_number', 'description', 'images', 'provinsi', 'kota', 'kode_pos',  'alamat_lengkap',
     ];
 
     protected $hidden = [
         'created_at', 'updated_at',
     ];
-    
+
     public function ratings()
     {
         return $this->hasMany(ApotekRating::class);
