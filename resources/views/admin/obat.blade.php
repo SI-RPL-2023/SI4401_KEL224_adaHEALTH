@@ -45,171 +45,65 @@
             <form action="{{ route('store.obat') }}" class="pt-20" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="mb-4">
-                    <label for="images" class="block text-gray-700 font-bold mb-2">Image:</label>
-                    <input type="file" name="images" id="images" class="border rounded-lg py-2 px-3 w-full @error('images') border-red-500 @enderror" value="{{ old('images') }}">
+                    <label for="photo" class="block text-gray-700 font-bold mb-2">Image:</label>
+                    <input type="file" name="photo" id="photo" class="border rounded-lg py-2 px-3 w-full @error('photo') border-red-500 @enderror" value="{{ old('photo') }}">
 
 
-                    @error('images')
+                    @error('photo')
                         <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                     @enderror
                 </div>
                 <div class="mb-4">
-                    <label for="name" class="block text-gray-700 font-bold mb-2">obat Name:</label>
-                    <input type="text" name="name" id="name" class="border rounded-lg py-2 px-3 w-full @error('name') border-red-500 @enderror" value="{{ old('name') }}" placeholder="Enter obat name , ex : obat Kimia Farma  Bandung ">
+                    <label for="nama" class="block text-gray-700 font-bold mb-2">obat Name:</label>
+                    <input type="text" name="nama" id="nama" class="border rounded-lg py-2 px-3 w-full @error('nama') border-red-500 @enderror" value="{{ old('nama') }}" placeholder="Enter obat nama , ex : obat Kimia Farma  Bandung ">
 
-                    @error('name')
-                        <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
-                    @enderror
-                </div>
-
-                <div class="mb-4">
-                    <label for="description" class="block text-gray-700 font-bold mb-2">Description:</label>
-                    <textarea name="description" id="description" cols="30" rows="10" class="border rounded-lg py-2 px-3 w-full @error('description') border-red-500 @enderror" placeholder="Enter obat description
-                    ex : 'obat ini adalah obat terbesar se Bandung Raya '
-                    ">{{ old('description') }}</textarea>
-
-                    @error('description')
+                    @error('nama')
                         <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                     @enderror
                 </div>
 
                 <div class="mb-4">
-                    <label for="phone_number" class="block text-gray-700 font-bold mb-2">Phone Number:</label>
-                    <input type="text" name="phone_number" id="phone_number" class="border rounded-lg py-2 px-3 w-full @error('phone_number') border-red-500 @enderror" value="{{ old('phone_number') }}" placeholder="Enter obat phone number">
+                    <label for="jenis" class="block text-gray-700 font-bold mb-2">Jenis Obat:</label>
+                    <input type="text" name="jenis" id="jenis" class="border rounded-lg py-2 px-3 w-full @error('jenis') border-red-500 @enderror" value="{{ old('jenis') }}" placeholder="Enter obat jenis , ex : Antiseptik">
 
-                    @error('phone_number')
+                    @error('jenis')
                         <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                     @enderror
                 </div>
 
                 <div class="mb-4">
-                    <label for="provinsi" class="block text-gray-700 font-bold mb-2">Pilih Provinsi obat:</label>
-                    <select name="provinsi" id="provinsi" class="border-gray-400 border rounded-md px-4 py-2 mt-2">
-                        <option value="">Pilih Provinsi</option>
-                        <option value="Aceh">Aceh</option>
-                        <option value="Bali">Bali</option>
-                        <option value="Bangka Belitung">Bangka Belitung</option>
-                        <option value="Banten">Banten</option>
-                        <option value="Bengkulu">Bengkulu</option>
-                        <option value="DI Yogyakarta">DI Yogyakarta</option>
-                        <option value="DKI Jakarta">DKI Jakarta</option>
-                        <option value="Gorontalo">Gorontalo</option>
-                        <option value="Jambi">Jambi</option>
-                        <option value="Jawa Barat">Jawa Barat</option>
-                        <option value="Jawa Tengah">Jawa Tengah</option>
-                        <option value="Jawa Timur">Jawa Timur</option>
-                        <option value="Kalimantan Barat">Kalimantan Barat</option>
-                        <option value="Kalimantan Selatan">Kalimantan Selatan</option>
-                        <option value="Kalimantan Tengah">Kalimantan Tengah</option>
-                        <option value="Kalimantan Timur">Kalimantan Timur</option>
-                        <option value="Kalimantan Utara">Kalimantan Utara</option>
-                        <option value="Kepulauan Riau">Kepulauan Riau</option>
-                        <option value="Lampung">Lampung</option>
-                        <option value="Maluku">Maluku</option>
-                        <option value="Maluku Utara">Maluku Utara</option>
-                        <option value="Nusa Tenggara Barat">Nusa Tenggara Barat</option>
-                        <option value="Nusa Tenggara Timur">Nusa Tenggara Timur</option>
-                        <option value="Papua">Papua</option>
-                        <option value="Papua Barat">Papua Barat</option>
-                        <option value="Riau">Riau</option>
-                        <option value="Sulawesi Barat">Sulawesi Barat</option>
-                        <option value="Sulawesi Selatan">Sulawesi Selatan</option>
-                        <option value="Sulawesi Tengah">Sulawesi Tengah</option>
-                        <option value="Sulawesi Tenggara">Sulawesi Tenggara</option>
-                        <option value="Sulawesi Utara">Sulawesi Utara</option>
-                        <option value="Sumatera Barat">Sumatera Barat</option>
-                        <option value="Sumatera Selatan">Sumatera Selatan</option>
-                        <option value="Sumatera Utara">Sumatera Utara</option>
-                    </select>
+                    <label for="kategori" class="block text-gray-700 font-bold mb-2">Kategori Obat:</label>
+                    <input type="text" name="kategori" id="kategori" class="border rounded-lg py-2 px-3 w-full @error('kategori') border-red-500 @enderror" value="{{ old('kategori') }}" placeholder="Enter obat kategori , ex : Flu">
 
-                    @error('provinsi')
+                    @error('kategori')
                         <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                     @enderror
+                </div>
 
-                    <label for="kota" class="block text-gray-700 font-bold mb-2">Pilih Kota obat:</label>
-                    <select name="kota" id="kota" disabled class="border-gray-400 border rounded-md px-4 py-2 mt-2">
-                        <option value="">Pilih Kota</option>
-                    </select>
-                    @error('kota')
+                <div class="mb-4">
+                    <label for="deskripsi" class="block text-gray-700 font-bold mb-2">Description:</label>
+                    <textarea name="deskripsi" id="deskripsi" cols="30" rows="10" class="border rounded-lg py-2 px-3 w-full @error('deskripsi') border-red-500 @enderror" placeholder="Enter obat deskripsi
+                    ex : 'obat ini adalah obat flu yang diproduksi didaerah dan banyak disarankan oleh dokter2 terbaik '
+                    ">{{ old('deskripsi') }}</textarea>
+
+                    @error('deskripsi')
                         <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                     @enderror
+                </div>
 
-                    <script>
-                        const kotaSelect = document.getElementById('kota');
-                        const propinsiSelect = document.getElementById('provinsi');
+                <div class="mb-4">
+                    <label for="qty" class="block text-gray-700 font-bold mb-2">Jumlah Stock Obat</label>
+                    <input type="text" name="qty" id="qty" class="border rounded-lg py-2 px-3 w-full @error('qty') border-red-500 @enderror" value="{{ old('qty') }}" placeholder="Enter Stock obat , ex : 100">
 
-                        const kota = {
-                            'Aceh': ['Baitussalam', 'Banda Aceh', 'Lhokseumawe', 'Meulaboh', 'Sigli'],
-                            'Sumatera Utara': ['Binjai', 'Medan', 'Pematang Siantar', 'Tanjung Balai'],
-                            'Sumatera Barat': ['Bukittinggi', 'Padang', 'Pariaman', 'Payakumbuh', 'Sawahlunto'],
-                            'Riau': ['Dumai', 'Pekanbaru', 'Siak'],
-                            'Kepulauan Riau': ['Batam', 'Tanjung Pinang'],
-                            'Jambi': ['Jambi', 'Sungai Penuh'],
-                            'Bengkulu': ['Bengkulu', 'Mukomuko', 'Rejang Lebong'],
-                            'Sumatera Selatan': ['Lahat', 'Lubuk Linggau', 'Palembang', 'Prabumulih'],
-                            'Bangka Belitung': ['Bangka', 'Belitung', 'Pangkal Pinang'],
-                            'Lampung': ['Bandar Lampung', 'Kotabumi', 'Liwa', 'Metro'],
-                            'Banten': ['Cilegon', 'Serang', 'Tangerang', 'Tigaraksa'],
-                            'DKI Jakarta': ['Jakarta Barat', 'Jakarta Pusat', 'Jakarta Selatan', 'Jakarta Timur', 'Kepulauan Seribu'],
-                            'Jawa Barat': ['Bandung', 'Cimahi', 'Garut', 'Tasikmalaya'],
-                            'Jawa Tengah': ['Semarang', 'Solo', 'Yogyakarta', 'Magelang'],
-                            'DI Yogyakarta': ['Bantul', 'Gunung Kidul', 'Kulon Progo', 'Sleman', 'Yogyakarta'],
-                            'Jawa Timur': ['Banyuwangi', 'Blitar', 'Gresik', 'Kediri', 'Madiun', 'Malang', 'Mojokerto', 'Probolinggo', 'Sidoarjo', 'Surabaya'],
-                            'Bali': ['Denpasar', 'Gianyar', 'Singaraja', 'Tabanan'],
-                            'Nusa Tenggara Barat': ['Bima', 'Mataram', 'Sumbawa Besar', 'Taliwang'],
-                            'Nusa Tenggara Timur': ['Ende', 'Kupang', 'Maumere', 'Ruteng'],
-                            'Kalimantan Barat': ['Ketapang', 'Pontianak', 'Singkawang'],
-                            'Kalimantan Tengah': ['Palangka Raya', 'Sampit', 'Tanjung Puting'],
-                            'Kalimantan Selatan': ['Banjarbaru', 'Banjarmasin', 'Martapura'],
-                            'Kalimantan Timur': ['Bontang', 'Samarinda', 'Tenggarong'],
-                            'Kalimantan Utara': ['Bulungan', 'Tarakan'],
-                            'Sulawesi Utara': ['Bitung', 'Manado', 'Tomohon'],
-                            'Gorontalo': ['Gorontalo', 'Limboro'],
-                            'Sulawesi Tengah': ['Donggala', 'Palu', 'Parigi Moutong'],
-                            'Sulawesi Barat': ['Majene', 'Mamuju'],
-                            'Sulawesi Selatan': ['Makassar', 'Palopo', 'Parepare'],
-                            'Sulawesi Tenggara': ['Bau-Bau', 'Kendari', 'Raha'],
-                            'Maluku': ['Ambon', 'Tual'],
-                            'Maluku Utara': ['Ternate', 'Tidore Kepulauan'],
-                            'Papua Barat': ['Fakfak', 'Manokwari', 'Sorong'],
-                            'Papua': ['Jayapura', 'Merauke', 'Timika']
-
-
-                            // tambahkan daftar kecamatan lainnya
-                        };
-
-                        propinsiSelect.addEventListener('change', function() {
-                            const selectedPropinsi = propinsiSelect.value;
-                            if (selectedPropinsi) {
-                                kotaSelect.disabled = false;
-                                kotaSelect.innerHTML = '<option value="">Pilih Kota</option>';
-                                kota[selectedPropinsi].forEach(function(item) {
-                                    const option = document.createElement('option');
-                                    option.value = item;
-                                    option.text = item;
-                                    kotaSelect.add(option);
-                                });
-                            } else {
-                                kotaSelect.disabled = true;
-                                kotaSelect.innerHTML = '<option value="">Pilih Kota</option>';
-                            }
-                        });
-
-                    </script>
-
-                    <label class="block">
-                        <label for="kode_pos" class="block text-gray-700 font-bold mb-2">Kode Pos:</label>
-
-                        <input type="text" name="kode_pos" class="border rounded-lg py-2 px-3 w-full @error('kode_pos') border-red-500 @enderror" value="{{ old('kode_pos') }}">
-                    </label>
-                    @error('kode_pos')
-                    <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                    @error('qty')
+                        <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                     @enderror
-                    <label class="block">
-                        <label for="alamat_lengkap" class="block text-gray-700 font-bold mb-2">Alamat lengkap:</label>
-                        <textarea name="jalan" id="jalan" cols="30" rows="10" class="border rounded-lg py-2 px-3 w-full @error('jalan') border-red-500 @enderror" placeholder="Enter obat jalan Ex: Jalan BojongSoang Raya no.41">{{ old('description') }}</textarea>
-                    </label>
-                    @error('jalan')
+                </div>
+                <div class="mb-4">
+                    <label for="harga" class="block text-gray-700 font-bold mb-2">Harga</label>
+                    <input type="text" name="harga" id="harga" class="border rounded-lg py-2 px-3 w-full @error('harga') border-red-500 @enderror" value="{{ old('harga') }}" placeholder="Enter Price obat , ex : 15000">
+
+                    @error('harga')
                         <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                     @enderror
                 </div>
