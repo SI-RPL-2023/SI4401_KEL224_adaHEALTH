@@ -41,7 +41,7 @@
     <div class="container mx-auto mt-8">
         @if (count($obats) == 0)
           <p class="text-gray-700 text-center">Data obat kosong, silahkan tambahkan</p>
-        <div id="hospital-form">
+        <div id="obat-form">
             <form action="{{ route('store.obat') }}" class="pt-20" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="mb-4">
@@ -55,7 +55,7 @@
                 </div>
                 <div class="mb-4">
                     <label for="name" class="block text-gray-700 font-bold mb-2">obat Name:</label>
-                    <input type="text" name="name" id="name" class="border rounded-lg py-2 px-3 w-full @error('name') border-red-500 @enderror" value="{{ old('name') }}" placeholder="Enter hospital name , ex : obat Kimia Farma  Bandung ">
+                    <input type="text" name="name" id="name" class="border rounded-lg py-2 px-3 w-full @error('name') border-red-500 @enderror" value="{{ old('name') }}" placeholder="Enter obat name , ex : obat Kimia Farma  Bandung ">
 
                     @error('name')
                         <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
@@ -64,7 +64,7 @@
 
                 <div class="mb-4">
                     <label for="description" class="block text-gray-700 font-bold mb-2">Description:</label>
-                    <textarea name="description" id="description" cols="30" rows="10" class="border rounded-lg py-2 px-3 w-full @error('description') border-red-500 @enderror" placeholder="Enter hospital description
+                    <textarea name="description" id="description" cols="30" rows="10" class="border rounded-lg py-2 px-3 w-full @error('description') border-red-500 @enderror" placeholder="Enter obat description
                     ex : 'obat ini adalah obat terbesar se Bandung Raya '
                     ">{{ old('description') }}</textarea>
 
@@ -75,7 +75,7 @@
 
                 <div class="mb-4">
                     <label for="phone_number" class="block text-gray-700 font-bold mb-2">Phone Number:</label>
-                    <input type="text" name="phone_number" id="phone_number" class="border rounded-lg py-2 px-3 w-full @error('phone_number') border-red-500 @enderror" value="{{ old('phone_number') }}" placeholder="Enter hospital phone number">
+                    <input type="text" name="phone_number" id="phone_number" class="border rounded-lg py-2 px-3 w-full @error('phone_number') border-red-500 @enderror" value="{{ old('phone_number') }}" placeholder="Enter obat phone number">
 
                     @error('phone_number')
                         <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
@@ -207,7 +207,7 @@
                     @enderror
                     <label class="block">
                         <label for="alamat_lengkap" class="block text-gray-700 font-bold mb-2">Alamat lengkap:</label>
-                        <textarea name="jalan" id="jalan" cols="30" rows="10" class="border rounded-lg py-2 px-3 w-full @error('jalan') border-red-500 @enderror" placeholder="Enter hospital jalan Ex: Jalan BojongSoang Raya no.41">{{ old('description') }}</textarea>
+                        <textarea name="jalan" id="jalan" cols="30" rows="10" class="border rounded-lg py-2 px-3 w-full @error('jalan') border-red-500 @enderror" placeholder="Enter obat jalan Ex: Jalan BojongSoang Raya no.41">{{ old('description') }}</textarea>
                     </label>
                     @error('jalan')
                         <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
@@ -284,7 +284,7 @@
             </div>
             <div class="mb-4">
                 <label for="nama" class="block text-gray-700 font-bold mb-2">obat Name:</label>
-                <input type="text" name="nama" id="nama" class="border rounded-lg py-2 px-3 w-full @error('nama') border-red-500 @enderror" value="{{ old('nama') }}" placeholder="Enter apotek nama , ex : obat Kimia Farma  Bandung ">
+                <input type="text" name="nama" id="nama" class="border rounded-lg py-2 px-3 w-full @error('nama') border-red-500 @enderror" value="{{ old('nama') }}" placeholder="Enter obat nama , ex : obat Kimia Farma  Bandung ">
 
                 @error('nama')
                     <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
@@ -293,7 +293,7 @@
 
             <div class="mb-4">
                 <label for="jenis" class="block text-gray-700 font-bold mb-2">Jenis Obat:</label>
-                <input type="text" name="jenis" id="jenis" class="border rounded-lg py-2 px-3 w-full @error('jenis') border-red-500 @enderror" value="{{ old('jenis') }}" placeholder="Enter apotek jenis , ex : Antiseptik">
+                <input type="text" name="jenis" id="jenis" class="border rounded-lg py-2 px-3 w-full @error('jenis') border-red-500 @enderror" value="{{ old('jenis') }}" placeholder="Enter obat jenis , ex : Antiseptik">
 
                 @error('jenis')
                     <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
@@ -302,7 +302,7 @@
 
             <div class="mb-4">
                 <label for="kategori" class="block text-gray-700 font-bold mb-2">Kategori Obat:</label>
-                <input type="text" name="kategori" id="kategori" class="border rounded-lg py-2 px-3 w-full @error('kategori') border-red-500 @enderror" value="{{ old('kategori') }}" placeholder="Enter apotek kategori , ex : Flu">
+                <input type="text" name="kategori" id="kategori" class="border rounded-lg py-2 px-3 w-full @error('kategori') border-red-500 @enderror" value="{{ old('kategori') }}" placeholder="Enter obat kategori , ex : Flu">
 
                 @error('kategori')
                     <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
@@ -311,7 +311,7 @@
 
             <div class="mb-4">
                 <label for="deskripsi" class="block text-gray-700 font-bold mb-2">Description:</label>
-                <textarea name="deskripsi" id="deskripsi" cols="30" rows="10" class="border rounded-lg py-2 px-3 w-full @error('deskripsi') border-red-500 @enderror" placeholder="Enter hospital deskripsi
+                <textarea name="deskripsi" id="deskripsi" cols="30" rows="10" class="border rounded-lg py-2 px-3 w-full @error('deskripsi') border-red-500 @enderror" placeholder="Enter obat deskripsi
                 ex : 'obat ini adalah obat flu yang diproduksi didaerah dan banyak disarankan oleh dokter2 terbaik '
                 ">{{ old('deskripsi') }}</textarea>
 
