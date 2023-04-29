@@ -25,6 +25,11 @@ use App\Http\Controllers\Auth\RegisterController;
 // Route::get('/', function () {
 //     return view('welcome');
 // });
+
+Route::get('/history', function () {
+    return view('historytransaksi');
+});
+
 Route::get('/help', function () {
     return view('help', ['title'=>'Help']);
 });
