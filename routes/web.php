@@ -25,6 +25,10 @@ use App\Http\Controllers\Auth\RegisterController;
 //     return view('welcome');
 // });
 
+Route::get('/profile', function () {
+    return view('editprofile');
+});
+
 Route::get('/', function () {
     return view('LandingPage', ['title' => 'Home']);
 });
