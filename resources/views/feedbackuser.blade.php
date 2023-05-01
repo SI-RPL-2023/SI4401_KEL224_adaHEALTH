@@ -31,11 +31,6 @@
                         </div>
                         <div class="flex items-center justify-end mt-4">
                             <button type="button" class="bg-[#2ac28a] hover:bg-gray-400 text-white py-2 px-4 rounded-lg mr-2" onclick="toggleFeedbackForm()">Ubah Feedback</button>
-                            {{-- <form action="{{ route('feedback.destroy', $feedback->id) }}" method="POST">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="bg-red-500 hover:bg-red-700 text-white py-2 px-4 rounded-lg">Delete</button>
-                            </form> --}}
                         </div>
 
                     </div>

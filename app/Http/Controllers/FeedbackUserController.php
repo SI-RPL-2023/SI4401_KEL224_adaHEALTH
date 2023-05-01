@@ -64,18 +64,7 @@ class FeedbackUserController extends Controller
         // jika feedback tidak ditemukan, tampilkan error
         return redirect()->route('feedback.show')->with('error', 'Feedback tidak ditemukan');
     }
-    // public function destroy($id)
-    // {
-    //     $feedback = FeedbackUser::find($id);
 
-    //     if (!$feedback) {
-    //         return redirect()->back()->with('error', 'Feedback not found.');
-    //     }
-
-    //     $feedback->delete();
-
-    //     return redirect()->back()->with('success', 'Feedback has been deleted.');
-    // }
 
 
 
