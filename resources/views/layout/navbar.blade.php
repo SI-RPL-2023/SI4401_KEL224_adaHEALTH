@@ -57,8 +57,9 @@
                     </div>
                     <div class="group">
                         <a href="#" class="text-gray-300 text-white rounded-md px-3 py-2 text-sm font-medium" aria-current="page">{{ Auth::user()->email }}</a>
-                        <div class="group-hover:block hidden w-[100px] h-[60px] bg-white shadow-lg absolute mt-[5px]">
+                        <div class="group-hover:block hidden w-[100px] h-[100px] bg-white shadow-lg absolute mt-[5px]">
                             <button class="border-b border-black w-full flex items-center justify-center">Profile</button>
+                            <button class="border-b border-black w-full flex items-center justify-center"> <a href="{{ url('/feedback') }}"> Feedback Application</a></button>
                             <form action="{{ route('logout') }}" method="post">
                                 @csrf
                                 <button class="w-full" type="submit">
