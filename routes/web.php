@@ -101,7 +101,7 @@ Route::controller(LoginController::class)->group(function () {
 
 //Middleware Group setelah login
 Route::group(['middleware' => ['auth']], function () {
-
+    Route::get('dokter', [AdminController::class, 'dokter_view']);
 
     Route::group(['middleware' => ['CekRoleMiddleware:0']], function () {
         Route::resource('/user', UserController::class);
@@ -110,10 +110,15 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::group(['middleware' => ['CekRoleMiddleware:1']], function () {
         Route::resource('dashboard', AdminController::class);
+        Route::get('dokter/add', [AdminController::class, 'form_tambah']);
+        Route::post('dokter/save', [AdminController::class, 'form_save']);
+        Route::get('dokter/edit/{id}', [AdminController::class, 'form_edit']);
+        Route::post('dokter/update/{id}', [AdminController::class, 'form_update']);
+        Route::get('dokter/delete/{id}', [AdminController::class, 'form_delete']);
     });
 
     Route::group(['middleware' => ['CekRoleMiddleware:2']], function () {
-        Route::resource('dokter', DokterController::class);
+        // Route::resource('dokter', DokterController::class);
     });
 
 });
