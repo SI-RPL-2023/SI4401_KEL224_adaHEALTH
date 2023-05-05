@@ -36,7 +36,9 @@
                     <input type="text" name="phone" class="w-full focus:outline-none border-b border-black mt-[6px]" value="{{ $user->phone }}">
                     <h1 class="text-start mt-[18px]">Password<span class="text-red-500">*</span></h1>
                     <input type="password" name="password" class="w-full focus:outline-none border-b border-black mt-[6px]" value="{{ $user->password }}">
-                    <button type="submit" class="w-[242px] h-[48px] bg-[#6A62C4] rounded-[20px] text-white font-semibold">Save</button>
+                    <div class="flex w-full justify-center items-center">
+                        <button type="submit" class="w-[242px] h-[48px] mt-[20px] bg-[#6A62C4] rounded-[20px] text-white font-semibold">Save</button>
+                    </div>
                 </form>
             </div>
         </div>
