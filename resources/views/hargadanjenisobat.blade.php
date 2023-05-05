@@ -35,17 +35,26 @@
     <div class="container mx-auto py-8">
         <h1 class="text-2xl font-bold mb-4">{{ $title }}</h1>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          @foreach($obats as $obat)
+          @forelse($obats as $obat)
           <div class="bg-white rounded-lg shadow-lg overflow-hidden">
-            <img class="object-cover h-56 w-full" src="{{ $obat->photo }}" alt="{{ $obat->nama }}">
-            <div class="p-4">
-              <h2 class="text-xl font-bold mb-2">{{ $obat->nama }}</h2>
-              <p class="text-gray-700 text-base">{{ $obat->deskripsi }}</p>
-              <p class="text-gray-700 text-base mt-2">Harga: {{ $obat->harga }}</p>
-              <p class="text-gray-700 text-base mt-2">Kategori: {{ $obat->kategori }}</p>
+            <img class="object-cover h-56 w-full" src="{{ asset('storage/images/'.$obat->photo) }}" alt="{{ $obat->nama }}">
+            <a href=" {{ route('obat.show', ['id' => $obat->id]) }} ">
+                <div class="p-4">
+                    <h2 class="text-xl font-bold mb-2">{{ $obat->nama }}</h2>
+                    <p class="text-gray-700 text-base">{{ $obat->deskripsi }}</p>
+                    <p class="text-gray-700 text-base mt-2">Harga: {{ $obat->harga }}</p>
+                    <p class="text-gray-700 text-base mt-2">Kategori: {{ $obat->kategori }}</p>
+                </div>
+            </a>
+          </div>
+          @empty
+          <div class="alert alert-info shadow-lg">
+            <div>
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="stroke-current flex-shrink-0 w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+              <span>Tidak ada obat.</span>
             </div>
           </div>
-          @endforeach
+          @endforelse
         </div>
       </div>
 
