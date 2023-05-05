@@ -102,6 +102,17 @@
                         </button>
                     </div>
                 </form>
+                <script>
+                    const inputPhoto = document.querySelector('input[type="file"]');
+                    const previewPhoto = document.querySelector('photo');
+                    inputPhoto.addEventListener('change', function(){
+                        const reader = new FileReader();
+                        reader.readAsDataURL(this.files[0]);
+                        reader.onload = function(){
+                            previewPhoto.src = reader.result;
+                        }
+                    });
+                </script>
 
             </div>
         </div>
