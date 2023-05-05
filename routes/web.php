@@ -25,9 +25,8 @@ use App\Http\Controllers\Auth\RegisterController;
 //     return view('welcome');
 // });
 
-Route::get('/profile', function () {
-    return view('editprofile');
-});
+Route::get('/profile/{id}', [UserController::class, 'show'])->name('profile.show');
+Route::put('/profile/{id}', [UserController::class, 'edit'])->name('updateProfile.put');
 
 Route::get('/', function () {
     return view('LandingPage', ['title' => 'Home']);
