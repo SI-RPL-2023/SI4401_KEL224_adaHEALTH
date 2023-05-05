@@ -16,11 +16,17 @@
 
     <div class="flex justify-center">
         <div class="border w-[1190px] h-[660px] rounded-[12px] mt-[30px]">
-            <div class="flex justify-between">
-                <h1 class="">Deskripsi</h1>
-                <h1 class="">Waktu</h1>
-                <h1 class="">Status Transaksi</h1>
-                <h1 class="">Total</h1>
+            <div class="flex ">
+                <div>
+                    <h1 class="ml-[92px] text-[14px]">Resep Dr.andi</h1>
+                    <p class="ml-[92px] text-[10px] text-[#6A62C4]">Mefinal x4</p>
+                </div>
+                <h1 class="ml-[170px] text-[14px]">8.50 AM 20 Juli 2021</h1>
+                <h1 class="ml-[400px] text-[14px]">Lunas</h1>
+                <div>
+                    <h1 class="ml-[200px] text-[14px]">IDR 95.000</h1>
+                    <p class="ml-[200px] text-[10px] text-[#6A62C4]">Mefinal x4</p>
+                </div>
             </div>
         </div>
     </div>
