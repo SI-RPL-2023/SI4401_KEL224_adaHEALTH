@@ -77,7 +77,7 @@ Route::get('/hargadanjenisobat', function () {
 
 Route::get('/obats', [ObatController::class, 'index']);
 
-Route::get('/obats/detail/{id}', [ObatController::class, 'show'])->name('obat.show');
+Route::get('/obats/detail/{id}', [ObatController::class, 'show']);
 Route::post('/obats/detail/{id}', [ObatController::class, 'store_pesan'])->name('obat.store_pesan');
 Route::post('/obat/detail/{id}', [ObatController::class, 'updateStatus'])->name('transaction.update');
 
