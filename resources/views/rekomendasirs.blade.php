@@ -17,7 +17,7 @@
             <p class="mt-2 text-lg leading-8 text-gray-600">Learn how to grow your Hospital with our recommended facility.</p>
           </div>
           <div class="mx-auto mt-10 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 border-t border-gray-200 pt-10 sm:mt-16 sm:pt-16 lg:mx-0 lg:max-w-none lg:grid-cols-3">
-            @foreach($hospitals as $hospital)
+            @forelse($hospitals as $hospital)
             <article class="flex max-w-xl flex-col items-start justify-between">
               <div class="flex items-center gap-x-4 text-xs">
                 <time datetime="2020-03-16" class="text-gray-500">Mar 16, 2020</time>
@@ -34,7 +34,7 @@
                 <p class="mt-5 line-clamp-3 text-sm leading-6 text-gray-600 description">{{ $hospital->description}}</p>
               </div>
               <div class="relative mt-8 flex items-center gap-x-4">
-                <img src="asset/{{ $hospital->images }}" alt="" class="h-10 w-10 rounded-full bg-gray-50">
+                <img src="{{ url('images/'.$hospital->images) }}" alt="" class="h-10 w-10 rounded-full bg-gray-50">
                 <div class="text-sm leading-6">
                   <p class="font-semibold text-gray-900">
                     <a href="#">
@@ -46,7 +46,14 @@
                 </div>
               </div>
             </article>
-            @endforeach
+            @empty
+            <div class="alert alert-info shadow-lg">
+                <div>
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="stroke-current flex-shrink-0 w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                  <span>Tidak ada Rumah Sakit.</span>
+                </div>
+            </div>
+            @endforelse
             <!-- More posts... -->
           </div>
         </div>
@@ -56,5 +63,4 @@
 
 
 </div>
-
 @endsection

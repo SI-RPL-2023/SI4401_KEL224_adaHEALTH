@@ -22,7 +22,6 @@ class FortifyServiceProvider extends ServiceProvider
         //
     }
 
-
     /**
      * Bootstrap any application services.
      */

@@ -16,7 +16,9 @@ return new class extends Migration
             $table->string('name');
             $table->text('description');
             $table->string('phone_number');
-            $table->string('address');
+            $table->string('provinsi');
+            $table->string('kota');
+            $table->string('alamat_lengkap');
             $table->string('images');
             $table->timestamps();
         });
