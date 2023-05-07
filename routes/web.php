@@ -12,6 +12,8 @@ use App\Http\Controllers\DokterController;
 use App\Http\Controllers\HospitalController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\bmiController;
+use App\Http\Controllers\HistoryTransaction;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -26,6 +28,12 @@ use App\Http\Controllers\bmiController;
 // Route::get('/', function () {
 //     return view('welcome');
 // });
+
+// Route::get('/history', function () {
+//     return view('historytransaksi');
+// });
+Route::get('/history', [HistoryTransaction::class, 'index']);
+
 Route::get('/help', function () {
     return view('help', ['title'=>'Help']);
 });
@@ -78,8 +86,9 @@ Route::get('/hargadanjenisobat', function () {
 
 Route::get('/obats', [ObatController::class, 'index']);
 
-Route::get('/obat/{kategori}', [ObatController::class, 'kategori'])->name('obat.kategori');
-Route::get('/obat/{obat}/detail', [ObatController::class, 'detail'])->name('obat.detail');
+Route::get('/obats/detail/{id}', [ObatController::class, 'show']);
+Route::post('/obats/detail/{id}', [ObatController::class, 'store_pesan'])->name('obat.store_pesan');
+Route::post('/obat/detail/{id}', [ObatController::class, 'updateStatus'])->name('transaction.update');
 
 
 Route::middleware([
@@ -111,11 +120,43 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::group(['middleware' => ['CekRoleMiddleware:1']], function () {
         Route::resource('dashboard', AdminController::class);
+        //AddHospital
+        Route::get('/add/hospital', [\App\Http\Controllers\Admin\HospitalController::class, 'show'])->name('add.hospital');
+        Route::post('/add/hospital', [\App\Http\Controllers\Admin\HospitalController::class, 'store'])->name('store.hospital');
+
+        Route::get('/hospital/{hospital}/edit', [\App\Http\Controllers\Admin\HospitalController::class, 'edit'])->name('hospital.edit');
+        Route::put('/hospital/{hospital}/edit', [\App\Http\Controllers\Admin\HospitalController::class, 'update'])->name('hospital.update');
+
+        Route::delete('/add/hospital/{id}', [\App\Http\Controllers\Admin\HospitalController::class, 'delete'])->name('delete.hospital');
+        //AddHospital
+
+        //AddApotek
+        Route::get('/add/apotek', [\App\Http\Controllers\Admin\ApotekController::class, 'show'])->name('add.apotek');
+        Route::post('/add/apotek', [\App\Http\Controllers\Admin\ApotekController::class, 'store'])->name('store.apotek');
+
+        Route::get('/apotek/{apotek}/edit', [\App\Http\Controllers\Admin\ApotekController::class, 'edit'])->name('apotek.edit');
+        Route::put('/apotek/{apotek}/edit', [\App\Http\Controllers\Admin\ApotekController::class, 'update'])->name('apotek.update');
+
+
+        Route::delete('/apotek/{id}', [\App\Http\Controllers\Admin\ApotekController::class, 'delete'])->name('delete.apotek');
+        //AddApotek
+
+        //Add Obat
+        Route::get('/add/obat', [\App\Http\Controllers\Admin\ObatController::class, 'show'])->name('add.obat');
+        Route::post('/add/obat', [\App\Http\Controllers\Admin\ObatController::class, 'store'])->name('store.obat');
+
+        Route::get('/obat/{obat}/edit', [\App\Http\Controllers\Admin\ObatController::class, 'edit'])->name('obat.edit');
+        Route::put('/obat/{obat}/edit', [\App\Http\Controllers\Admin\ObatController::class, 'update'])->name('obat.update');
+
+
+        Route::delete('/obat/{id}', [\App\Http\Controllers\Admin\ObatController::class, 'delete'])->name('delete.obat');
+        //Add Obat
     });
 
     Route::group(['middleware' => ['CekRoleMiddleware:2']], function () {
         Route::resource('dokter', DokterController::class);
     });
+
 
 });
 
@@ -128,14 +169,5 @@ Route::get('/resultbmi', [bmiController::class,'indexResult'])->name('result');
 
 
 
-Route::get('/underweightpage', function () {
-    return view('underweightpage');
-});
 
-Route::get('/normalpage', function () {
-    return view('normalpage');
-});
-
-Route::get('/obesitypage', function () {
-    return view('obesitypage');
 });
