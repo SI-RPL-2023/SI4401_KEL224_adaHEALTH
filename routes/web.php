@@ -166,8 +166,3 @@ Route::get('/kalkulatorbmi', [bmiController::class,'index']);
 Route::post('/kalkulatorbmi', [bmiController::class, 'CalculateBMI'])->name('kalkulatorbmi.check');
 
 Route::get('/resultbmi', [bmiController::class,'indexResult'])->name('result');
-
-
-
-
-});

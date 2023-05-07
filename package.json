@@ -21,7 +21,6 @@
     "dependencies": {
 
         "bootstrap-icons": "^1.10.5",
-        "daisyui": "^2.51.5"
         "@fullcalendar/core": "^6.1.5",
         "@fullcalendar/daygrid": "^6.1.5",
         "chart.js": "^4.2.1",
