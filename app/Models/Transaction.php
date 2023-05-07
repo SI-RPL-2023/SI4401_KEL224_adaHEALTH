@@ -16,6 +16,12 @@ class Transaction extends Model
      */
     protected $fillable = [
         'id_user',
+
+        'id_dokter',
+        'id_obat',
+        'total',
+    ];
+}
         'id_obat',
         'id_hospital',
         'id_rating_hospital',
@@ -32,3 +38,4 @@ class Transaction extends Model
         return $this->belongsTo(Obat::class, 'id_obat');
     }
 }
+

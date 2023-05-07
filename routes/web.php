@@ -11,6 +11,8 @@ use App\Http\Controllers\ApotekController;
 use App\Http\Controllers\DokterController;
 use App\Http\Controllers\HospitalController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\HistoryTransaction;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -25,6 +27,12 @@ use App\Http\Controllers\Auth\RegisterController;
 // Route::get('/', function () {
 //     return view('welcome');
 // });
+
+// Route::get('/history', function () {
+//     return view('historytransaksi');
+// });
+Route::get('/history', [HistoryTransaction::class, 'index']);
+
 Route::get('/help', function () {
     return view('help', ['title'=>'Help']);
 });
