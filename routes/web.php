@@ -29,6 +29,10 @@ use App\Http\Controllers\HistoryTransaction;
 //     return view('welcome');
 // });
 
+
+Route::get('/profile/{id}', [UserController::class, 'show'])->name('profile.show');
+Route::put('/profile/{id}', [UserController::class, 'edit'])->name('updateProfile.put');
+
 // Route::get('/history', function () {
 //     return view('historytransaksi');
 // });
@@ -37,6 +41,7 @@ Route::get('/history', [HistoryTransaction::class, 'index']);
 Route::get('/help', function () {
     return view('help', ['title'=>'Help']);
 });
+
 
 Route::get('/', function () {
     return view('LandingPage', ['title' => 'Home']);
