@@ -11,6 +11,7 @@ use App\Http\Controllers\ApotekController;
 use App\Http\Controllers\DokterController;
 use App\Http\Controllers\HospitalController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\bmiController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -118,10 +119,23 @@ Route::group(['middleware' => ['auth']], function () {
 
 });
 
-Route::get('/kalkulatorbmi', function () {
-    return view('kalkulatorbmi');
+
+
+Route::get('/kalkulatorbmi', [bmiController::class,'index']);
+Route::post('/kalkulatorbmi', [bmiController::class, 'CalculateBMI'])->name('kalkulatorbmi.check');
+
+Route::get('/resultbmi', [bmiController::class,'indexResult'])->name('result');
+
+
+
+Route::get('/underweightpage', function () {
+    return view('underweightpage');
 });
 
-Route::get('/resultbmi', function () {
-    return view('resultbmi');
+Route::get('/normalpage', function () {
+    return view('normalpage');
+});
+
+Route::get('/obesitypage', function () {
+    return view('obesitypage');
 });

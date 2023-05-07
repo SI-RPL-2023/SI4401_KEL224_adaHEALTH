@@ -7,7 +7,7 @@
     <div class="mt-4 flex flex-col lg:row-span-3 lg:mt-0 ml-[30px]  items-center">
         <p class="text-[32px] mt-[40px] text-center font-bold">Kalkulator BMI</p>
         <a class="text-[20px] mt-[40px] text-gray-900 font-regular text-[#BEBEBE] ">Yuk, ketahui berat badan ideal kamu dengan kalkulator BMI</a>
-        <button class="bg-[#3F55AC] mt-[32px] drop-shadow-lg opacity-90 w-[500px] h-[90px] font-bold text-white text-[32px] rounded-[15px]"">Hitung BMI</button>
+        <button class="bg-[#3F55AC] mt-[32px] drop-shadow-lg opacity-90 w-[500px] h-[90px] font-bold text-white text-[32px] rounded-[15px]"><a href="#bmi">Hitung BMI</a> </button>
     </div>
 </div>
 
@@ -37,26 +37,44 @@
 
 <div class="flex justify-center items-center w-screen h-screen">
     <div class="bg-[#E8E6FD] w-[1200px] h-[700px] rounded-[20px]">
-        <h1 class="font-bold mt-[32px] ml-[32px] text-[32px]"> Kalkulator BMI (IMT) </h1>
+        <h1 class="font-bold mt-[32px] ml-[32px] text-[32px]" id="bmi"> Kalkulator BMI (IMT) </h1>
         <a class="font-regular text-[#5D5B5B] mt-[56px] ml-[32px] text-[20px] "> Gunakan kalkulator ini untuk memeriksa Indeks Massa Tubuh (IMT) dan mengecek apakah berat badan Anda ideal atau tidak. </a>
-
-        <div class="flex justify-center items-center mt-[50px]">
-            <div class="card bg-white flex justify-center items-center w-[300px] h-[190px] rounded-[35px] flex-col mr-6">
-                <img src="{{ url('asset/male.png') }}" alt="" class="flex justify-center items-center w-[120px] h-[123px]">
-                <a class="text-bold text-[#6A62C4]">male</a>
+<style>
+.card.active {
+    border: 2px solid #6A62C4;
+}
+</style>
+            <div class="flex justify-center items-center mt-[50px]">
+                <div class="card bg-white flex justify-center items-center w-[300px] h-[190px] rounded-[35px] flex-col mr-6" data-card="male">
+                    <img src="{{ url('asset/male.png') }}" alt="" class="flex justify-center items-center w-[120px] h-[123px]">
+                    <a class="text-bold text-[#6A62C4]">male</a>
+                </div>
+                <div class="card bg-white flex justify-center items-center w-[300px] h-[190px] rounded-[35px] flex-col ml-6" data-card="female">
+                    <img src="{{ url('asset/women.png') }}" alt="" class="w-[120px] h-[123px]">
+                    <a class="text-bold text-[#6A62C4]">female</a>
+                </div>
             </div>
-            <div class="card bg-white flex justify-center items-center w-[300px] h-[190px] rounded-[35px] flex-col ml-6">
-                <img src="{{ url('asset/women.png') }}" alt="" class="w-[120px] h-[123px]">
-                <a class="text-bold text-[#6A62C4]">women</a>
-            </div>
-        </div>
+<script>
+    const cards = document.querySelectorAll('.card');
+    
+    
+    cards.forEach(card => {
+        card.addEventListener('click', () => {
+            
+            cards.forEach(c => c.classList.remove('active'));
+            
+            card.classList.add('active');
+        });
+    });
+</script>
         
-        <form action="" class="flex justify-center items-center flex-col text-start">
+        <form action="{{ route('kalkulatorbmi.check') }}" method="POST" class="flex justify-center items-center flex-col text-start">
+            @csrf
             <label class="text-[#909090] mb-[20px]" for=""></label>
-            <input type="text" class="w-[400px] h-[45px] pl-[30px] rounded-[20px]" placeholder="Tinggi Badan (cm)">
+                <input type="text" class="w-[400px] h-[45px] pl-[30px] rounded-[20px]" name="height" id="height" placeholder="Tinggi Badan (cm)">
             <label class="text-[#909090] mt-[20px]" for=""></label>
-            <input type="text" class="w-[400px] h-[45px] pl-[30px] rounded-[20px]" placeholder="Berat Badan (kg)">
-            <button class="bg-[#3F55AC] mt-[20px] drop-shadow-lg opacity-90 w-[250px] h-[70px] font-semi-bold text-white text-[20px] rounded-[20px]"">Hitung</button>
+                <input type="text" class="w-[400px] h-[45px] pl-[30px] rounded-[20px]" name="weight" id="weight" placeholder="Berat Badan (kg)">
+            <button type="submit" class="bg-[#3F55AC] mt-[20px] drop-shadow-lg opacity-90 w-[250px] h-[70px] font-semi-bold text-white text-[20px] rounded-[20px]"">Hitung</button>
         </form>
         
 
