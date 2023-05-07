@@ -16,8 +16,26 @@ class Transaction extends Model
      */
     protected $fillable = [
         'id_user',
+
         'id_dokter',
         'id_obat',
         'total',
     ];
 }
+        'id_obat',
+        'id_hospital',
+        'id_rating_hospital',
+        'id_apotek',
+        'id_rating_apotek',
+        'type',
+        'qty_item',
+        'total_harga',
+        'metode_payment',
+        'status',
+    ];
+    public function obat()
+    {
+        return $this->belongsTo(Obat::class, 'id_obat');
+    }
+}
+

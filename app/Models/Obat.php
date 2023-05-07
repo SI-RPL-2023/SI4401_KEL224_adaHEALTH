@@ -21,6 +21,7 @@ class Obat extends Model
         'deskripsi',
         'harga',
         'qty',
+        'photo',
     ];
 
 }
