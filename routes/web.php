@@ -11,6 +11,7 @@ use App\Http\Controllers\ApotekController;
 use App\Http\Controllers\DokterController;
 use App\Http\Controllers\HospitalController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\bmiController;
 use App\Http\Controllers\HistoryTransaction;
 
 /*
@@ -155,5 +156,18 @@ Route::group(['middleware' => ['auth']], function () {
     Route::group(['middleware' => ['CekRoleMiddleware:2']], function () {
         Route::resource('dokter', DokterController::class);
     });
+
+
+});
+
+
+
+Route::get('/kalkulatorbmi', [bmiController::class,'index']);
+Route::post('/kalkulatorbmi', [bmiController::class, 'CalculateBMI'])->name('kalkulatorbmi.check');
+
+Route::get('/resultbmi', [bmiController::class,'indexResult'])->name('result');
+
+
+
 
 });
