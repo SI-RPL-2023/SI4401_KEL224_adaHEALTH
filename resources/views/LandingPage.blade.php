@@ -53,11 +53,11 @@
                         </div>
                     </button>
                     </a>
-                    <button>
+                    <a href="{{ route('index.services') }}">
                         <div class="bg-white bg-opacity-50 w-[174px] h-[103px] rounded-[15px] flex items-end p-[15px]">
                             Show All
                         </div>
-                    </button>
+                    </a>
                 </div>
             </div>
         </div>

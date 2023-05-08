@@ -2,14 +2,15 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HelpController;
-use App\Http\Controllers\ObatController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ObatController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ApotekController;
 use App\Http\Controllers\DokterController;
 use App\Http\Controllers\HospitalController;
+use App\Http\Controllers\ServicesController;
 use App\Http\Controllers\Auth\RegisterController;
 /*
 |--------------------------------------------------------------------------
@@ -33,6 +34,7 @@ Route::get('/', function () {
     return view('LandingPage', ['title' => 'Home']);
 });
 
+Route::get('/services', [ServicesController::class, 'index'])->name('index.services');
 // route::get('/', [HomeController::class, "show"]);
 // route::get('/redirects', [HomeController::class, "index"]);
 

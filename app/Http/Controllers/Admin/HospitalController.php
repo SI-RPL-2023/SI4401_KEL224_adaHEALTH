@@ -50,10 +50,10 @@ class HospitalController extends Controller
             'jalan' => 'required',
         ]);
 
-        // Upload gambar ke direktori public/images/hospitals
-        $imageName = time().'.'.$request->images->extension();
-        $request->images->move(public_path('images/'), $imageName);
-
+        $imageName = time() . '.' . $request->images->getClientOriginalExtension();
+        if (!$request->images->storeAs('images', $imageName, 'public')) {
+            return back()->with('error', 'Gagal upload gambar.');
+        }
         // Simpan data hospital ke database
         $hospital = Hospital::create([
             'name' => $request->input('name'),

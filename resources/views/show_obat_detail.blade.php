@@ -78,6 +78,7 @@
     </script>
 
     @empty
+
     @endforelse
     @else
 
