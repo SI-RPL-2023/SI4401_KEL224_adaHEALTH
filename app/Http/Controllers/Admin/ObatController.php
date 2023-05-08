@@ -12,9 +12,10 @@ class ObatController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Obat $obat)
     {
-        //
+
+        return view('admin.obat_show',  compact('obat'));
     }
 
     /**
@@ -81,7 +82,7 @@ class ObatController extends Controller
     {
         // Validasi input form
         $validated = $request->validate([
-            'photo' => 'required|image|max:2048',
+            'photo' => 'nullable',
             'nama' => 'required',
             'jenis' => 'required',
             'kategori' => 'required',

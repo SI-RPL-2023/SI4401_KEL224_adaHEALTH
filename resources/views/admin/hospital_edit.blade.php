@@ -17,7 +17,7 @@
 
         <div class="">
             <h1 class="text-base font-semibold text-black">
-                Edit Hospital
+                Edit hospital
             </h1>
         </div>
 
@@ -37,13 +37,13 @@
                 {{ session('error') }}
             </div>
         @endif
-        <h1 class="text-2xl font-bold mb-4">Edit Data Hospital</h1>
+        <h1 class="text-2xl font-bold mb-4">Edit Data hospital</h1>
 
         <div class="max-w-full mx-auto py-12 px-4 sm:px-6 lg:px-8">
             <div class="bg-white shadow overflow-hidden sm:rounded-lg">
               <div class="px-4 py-5 sm:px-6">
-                <h3 class="text-lg leading-6 font-medium text-gray-900">Edit Hospital</h3>
-                <p class="mt-1 max-w-2xl text-sm text-gray-500">Silakan ubah data rumah sakit pada formulir berikut.</p>
+                <h3 class="text-lg leading-6 font-medium text-gray-900">Edit hospital</h3>
+                <p class="mt-1 max-w-2xl text-sm text-gray-500">Silakan ubah data hospital pada formulir berikut.</p>
               </div>
               <div class="border-t border-gray-200">
                 <form method="POST" action="{{ route('hospital.update', $hospital->id) }}" enctype="multipart/form-data">
@@ -80,7 +80,6 @@
                                 <label for="alamat_lengkap" class="block text-sm font-medium text-gray-700">Alamat Lengkap</label>
                                 <textarea name="alamat_lengkap" id="alamat_lengkap" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">{{ $hospital->alamat_lengkap }}</textarea>
                             </div>
-
                             <div class="col-span-6 sm:col-span-4">
                                 <label class="block text-sm font-medium leading-6 text-gray-900">Upload Images</label>
                                 <div class="flex items-center justify-center w-full">
@@ -105,8 +104,6 @@
                                     @endif
                                 </figure>
                             </div>
-
-
                         </div>
                     </div>
                     <div class="px-4 py-3 bg-gray-50 text-right sm:px-6">

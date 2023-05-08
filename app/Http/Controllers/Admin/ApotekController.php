@@ -12,9 +12,10 @@ class ApotekController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Apotek $apotek)
     {
-        //
+
+        return view('admin.apotek_show',  compact('apotek'));
     }
 
     /**

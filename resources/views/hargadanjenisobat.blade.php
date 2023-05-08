@@ -37,7 +37,7 @@
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             @forelse($obats as $obat)
             <div class="bg-white rounded-lg shadow-lg overflow-hidden">
-                <img class="object-cover h-56 w-full" src="{{ asset('storage/images/'.$obat->photo) }}" alt="{{ $obat->nama }}">
+                <img class="object-cover h-56 w-full" src="{{asset('upload/obat/'.$obat->photo)}}" alt="{{ $obat->nama }}">
                 <a href="{{ url('obats/detail/'.$obat->id) }}">
                     <div class="p-4">
                         <h2 class="text-xl font-bold mb-2">{{ $obat->nama }}</h2>

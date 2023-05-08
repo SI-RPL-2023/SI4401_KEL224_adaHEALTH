@@ -143,11 +143,12 @@
                     <td class="py-3 px-4">{{ $obat->qty }} pcs</td>
                     <td class="py-3 px-4"><img class="w-24 h-24 mb-3 rounded-full shadow-lg" src="{{asset('upload/obat/'.$obat->photo)}}" alt=""/></td>
                     <td class="py-3 px-4 text-right">
-                      <a href="{{ route('obat.edit', $obat->id) }}" class="text-blue-500 hover:text-blue-700">Edit</a>
+                        <div class="badge badge-secondary"><a href="{{ route('obat.show', $obat->id) }}" class="text-white">Detail</a></div>
+                      <a href="{{ route('obat.edit', $obat->id) }}" class="badge badge-accent text-white">Edit</a>
                       <form action="{{ route('delete.obat', $obat->id) }}" method="POST" class="inline-block">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class="text-red-500 hover:text-red-700">Hapus</button>
+                        <button type="submit" class="badge badge-error text-white">Hapus</button>
                       </form>
                     </td>
                   </tr>

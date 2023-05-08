@@ -71,7 +71,7 @@ Route::post('register', [RegisterController::class, 'register']);
 
 //Apotek Route
 Route::get('/apotek', [ApotekController::class, 'index']);
-Route::get('/detail/{id}', [ApotekController::class, 'show'])->name('apotek.show');
+Route::get('/apotek/{id}', [ApotekController::class, 'show'])->name('apotek.detail');
 
 Route::get('/help', [HelpController::class, 'index'])->name('help.index');
 Route::get('apotek/{id}/rate', [ApotekController::class, 'createRating'])->name('apotek.createRating');
@@ -141,6 +141,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/add/hospital', [\App\Http\Controllers\Admin\HospitalController::class, 'show'])->name('add.hospital');
         Route::post('/add/hospital', [\App\Http\Controllers\Admin\HospitalController::class, 'store'])->name('store.hospital');
 
+        Route::get('/hospital/{hospital}/show', [\App\Http\Controllers\Admin\HospitalController::class, 'index'])->name('hospital.show');
         Route::get('/hospital/{hospital}/edit', [\App\Http\Controllers\Admin\HospitalController::class, 'edit'])->name('hospital.edit');
         Route::put('/hospital/{hospital}/edit', [\App\Http\Controllers\Admin\HospitalController::class, 'update'])->name('hospital.update');
 
@@ -151,6 +152,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/add/apotek', [\App\Http\Controllers\Admin\ApotekController::class, 'show'])->name('add.apotek');
         Route::post('/add/apotek', [\App\Http\Controllers\Admin\ApotekController::class, 'store'])->name('store.apotek');
 
+        Route::get('/apotek/{apotek}/show', [\App\Http\Controllers\Admin\ApotekController::class, 'index'])->name('apotek.show');
         Route::get('/apotek/{apotek}/edit', [\App\Http\Controllers\Admin\ApotekController::class, 'edit'])->name('apotek.edit');
         Route::put('/apotek/{apotek}/edit', [\App\Http\Controllers\Admin\ApotekController::class, 'update'])->name('apotek.update');
 
@@ -162,6 +164,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/add/obat', [\App\Http\Controllers\Admin\ObatController::class, 'show'])->name('add.obat');
         Route::post('/add/obat', [\App\Http\Controllers\Admin\ObatController::class, 'store'])->name('store.obat');
 
+        Route::get('/obat/{obat}/show', [\App\Http\Controllers\Admin\ObatController::class, 'index'])->name('obat.show');
         Route::get('/obat/{obat}/edit', [\App\Http\Controllers\Admin\ObatController::class, 'edit'])->name('obat.edit');
         Route::put('/obat/{obat}/edit', [\App\Http\Controllers\Admin\ObatController::class, 'update'])->name('obat.update');
 

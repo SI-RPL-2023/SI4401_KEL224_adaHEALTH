@@ -41,7 +41,7 @@
     <div class="container mx-auto mt-8">
         @if (count($apoteks) == 0)
           <p class="text-gray-700 text-center">Data Apotek kosong, silahkan tambahkan</p>
-        <div id="hospital-form">
+        <div id="apotek-form">
             <form action="{{ route('store.apotek') }}" class="pt-20" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="mb-4">
@@ -55,7 +55,7 @@
                 </div>
                 <div class="mb-4">
                     <label for="name" class="block text-gray-700 font-bold mb-2">Apotek Name:</label>
-                    <input type="text" name="name" id="name" class="border rounded-lg py-2 px-3 w-full @error('name') border-red-500 @enderror" value="{{ old('name') }}" placeholder="Enter hospital name , ex : Apotek Kimia Farma  Bandung ">
+                    <input type="text" name="name" id="name" class="border rounded-lg py-2 px-3 w-full @error('name') border-red-500 @enderror" value="{{ old('name') }}" placeholder="Enter apotek name , ex : Apotek Kimia Farma  Bandung ">
 
                     @error('name')
                         <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
@@ -64,7 +64,7 @@
 
                 <div class="mb-4">
                     <label for="description" class="block text-gray-700 font-bold mb-2">Description:</label>
-                    <textarea name="description" id="description" cols="30" rows="10" class="border rounded-lg py-2 px-3 w-full @error('description') border-red-500 @enderror" placeholder="Enter hospital description
+                    <textarea name="description" id="description" cols="30" rows="10" class="border rounded-lg py-2 px-3 w-full @error('description') border-red-500 @enderror" placeholder="Enter apotek description
                     ex : 'Apotek ini adalah Apotek terbesar se Bandung Raya '
                     ">{{ old('description') }}</textarea>
 
@@ -75,7 +75,7 @@
 
                 <div class="mb-4">
                     <label for="phone_number" class="block text-gray-700 font-bold mb-2">Phone Number:</label>
-                    <input type="text" name="phone_number" id="phone_number" class="border rounded-lg py-2 px-3 w-full @error('phone_number') border-red-500 @enderror" value="{{ old('phone_number') }}" placeholder="Enter hospital phone number">
+                    <input type="text" name="phone_number" id="phone_number" class="border rounded-lg py-2 px-3 w-full @error('phone_number') border-red-500 @enderror" value="{{ old('phone_number') }}" placeholder="Enter apotek phone number">
 
                     @error('phone_number')
                         <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
@@ -207,7 +207,7 @@
                     @enderror
                     <label class="block">
                         <label for="alamat_lengkap" class="block text-gray-700 font-bold mb-2">Alamat lengkap:</label>
-                        <textarea name="jalan" id="jalan" cols="30" rows="10" class="border rounded-lg py-2 px-3 w-full @error('jalan') border-red-500 @enderror" placeholder="Enter hospital jalan Ex: Jalan BojongSoang Raya no.41">{{ old('description') }}</textarea>
+                        <textarea name="jalan" id="jalan" cols="30" rows="10" class="border rounded-lg py-2 px-3 w-full @error('jalan') border-red-500 @enderror" placeholder="Enter apotek jalan Ex: Jalan BojongSoang Raya no.41">{{ old('description') }}</textarea>
                     </label>
                     @error('jalan')
                         <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
@@ -241,11 +241,12 @@
                     <td class="py-3 px-4">{{ $apotek->alamat_lengkap }}</td>
                     <td class="py-3 px-4"><img class="w-24 h-24 mb-3 rounded-full shadow-lg" src="{{asset('upload/apotek/'.$apotek->images)}}" alt=""/></td>
                     <td class="py-3 px-4 text-right">
-                      <a href="{{ route('apotek.edit', $apotek->id) }}" class="text-blue-500 hover:text-blue-700">Edit</a>
+                        <div class="badge badge-secondary"><a href="{{ route('apotek.show', $apotek->id) }}" class="text-white">Detail</a></div>
+                      <a href="{{ route('apotek.edit', $apotek->id) }}" class="badge badge-accent text-white">Edit</a>
                       <form action="{{ route('delete.apotek', $apotek->id) }}" method="POST" class="inline-block">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class="text-red-500 hover:text-red-700">Hapus</button>
+                        <button type="submit" class="badge badge-error text-white">Hapus</button>
                       </form>
                     </td>
                   </tr>
@@ -281,7 +282,7 @@
             </div>
             <div class="mb-4">
                 <label for="name" class="block text-gray-700 font-bold mb-2">Apotek Name:</label>
-                <input type="text" name="name" id="name" class="border rounded-lg py-2 px-3 w-full @error('name') border-red-500 @enderror" value="{{ old('name') }}" placeholder="Enter hospital name , ex : Apotek Kimia Farma  Bandung ">
+                <input type="text" name="name" id="name" class="border rounded-lg py-2 px-3 w-full @error('name') border-red-500 @enderror" value="{{ old('name') }}" placeholder="Enter apotek name , ex : Apotek Kimia Farma  Bandung ">
 
                 @error('name')
                     <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
@@ -290,7 +291,7 @@
 
             <div class="mb-4">
                 <label for="description" class="block text-gray-700 font-bold mb-2">Description:</label>
-                <textarea name="description" id="description" cols="30" rows="10" class="border rounded-lg py-2 px-3 w-full @error('description') border-red-500 @enderror" placeholder="Enter hospital description
+                <textarea name="description" id="description" cols="30" rows="10" class="border rounded-lg py-2 px-3 w-full @error('description') border-red-500 @enderror" placeholder="Enter apotek description
                 ex : 'Apotek ini adalah Apotek terbesar se Bandung Raya '
                 ">{{ old('description') }}</textarea>
 
@@ -301,7 +302,7 @@
 
             <div class="mb-4">
                 <label for="phone_number" class="block text-gray-700 font-bold mb-2">Phone Number:</label>
-                <input type="text" name="phone_number" id="phone_number" class="border rounded-lg py-2 px-3 w-full @error('phone_number') border-red-500 @enderror" value="{{ old('phone_number') }}" placeholder="Enter hospital phone number">
+                <input type="text" name="phone_number" id="phone_number" class="border rounded-lg py-2 px-3 w-full @error('phone_number') border-red-500 @enderror" value="{{ old('phone_number') }}" placeholder="Enter apotek phone number">
 
                 @error('phone_number')
                     <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
@@ -433,7 +434,7 @@
                 @enderror
                 <label class="block">
                     <label for="alamat_lengkap" class="block text-gray-700 font-bold mb-2">Alamat lengkap:</label>
-                    <textarea name="jalan" id="jalan" cols="30" rows="10" class="border rounded-lg py-2 px-3 w-full @error('jalan') border-red-500 @enderror" placeholder="Enter hospital jalan Ex: Jalan BojongSoang Raya no.41">{{ old('description') }}</textarea>
+                    <textarea name="jalan" id="jalan" cols="30" rows="10" class="border rounded-lg py-2 px-3 w-full @error('jalan') border-red-500 @enderror" placeholder="Enter apotek jalan Ex: Jalan BojongSoang Raya no.41">{{ old('description') }}</textarea>
                 </label>
                 @error('jalan')
                     <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
