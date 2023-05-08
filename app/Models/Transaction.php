@@ -15,6 +15,7 @@ class Transaction extends Model
      * @var array<int, string>
      */
     protected $fillable = [
+        'id',
         'id_user',
         'id_obat',
         'id_hospital',
@@ -27,8 +28,10 @@ class Transaction extends Model
         'metode_payment',
         'status',
     ];
+
     public function obat()
     {
         return $this->belongsTo(Obat::class, 'id_obat');
     }
 }
+

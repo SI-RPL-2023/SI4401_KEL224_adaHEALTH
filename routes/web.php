@@ -2,15 +2,19 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HelpController;
-use App\Http\Controllers\ObatController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ObatController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ApotekController;
 use App\Http\Controllers\DokterController;
 use App\Http\Controllers\HospitalController;
+use App\Http\Controllers\FeedbackUserController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\bmiController;
+use App\Http\Controllers\HistoryTransaction;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -25,9 +29,20 @@ use App\Http\Controllers\Auth\RegisterController;
 // Route::get('/', function () {
 //     return view('welcome');
 // });
+
+
+Route::get('/profile/{id}', [UserController::class, 'show'])->name('profile.show');
+Route::put('/profile/{id}', [UserController::class, 'edit'])->name('updateProfile.put');
+
+// Route::get('/history', function () {
+//     return view('historytransaksi');
+// });
+Route::get('/history', [HistoryTransaction::class, 'index']);
+
 Route::get('/help', function () {
     return view('help', ['title'=>'Help']);
 });
+
 
 Route::get('/', function () {
     return view('LandingPage', ['title' => 'Home']);
@@ -102,15 +117,25 @@ Route::controller(LoginController::class)->group(function () {
 
 //Middleware Group setelah login
 Route::group(['middleware' => ['auth']], function () {
-
+    Route::get('dokter', [AdminController::class, 'dokter_view']);
 
     Route::group(['middleware' => ['CekRoleMiddleware:0']], function () {
         Route::resource('/user', UserController::class);
-
+        //Route untuk Fitur Feedback CRUD
+        Route::get('/feedback', [FeedbackUserController::class, 'show'])->name('feedback.show');
+        Route::post('/feedback', [FeedbackUserController::class, 'store'])->name('feedback.store');
+        Route::put('/feedback/{id}', [FeedbackUserController::class, 'update'])->name('feedback.update');
+        // Route::delete('/feedback/{id}', [FeedbackUserController::class, 'destroy'])->name('feedback.destroy');
+        //End Route untuk Fitur Feedback CRUD
     });
 
     Route::group(['middleware' => ['CekRoleMiddleware:1']], function () {
         Route::resource('dashboard', AdminController::class);
+        Route::get('dokter/add', [AdminController::class, 'form_tambah']);
+        Route::post('dokter/save', [AdminController::class, 'form_save']);
+        Route::get('dokter/edit/{id}', [AdminController::class, 'form_edit']);
+        Route::post('dokter/update/{id}', [AdminController::class, 'form_update']);
+        Route::get('dokter/delete/{id}', [AdminController::class, 'form_delete']);
         //AddHospital
         Route::get('/add/hospital', [\App\Http\Controllers\Admin\HospitalController::class, 'show'])->name('add.hospital');
         Route::post('/add/hospital', [\App\Http\Controllers\Admin\HospitalController::class, 'store'])->name('store.hospital');
@@ -145,7 +170,15 @@ Route::group(['middleware' => ['auth']], function () {
     });
 
     Route::group(['middleware' => ['CekRoleMiddleware:2']], function () {
-        Route::resource('dokter', DokterController::class);
+        // Route::resource('dokter', DokterController::class);
     });
 
+
 });
+
+
+
+Route::get('/kalkulatorbmi', [bmiController::class,'index']);
+Route::post('/kalkulatorbmi', [bmiController::class, 'CalculateBMI'])->name('kalkulatorbmi.check');
+
+Route::get('/resultbmi', [bmiController::class,'indexResult'])->name('result');
