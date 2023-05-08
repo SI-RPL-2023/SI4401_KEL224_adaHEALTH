@@ -11,12 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('transactions', function (Blueprint $table) {
+        Schema::create('dokter_spesialis', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('id_user')->references('id')->on('users');
-            $table->foreignId('id_dokter')->references('id')->on('users');
-            $table->foreignId('id_obat')->references('id')->on('obats');
-            $table->integer('total');
+            $table->string('nama');
+            $table->string('spesialis');
+            $table->text('description');
+            $table->string('image');    
+            $table->string('role')->default('dokter');
             $table->timestamps();
         });
     }
@@ -26,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('transactions');
+        Schema::dropIfExists('dokter_spesialis');
     }
 };

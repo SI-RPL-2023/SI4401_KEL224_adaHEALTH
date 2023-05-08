@@ -12,5 +12,6 @@
     @include('layout.navbar')
 
     @yield('content')
+
 </body>
 </html>

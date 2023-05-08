@@ -12,6 +12,9 @@ use App\Http\Controllers\DokterController;
 use App\Http\Controllers\HospitalController;
 use App\Http\Controllers\FeedbackUserController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\bmiController;
+use App\Http\Controllers\HistoryTransaction;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -26,9 +29,20 @@ use App\Http\Controllers\Auth\RegisterController;
 // Route::get('/', function () {
 //     return view('welcome');
 // });
+
+
+Route::get('/profile/{id}', [UserController::class, 'show'])->name('profile.show');
+Route::put('/profile/{id}', [UserController::class, 'edit'])->name('updateProfile.put');
+
+// Route::get('/history', function () {
+//     return view('historytransaksi');
+// });
+Route::get('/history', [HistoryTransaction::class, 'index']);
+
 Route::get('/help', function () {
     return view('help', ['title'=>'Help']);
 });
+
 
 Route::get('/', function () {
     return view('LandingPage', ['title' => 'Home']);
@@ -78,8 +92,9 @@ Route::get('/hargadanjenisobat', function () {
 
 Route::get('/obats', [ObatController::class, 'index']);
 
-Route::get('/obat/{kategori}', [ObatController::class, 'kategori'])->name('obat.kategori');
-Route::get('/obat/{obat}/detail', [ObatController::class, 'detail'])->name('obat.detail');
+Route::get('/obats/detail/{id}', [ObatController::class, 'show']);
+Route::post('/obats/detail/{id}', [ObatController::class, 'store_pesan'])->name('obat.store_pesan');
+Route::post('/obat/detail/{id}', [ObatController::class, 'updateStatus'])->name('transaction.update');
 
 
 Route::middleware([
@@ -102,7 +117,7 @@ Route::controller(LoginController::class)->group(function () {
 
 //Middleware Group setelah login
 Route::group(['middleware' => ['auth']], function () {
-
+    Route::get('dokter', [AdminController::class, 'dokter_view']);
 
     Route::group(['middleware' => ['CekRoleMiddleware:0']], function () {
         Route::resource('/user', UserController::class);
@@ -116,10 +131,54 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::group(['middleware' => ['CekRoleMiddleware:1']], function () {
         Route::resource('dashboard', AdminController::class);
+        Route::get('dokter/add', [AdminController::class, 'form_tambah']);
+        Route::post('dokter/save', [AdminController::class, 'form_save']);
+        Route::get('dokter/edit/{id}', [AdminController::class, 'form_edit']);
+        Route::post('dokter/update/{id}', [AdminController::class, 'form_update']);
+        Route::get('dokter/delete/{id}', [AdminController::class, 'form_delete']);
+        //AddHospital
+        Route::get('/add/hospital', [\App\Http\Controllers\Admin\HospitalController::class, 'show'])->name('add.hospital');
+        Route::post('/add/hospital', [\App\Http\Controllers\Admin\HospitalController::class, 'store'])->name('store.hospital');
+
+        Route::get('/hospital/{hospital}/edit', [\App\Http\Controllers\Admin\HospitalController::class, 'edit'])->name('hospital.edit');
+        Route::put('/hospital/{hospital}/edit', [\App\Http\Controllers\Admin\HospitalController::class, 'update'])->name('hospital.update');
+
+        Route::delete('/add/hospital/{id}', [\App\Http\Controllers\Admin\HospitalController::class, 'delete'])->name('delete.hospital');
+        //AddHospital
+
+        //AddApotek
+        Route::get('/add/apotek', [\App\Http\Controllers\Admin\ApotekController::class, 'show'])->name('add.apotek');
+        Route::post('/add/apotek', [\App\Http\Controllers\Admin\ApotekController::class, 'store'])->name('store.apotek');
+
+        Route::get('/apotek/{apotek}/edit', [\App\Http\Controllers\Admin\ApotekController::class, 'edit'])->name('apotek.edit');
+        Route::put('/apotek/{apotek}/edit', [\App\Http\Controllers\Admin\ApotekController::class, 'update'])->name('apotek.update');
+
+
+        Route::delete('/apotek/{id}', [\App\Http\Controllers\Admin\ApotekController::class, 'delete'])->name('delete.apotek');
+        //AddApotek
+
+        //Add Obat
+        Route::get('/add/obat', [\App\Http\Controllers\Admin\ObatController::class, 'show'])->name('add.obat');
+        Route::post('/add/obat', [\App\Http\Controllers\Admin\ObatController::class, 'store'])->name('store.obat');
+
+        Route::get('/obat/{obat}/edit', [\App\Http\Controllers\Admin\ObatController::class, 'edit'])->name('obat.edit');
+        Route::put('/obat/{obat}/edit', [\App\Http\Controllers\Admin\ObatController::class, 'update'])->name('obat.update');
+
+
+        Route::delete('/obat/{id}', [\App\Http\Controllers\Admin\ObatController::class, 'delete'])->name('delete.obat');
+        //Add Obat
     });
 
     Route::group(['middleware' => ['CekRoleMiddleware:2']], function () {
-        Route::resource('dokter', DokterController::class);
+        // Route::resource('dokter', DokterController::class);
     });
 
+
 });
+
+
+
+Route::get('/kalkulatorbmi', [bmiController::class,'index']);
+Route::post('/kalkulatorbmi', [bmiController::class, 'CalculateBMI'])->name('kalkulatorbmi.check');
+
+Route::get('/resultbmi', [bmiController::class,'indexResult'])->name('result');

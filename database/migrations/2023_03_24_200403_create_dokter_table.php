@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('dokters', function (Blueprint $table) {
             $table->id();
             $table->string('nama_dokter');
+            $table->string('spesialis');
             $table->string('email');
             $table->string('alamat');
             $table->string('password');
@@ -21,6 +22,9 @@ return new class extends Migration
             $table->string('gender');
             $table->date('tanggal_lahir');
             $table->string('role')->default('dokter');
+            $table->text('foto');
+            $table->string('jam_buka');
+            $table->string('jam_tutup');
             $table->timestamps();
         });
     }
