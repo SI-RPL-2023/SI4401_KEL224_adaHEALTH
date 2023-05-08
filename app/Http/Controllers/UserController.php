@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
@@ -29,6 +30,10 @@ class UserController extends Controller
             $user->email = $data['email'];
             $user->phone = $data['phone'];
             $user->password = bcrypt($data['password']);
+            if ($request->hasFile('image')) {
+                $img = Storage::disk('public')->put('img', $request->file('image'));
+                $user->photo = $img;
+            }
             $user->save();
 
             return redirect('/')->with('success', 'Edit Success');
