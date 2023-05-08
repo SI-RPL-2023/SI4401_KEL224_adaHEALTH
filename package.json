@@ -19,11 +19,9 @@
         "vite": "^4.0.0"
     },
     "dependencies": {
-
-        "daisyui": "^2.51.6"
-        "bootstrap-icons": "^1.10.5",
         "@fullcalendar/core": "^6.1.5",
         "@fullcalendar/daygrid": "^6.1.5",
+        "bootstrap-icons": "^1.10.5",
         "chart.js": "^4.2.1",
         "daisyui": "^2.51.6",
         "flatpickr": "^4.6.13"

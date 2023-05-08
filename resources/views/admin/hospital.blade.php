@@ -238,7 +238,7 @@
                     <td class="py-3 px-4">{{ $hospital->description }}</td>
                     <td class="py-3 px-4">{{ $hospital->phone_number }}</td>
                     <td class="py-3 px-4">{{ $hospital->alamat_lengkap }}</td>
-                    <td class="py-3 px-4"><img src="{{ asset('storage/images/'.$hospital->images) }}" alt="{{ $hospital->name }}" class="w-20 rounded-lg"></td>
+                    <td class="py-3 px-4"><img class="w-24 h-24 mb-3 rounded-full shadow-lg" src="{{asset('upload/hospital/'.$hospital->images)}}" alt=""/></td>
                     <td class="py-3 px-4 text-right">
                       <a href="{{ route('hospital.edit', $hospital->id) }}" class="text-blue-500 hover:text-blue-700">Edit</a>
                       <form action="{{ route('delete.hospital', $hospital->id) }}" method="POST" class="inline-block">

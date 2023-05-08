@@ -50,10 +50,9 @@ class ApotekController extends Controller
             'jalan' => 'required',
         ]);
 
-        $imageName = time() . '.' . $request->images->getClientOriginalExtension();
-        if (!$request->images->storeAs('images', $imageName, 'public')) {
-            return back()->with('error', 'Gagal upload gambar.');
-        }
+        $imageName = $request->file('images');
+        $imageName->store('upload/apotek', ['disk' => 'public_uploads']);
+
         // Simpan data apotek ke database
         $apotek = Apotek::create([
             'name' => $request->input('name'),
@@ -62,7 +61,7 @@ class ApotekController extends Controller
             'alamat_lengkap' => $request->input('jalan'),
             'provinsi' => $request->input('provinsi'),
             'kota' => $request->input('kota'),
-            'images' => $imageName
+            'images' => $imageName->hashName()
         ]);
         return redirect('/add/apotek')->with('success', 'apotek added successfully.');
     }
@@ -93,18 +92,22 @@ class ApotekController extends Controller
 
 
         // Jika ada file gambar yang diupload
-        if ($request->hasFile('images')) {
-            // Hapus gambar yang lama
-            Storage::delete('public/images/' . $apotek->images);
+        if($request->hasFile('images')) {
+            $imageName = $request->file('images');
+            $imageName->store('upload/apotek', ['disk' => 'public_uploads']);
 
-            // Upload gambar yang baru
-            $imageName = time() . '.' . $request->images->getClientOriginalExtension();
-            if (!$request->images->storeAs('images', $imageName, 'public')) {
-                return back()->with('error', 'Gagal upload gambar.');
+            //delete gambar image
+            if($apotek->images != null) {
+                $path = public_path('upload/apotek/'.$apotek->images);
+                if(file_exists($path)) {
+                    unlink($path);
+                } else {
+                    return response()->json(['message' => 'File not found.'], 404);
+                }
             }
 
             // Simpan nama gambar yang baru ke dalam database
-            $apotek->images = $imageName;
+            $apotek->images = $imageName->hashName(); // atau $imageName->getClientOriginalName()
         }
         // Update data apotek
         $apotek->name = $request->name;
@@ -116,7 +119,7 @@ class ApotekController extends Controller
         $apotek->save();
 
         // Redirect ke halaman detail apotek
-        return redirect()->route('apotek.update', compact('apotek'))->with('success', 'Data Apotek berhasil diupdate');
+        return redirect()->route('add.apotek', compact('apotek'))->with('success', 'Data Apotek berhasil diupdate');
 
     }
     public function delete($id)

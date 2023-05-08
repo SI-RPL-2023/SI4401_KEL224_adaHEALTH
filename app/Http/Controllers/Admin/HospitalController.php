@@ -50,9 +50,8 @@ class HospitalController extends Controller
             'jalan' => 'required',
         ]);
 
-        // Upload gambar ke direktori public/images/hospitals
-        $imageName = time().'.'.$request->images->extension();
-        $request->images->move(public_path('images/'), $imageName);
+        $imageName = $request->file('images');
+        $imageName->store('upload/hospital', ['disk' => 'public_uploads']);
 
         // Simpan data hospital ke database
         $hospital = Hospital::create([
@@ -62,7 +61,7 @@ class HospitalController extends Controller
             'alamat_lengkap' => $request->input('jalan'),
             'provinsi' => $request->input('provinsi'),
             'kota' => $request->input('kota'),
-            'images' => $imageName
+            'images' => $imageName->hashName()
         ]);
         return redirect('/add/hospital')->with('success', 'Hospital added successfully.');
     }
@@ -93,18 +92,22 @@ class HospitalController extends Controller
 
 
         // Jika ada file gambar yang diupload
-        if ($request->hasFile('images')) {
-            // Hapus gambar yang lama
-            Storage::delete('public/images/' . $hospital->images);
+        if($request->hasFile('images')) {
+            $imageName = $request->file('images');
+            $imageName->store('upload/hospital', ['disk' => 'public_uploads']);
 
-            // Upload gambar yang baru
-            $imageName = time() . '.' . $request->images->getClientOriginalExtension();
-            if (!$request->images->storeAs('images', $imageName, 'public')) {
-                return back()->with('error', 'Gagal upload gambar.');
+            //delete gambar image
+            if($hospital->images != null) {
+                $path = public_path('upload/hospital/'.$hospital->images);
+                if(file_exists($path)) {
+                    unlink($path);
+                } else {
+                    return response()->json(['message' => 'File not found.'], 404);
+                }
             }
 
             // Simpan nama gambar yang baru ke dalam database
-            $hospital->images = $imageName;
+            $hospital->images = $imageName->hashName(); // atau $imageName->getClientOriginalName()
         }
         // Update data rumah sakit
         $hospital->name = $request->name;
@@ -116,7 +119,7 @@ class HospitalController extends Controller
         $hospital->save();
 
         // Redirect ke halaman detail rumah sakit
-        return redirect()->route('hospital.update', compact('hospital'))->with('success', 'Data Rumah Sakit berhasil diupdate');
+        return redirect()->route('add.hospital', compact('hospital'))->with('success', 'Data Rumah Sakit berhasil diupdate');
 
     }
     public function delete($id)

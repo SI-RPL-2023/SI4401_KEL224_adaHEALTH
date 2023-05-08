@@ -141,7 +141,7 @@
                     <td class="py-3 px-4">{{ $obat->kategori }}</td>
                     <td class="py-3 px-4">{{ $obat->harga }}</td>
                     <td class="py-3 px-4">{{ $obat->qty }} pcs</td>
-                    <td class="py-3 px-4"><img src="{{ asset('storage/images/'.$obat->photo) }}" alt="{{ $obat->nama }}" class="w-20 rounded-lg"></td>
+                    <td class="py-3 px-4"><img class="w-24 h-24 mb-3 rounded-full shadow-lg" src="{{asset('upload/obat/'.$obat->photo)}}" alt=""/></td>
                     <td class="py-3 px-4 text-right">
                       <a href="{{ route('obat.edit', $obat->id) }}" class="text-blue-500 hover:text-blue-700">Edit</a>
                       <form action="{{ route('delete.obat', $obat->id) }}" method="POST" class="inline-block">
@@ -236,6 +236,7 @@
         </form>
     </div>
 </div>
+
 <script>
     function toggleobatForm() {
         var form = document.getElementById('obat-form');
