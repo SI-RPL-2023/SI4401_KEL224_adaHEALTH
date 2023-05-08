@@ -2,14 +2,15 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HelpController;
-use App\Http\Controllers\ObatController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ObatController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ApotekController;
 use App\Http\Controllers\DokterController;
 use App\Http\Controllers\HospitalController;
+use App\Http\Controllers\FeedbackUserController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\bmiController;
 use App\Http\Controllers\HistoryTransaction;
@@ -120,7 +121,12 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::group(['middleware' => ['CekRoleMiddleware:0']], function () {
         Route::resource('/user', UserController::class);
-
+        //Route untuk Fitur Feedback CRUD
+        Route::get('/feedback', [FeedbackUserController::class, 'show'])->name('feedback.show');
+        Route::post('/feedback', [FeedbackUserController::class, 'store'])->name('feedback.store');
+        Route::put('/feedback/{id}', [FeedbackUserController::class, 'update'])->name('feedback.update');
+        // Route::delete('/feedback/{id}', [FeedbackUserController::class, 'destroy'])->name('feedback.destroy');
+        //End Route untuk Fitur Feedback CRUD
     });
 
     Route::group(['middleware' => ['CekRoleMiddleware:1']], function () {
