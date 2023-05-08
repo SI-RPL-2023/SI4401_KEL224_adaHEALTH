@@ -37,6 +37,7 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'phone' => $data['phone'],
             'password' => Hash::make($data['password']),
+            'photo' => 'https://ui-avatars.com/api/?name=John+Doe'
         ]);
     }
 
