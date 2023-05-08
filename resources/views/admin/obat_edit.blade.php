@@ -87,12 +87,28 @@
 
 
                             <div class="col-span-6 sm:col-span-4">
-                                <label for="photo" class="blocktext-sm font-medium text-gray-700">Gambar</label>
-                                <input type="file" name="photo" id="photo" multiple class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                                <label class="block text-sm font-medium leading-6 text-gray-900">Upload Images</label>
+                                <div class="flex items-center justify-center w-full">
+                                <label for="thumbnail" class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
+                                    <div class="flex flex-col items-center justify-center pt-5 pb-6">
+                                        <svg aria-hidden="true" class="w-10 h-10 mb-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path></svg>
+                                        <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">Click to upload</p>
+                                        <p class="text-xs text-gray-500 dark:text-gray-400">PNG or JPG</p>
+                                    </div>
+                                    <input id="thumbnail" type="file" name="photo" accept=".jpg,.jpeg,.png" class="hidden" />
+                                </label>
                             </div>
-                            <h1 for="" class="text-base font-semibold text-[#ff3434]">*gambar sebelumnya</h1>
-                            <div class="grid grid-cols-2 gap-4">
-                                <td class="py-3 px-4"><img src="{{ asset('storage/images/'.$obat->photo) }}" alt="{{ $obat->photo }}" class="w-full rounded-lg"></td>
+
+                            <div class="col-span-6 sm:col-span-4">
+                                <figure class="max-w-lg mx-auto mt-6">
+                                    @if($obat->photo != null)
+                                    <img class="h-auto max-w-full rounded-lg mx-auto" src="{{asset('upload/obat/'.$obat->photo)}}" width="300" height="300" id="images" alt="image description">
+                                    <figcaption class="mt-2 text-sm text-center text-gray-500 dark:text-gray-400" id="image-caption">{{ $obat->images }}</figcaption>
+                                    @else
+                                    <img class="h-auto max-w-full rounded-lg mx-auto" src="{{asset('images/thumbnail.jpg')}}" id="images" alt="image description">
+                                    <figcaption class="mt-2 text-sm text-center text-gray-500 dark:text-gray-400" id="image-caption">Image Caption</figcaption>
+                                    @endif
+                                </figure>
                             </div>
                         </div>
                     </div>
@@ -102,21 +118,36 @@
                         </button>
                     </div>
                 </form>
-                <script>
-                    const inputPhoto = document.querySelector('input[type="file"]');
-                    const previewPhoto = document.querySelector('photo');
-                    inputPhoto.addEventListener('change', function(){
-                        const reader = new FileReader();
-                        reader.readAsDataURL(this.files[0]);
-                        reader.onload = function(){
-                            previewPhoto.src = reader.result;
-                        }
-                    });
-                </script>
+
 
             </div>
         </div>
     </div>
+    <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.js"></script>
+    <script>
 
+        $('#thumbnail').change(function() {
+            var file = $('#thumbnail')[0].files[0].name;
+            $('#image-caption').text(file);
+        });
+        // image preview
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#images').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        $("#thumbnail").change(function(){
+            readURL(this);
+        });
+        // END of image preview
+        </script>
 
 @endsection

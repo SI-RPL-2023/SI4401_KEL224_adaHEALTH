@@ -16,11 +16,16 @@ class Dokter extends Model
      */
     protected $fillable = [
         'nama_dokter',
+        'spesialis',
         'email',
         'password',
         'alamat',
         'no_telp',
         'gender',
         'tanggal_lahir',
+        'role',
+        'foto',
+        'jam_buka',
+        'jam_tutup'
     ];
 }
