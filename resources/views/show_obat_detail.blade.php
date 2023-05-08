@@ -111,7 +111,7 @@
                     <form method="POST" action="{{ route('obat.store_pesan', ['id' => $obat->id]) }}">
                         @csrf
                         <h2 class="mt-5">Masukkan Jumlah</h2>
-                        <input type="number" class="input input-bordered mt-3" name="qty" step="1" min="5" max="10" placeholder="5" required> / Rp.17.000
+                        <input type="number" class="input input-bordered mt-3" name="qty" step="1" min="5" max="10" placeholder="5" required> / Rp{{ number_format($obat->harga, 0, ',', '.') }}
                         <button type="submit" class="mt-10 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Pesan</button>
                     </form>
                 </div>

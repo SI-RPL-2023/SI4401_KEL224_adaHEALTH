@@ -127,6 +127,11 @@ class ObatController extends Controller
     {
         $obat = Obat::findOrFail($id);
 
+        // cek apakah obat tersebut memiliki transaksi
+        if ($obat->transactions()->count() > 0) {
+            return redirect('/add/obat')->with('error', 'Data obat tidak bisa dihapus karena sudah ada transaksi!');
+        }
+
         // hapus gambar dari public/images
         Storage::delete('public/images/'.$obat->image_path);
 
