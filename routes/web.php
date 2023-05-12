@@ -171,6 +171,12 @@ Route::group(['middleware' => ['auth']], function () {
 
         Route::delete('/obat/{id}', [\App\Http\Controllers\Admin\ObatController::class, 'delete'])->name('delete.obat');
         //Add Obat
+
+        //Artikel
+
+        Route::resource('artikel', \App\Http\Controllers\Admin\ArtikelController::class);
+        Route::get('/artikel', [App\Http\Controllers\Admin\ArtikelController::class, 'index'])->name('artikel.index');
+        //End artikel
     });
 
     Route::group(['middleware' => ['CekRoleMiddleware:2']], function () {
