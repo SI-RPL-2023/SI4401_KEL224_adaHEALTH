@@ -15,10 +15,14 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->string('slug')->unique();
-            $table->text('content')->nullable();
-            $table->text('content2')->nullable();
-            $table->text('content3')->nullable();
-            $table->text('content4')->nullable();
+            $table->text('title_content')->nullable();
+            $table->text('isi_content')->nullable();
+            $table->text('title_content2')->nullable();
+            $table->text('isi_content2')->nullable();
+            $table->text('title_content3')->nullable();
+            $table->text('isi_content3')->nullable();
+            $table->text('title_content4')->nullable();
+            $table->text('isi_content4')->nullable();
             $table->string('category');
             $table->string('images');
             $table->unsignedBigInteger('user_id');

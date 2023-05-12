@@ -12,14 +12,23 @@ class Article extends Model
     protected $fillable = [
         'title',
         'slug',
-        'content',
-        'content2',
-        'content3',
-        'content4',
+        'title_content',
+        'isi_content',
+
+        'title_content2',
+        'isi_content2',
+
+        'title_content3',
+        'isi_content3',
+
+        'title_content4',
+        'isi_content4',
+        
         'category',
         'images',
         'author_id',
         'published_date',
+        'views',
     ];
 
     public function user()

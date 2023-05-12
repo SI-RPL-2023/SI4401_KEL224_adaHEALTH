@@ -116,6 +116,8 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/artikel', [App\Http\Controllers\Admin\ArtikelController::class, 'index'])->name('artikel.index');
         Route::get('/artikel/create', [App\Http\Controllers\Admin\ArtikelController::class, 'create'])->name('artikel.create');
         Route::post('/artikel', [App\Http\Controllers\Admin\ArtikelController::class, 'store'])->name('artikel.store');
+        Route::get('/artikel/{article}',  [App\Http\Controllers\Admin\ArtikelController::class, 'show'])->name('artikel.show');
+
         //End artikel
     Route::group(['middleware' => ['CekRoleMiddleware:0']], function () {
         Route::resource('/user', UserController::class);
