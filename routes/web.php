@@ -77,15 +77,6 @@ Route::get('/help', [HelpController::class, 'index'])->name('help.index');
 Route::get('apotek/{id}/rate', [ApotekController::class, 'createRating'])->name('apotek.createRating');
 Route::post('apotek/{id}/rate', [ApotekController::class, 'storeRating'])->name('apotek.storeRating');
 
-Route::middleware([
-    'auth:sanctum',
-    config('jetstream.auth_session'),
-    'verified'
-])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
-});
 
 Route::get('/hargadanjenisobat', function () {
     return view('hargadanjenisobat');
@@ -119,7 +110,13 @@ Route::controller(LoginController::class)->group(function () {
 //Middleware Group setelah login
 Route::group(['middleware' => ['auth']], function () {
     Route::get('dokter', [AdminController::class, 'dokter_view']);
+        //Artikel
 
+        Route::resource('artikel', \App\Http\Controllers\Admin\ArtikelController::class);
+        Route::get('/artikel', [App\Http\Controllers\Admin\ArtikelController::class, 'index'])->name('artikel.index');
+        Route::get('/artikel/create', [App\Http\Controllers\Admin\ArtikelController::class, 'create'])->name('artikel.create');
+        Route::post('/artikel', [App\Http\Controllers\Admin\ArtikelController::class, 'store'])->name('artikel.store');
+        //End artikel
     Route::group(['middleware' => ['CekRoleMiddleware:0']], function () {
         Route::resource('/user', UserController::class);
         //Route untuk Fitur Feedback CRUD
@@ -172,11 +169,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::delete('/obat/{id}', [\App\Http\Controllers\Admin\ObatController::class, 'delete'])->name('delete.obat');
         //Add Obat
 
-        //Artikel
 
-        Route::resource('artikel', \App\Http\Controllers\Admin\ArtikelController::class);
-        Route::get('/artikel', [App\Http\Controllers\Admin\ArtikelController::class, 'index'])->name('artikel.index');
-        //End artikel
     });
 
     Route::group(['middleware' => ['CekRoleMiddleware:2']], function () {

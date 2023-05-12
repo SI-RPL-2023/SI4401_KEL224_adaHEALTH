@@ -11,21 +11,40 @@
                 </ul>
             </div>
         </div>
+        @if (session('success'))
+        <div class="alert alert-success shadow-lg mb-4">
+            <div>
+            <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current flex-shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+            <span>{{ session('success') }}</span>
+            </div>
+        </div>
+        @endif
+        @if (session('error'))
+            <div class="alert alert-danger shadow-lg">
+                {{ session('error') }}
+            </div>
+        @endif
         <div class=" mt-[100px]">
                 <form action="" class="flex">
                     <input type="text" placeholder="Cari artikel, seperti mencari peniti ditempat beras" class="input input-bordered flex-1 rounded-full" />
                     <button type="submit" class="btn btn-primary ml-2 rounded-full w-20 h-8 text font-mono">Cari</button>
                 </form>
         </div>
+        @if(Auth::user()->roles != 1)
+        @else
+        <div class="container my-12 mx-auto px-1 md:px-12 space-y-5">
+            <p class="normal-case ...">Buat Artikel Baru</p>
 
-
+            <a href="{{ route('artikel.create') }}" class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-gray-900 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-700 dark:focus:ring-gray-700">Buat Artikel Baru  +</a>
+        </div>
+        @endif
         {{-- Bagian Artikel banyak akses --}}
         <section class="mt-[100px]">
             <div class="flex flex-row p-8">
                 <div class="basis-5/6">
-                    <div class="relative bg-[#75e7db] w-full min-h-min p-10 rounded-3xl mt-5 mb-5">
-                        <img src="https://source.unsplash.com/640x360/?sports,running" alt="">
-                        <div class="absolute bottom-0 left-0 w-full bg-black bg-opacity-50 text-center">
+                    <div class="relative bg-[#6A62C4] w-full min-h-min p-10 rounded-3xl mt-5 mb-5">
+                        <img src="https://source.unsplash.com/640x360/?sports,running" alt="" class="rounded-md">
+                        <div class="absolute bottom-0 left-0 w-full bg-black bg-opacity-50 text-center rounded-3xl">
                             <h1 class="text-lg font-serif mb-4 text-white">Mengatasi Insomnia</h1>
                             <p class="text-sm font-serif mt-6 mb-6 text-white">Tidur yang cukup adalah kebutuhan penting bagi kesehatan fisik dan mental. Namun, beberapa orang menderita insomnia dan mengalami kesulitan untuk tidur atau tetap tertidur.</p>
                         </div>
@@ -163,8 +182,8 @@
 
         </section>
 
-
-        <section class="container mx-auto py-8">
+{{-- ArtikeL Kesehatan --}}
+<section class="container mx-auto py-8">
             <h1 class="text-3xl font-bold mb-8">Artikel Kesehatan</h1>
             <div class="grid grid-cols-3 gap-8">
               <div class="bg-white shadow rounded-lg">
@@ -216,62 +235,61 @@
                   <a href="#" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded inline-block">Baca selengkapnya</a>
                 </div>
               </div>
-        <section>
 
-{{--
-        <section class="mt-[100px]">
-            <div class="grid grid-cols-4 gap-4">
-                <div class="w-8/8">
-                    <div class="card w-full glass">
-                        <figure><img src="/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg" alt="car!"/></figure>
-                        <div class="card-body">
-                            <h2 class="card-title">Life hack</h2>
-                            <p>How to park your car at your garage?</p>
-                            <div class="card-actions justify-end">
-                                <button class="btn btn-primary">Learn now!</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="w-8/8">
-                    <div class="card w-full glass">
-                        <figure><img src="/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg" alt="car!"/></figure>
-                        <div class="card-body">
-                            <h2 class="card-title">Life hack</h2>
-                            <p>How to park your car at your garage?</p>
-                            <div class="card-actions justify-end">
-                                <button class="btn btn-primary">Learn now!</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="w-8/8">
-                    <div class="card w-full glass">
-                        <figure><img src="/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg" alt="car!"/></figure>
-                        <div class="card-body">
-                            <h2 class="card-title">Life hack</h2>
-                            <p>How to park your car at your garage?</p>
-                            <div class="card-actions justify-end">
-                                <button class="btn btn-primary">Learn now!</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="w-8/8">
-                    <div class="card w-full glass">
-                        <figure><img src="/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg" alt="car!"/></figure>
-                        <div class="card-body">
-                            <h2 class="card-title">Life hack</h2>
-                            <p>How to park your car at your garage?</p>
-                            <div class="card-actions justify-end">
-                                <button class="btn btn-primary">Learn now!</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+<section>
+{{-- End Artikel Kesehatan --}}
 
+{{-- ArtikeL All --}}
 
-        </section> --}}
+<style>
+    .image {
+  width: 100%;
+  height: 300px;
+  object-fit: cover !important;
+  object-position: center !important;
+  
+}
+.option-hover:hover
+{
+    transition: transform 0.2s ease-in-out;
+}
+    .option-hover:hover {
+  transform: scale(1.05);
+  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.5);
+}
+.option-hover:hover::before {
+  content: attr(alt);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  font-size: 1.5rem;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  z-index: 1;
+  white-space: nowrap;
+}
+
+</style>
+{{-- End Artikel All --}}
+    </div>
+    <h1 class="text-3xl font-bold mb-8">Semua Artikel </h1>
+    <div class="grid grid-cols-3 gap-8">
+
+        @forelse ($articlesAll as $show)
+        <div class="bg-white shadow rounded-lg option-hover">
+            <a href="" class="">
+                <img src="{{asset('upload/artikel/'.$show->images)}}" alt="{{ $show->title }}"  class="rounded-t-lg w-full image">
+                <div class="px-6 py-4"> 
+                    <h2 class="text-lg font-bold mb-2">{{ $show->title }}</h2>
+                    <p class="text-gray-700 text-base mb-2">{{ $show->content }}</p>
+                </div>
+            </a>
+        </div>
+        @empty
+        <p>Tidak ada Article Terkait</p>
+        @endforelse
     </div>
 @endsection
