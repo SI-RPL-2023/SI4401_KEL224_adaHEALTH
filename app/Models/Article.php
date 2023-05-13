@@ -23,7 +23,7 @@ class Article extends Model
 
         'title_content4',
         'isi_content4',
-        
+
         'category',
         'images',
         'author_id',
@@ -35,6 +35,7 @@ class Article extends Model
     {
         return $this->belongsTo(User::class);
     }
+    
 
 
 }

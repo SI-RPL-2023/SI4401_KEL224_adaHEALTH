@@ -117,6 +117,9 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/artikel/create', [App\Http\Controllers\Admin\ArtikelController::class, 'create'])->name('artikel.create');
         Route::post('/artikel', [App\Http\Controllers\Admin\ArtikelController::class, 'store'])->name('artikel.store');
         Route::get('/artikel/{article}',  [App\Http\Controllers\Admin\ArtikelController::class, 'show'])->name('artikel.show');
+        Route::get('/artikel/{id}/edit', [App\Http\Controllers\Admin\ArtikelController::class, 'edit'])->name('artikel.edit');
+        Route::put('/artikel/{id}/update', [App\Http\Controllers\Admin\ArtikelController::class, 'update'])->name('artikel.update');
+        Route::get('/artikel/{id}',  [App\Http\Controllers\Admin\ArtikelController::class, 'destroy'])->name('artikel.destroy');
 
         //End artikel
     Route::group(['middleware' => ['CekRoleMiddleware:0']], function () {

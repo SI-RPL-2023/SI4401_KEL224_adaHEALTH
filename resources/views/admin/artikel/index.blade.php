@@ -38,30 +38,51 @@
 
                 <a href="{{ route('artikel.create') }}" class="inline-flex items-center mt-5 px-4 py-2 text-sm font-medium btn btn-outline text-center text-gray-900 bg-white border border-gray-300 rounded-lg  focus:ring-4 focus:outline-none focus:ring-gray-200 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-700 dark:focus:ring-gray-700">Buat Artikel Baru  +</a>
             </div>
-            <div class="basis-1/2">
-                <p class="normal-case ...">Hapus Artikel </p>
-                <a href="" class="inline-flex items-center px-4 py-2 mt-5 text-sm font-medium text-center text-white btn btn-error rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-700 dark:focus:ring-gray-700">Hapus Artikel   -</a>
-            </div>
            
         </div>
            
         @endif
+
         {{-- Bagian Artikel banyak akses --}}
         <section class="mt-[100px]">
             <div class="flex flex-row p-8">
                 <div class="basis-5/6">
                     <div class="flex flex-row justify-between items-center py-4">
-                        <h2 class="text-lg font-bold flex">Artikel Populer <div class="badge badge-error text-white ml-3"> @if ($popularArticle){{ $popularArticle->views }} @else  <p>0</p> @endif
+                        <h2 class="text-lg font-bold flex">Artikel Populer <div class="badge badge-ghost bg-gradient text-white ml-3"> @if ($popularArticle){{ $popularArticle->views }} @else  <p>0</p> @endif
                             
                         </div><svg style="width:24px;height:24px" class="ml-3" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>Views</title><path d="M12,9A3,3 0 0,1 15,12A3,3 0 0,1 12,15A3,3 0 0,1 9,12A3,3 0 0,1 12,9M12,4.5C17,4.5 21.27,7.61 23,12C21.27,16.39 17,19.5 12,19.5C7,19.5 2.73,16.39 1,12C2.73,7.61 7,4.5 12,4.5M3.18,12C4.83,15.36 8.24,17.5 12,17.5C15.76,17.5 19.17,15.36 20.82,12C19.17,8.64 15.76,6.5 12,6.5C8.24,6.5 4.83,8.64 3.18,12Z" /></svg></h2>
+                        @if(Auth::user()->roles != 1)
+                        @else
+                        <div class="mt-5 mb-5 flex justify-end">
+                            <a href="{{ route('artikel.edit', $popularArticle->id) }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mr-2 rounded">Edit</a>
+                            <form action="{{ route('artikel.destroy', $popularArticle->id) }}" method="POST" onsubmit="return confirm('Apakah Anda yakin ingin menghapus artikel ini?')">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Delete</button>
+                            </form>
+                        </div>
+                        @endif
                     </div>
                     @if ($popularArticle)
                     <a href="{{  route('artikel.show', $popularArticle->id) }}">  
-                    <div class="relative bg-[#6A62C4] w-full min-h-min p-10 rounded-3xl mt-5 mb-5">
+                    <div class="relative bg-gradient2 w-full min-h-min p-10 rounded-3xl mt-5 mb-5">
                         <img src="{{ asset('upload/artikel/'.$popularArticle->images) }}" alt="{{ $popularArticle->title }}" class="rounded-md object-cover object-center w-full h-48 sm:h-56 md:h-64 lg:h-72 xl:h-80">
+                        @if($popularArticle)
+                        <style>
+                            .bg-gradient{
+                                /* background-image: linear-gradient( 109.6deg,  rgba(79,148,243,0.73) 11.2%, rgba(140,105,193,0.87) 91.2% ); */
+                                background-image: linear-gradient( 90.6deg,  rgb(104, 174, 243) -1.2%, rgb(101, 91, 211) 98.6% );
+                            }
+                            .bg-gradient2{
+                                background-image: linear-gradient( 179.7deg,  rgba(197,214,227,1) 2.9%, rgba(144,175,202,1) 97.1% );
+                            }
+                        </style>
+                        <div class="absolute top-3 right-3 transform rounded-full bg-gradient text-white text-xs px-2 py-1">Terpopuler</div>
+                       @else
+                        @endif
                         <div class="absolute bottom-0 left-0 w-full bg-black bg-opacity-50 text-center rounded-3xl">
                             <h1 class="text-lg font-serif mb-4 text-white">{{ $popularArticle->title }}</h1>
-                            <p class="text-sm font-serif mt-6 mb-6 text-white">{{ $popularArticle->excerpt }}</p>
+                            <p class="text-sm font-serif mt-6 mb-6 text-white">{{ $popularArticle->isi_content }}</p>
                         </div>
                     </div>
                     </a>
@@ -78,12 +99,26 @@
                           <div class="flex justify-between items-center">
                             <div class="relative">
                                 @forelse ( $articlesBerita as $b )
-                                <div class="bg-white shadow rounded-lg">
+                                <div class="bg-white shadow rounded-lg relative">
                                     <img src="{{ asset('upload/artikel/'.$b->images) }}" alt="Gambar artikel" class="rounded-t-lg w-full">
+                                    @if($b->category == "Berita")
+                                    <div class="absolute top-3 right-3 transform rounded-full bg-accent text-white text-xs px-2 py-1">{{ $b->user->name }}</div>
+                                   @else
+                                    @endif
                                     <div class="px-6 py-4">
                                       <h2 class="text-lg font-bold mb-2">{{ $b->title }}</h2>
                                       <p class="text-gray-700 text-base mb-2">{{ $b->isi_content }}</p>
-
+                                      @if(Auth::user()->roles != 1)
+                                      @else
+                                      <div class="mt-5 mb-5 flex justify-end">
+                                          <a href="{{ route('artikel.edit', $b->id) }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mr-2 rounded">Edit</a>
+                                          <form action="{{ route('artikel.destroy', $b->id) }}" method="POST" onsubmit="return confirm('Apakah Anda yakin ingin menghapus artikel ini?')">
+                                              @csrf
+                                              @method('DELETE')
+                                              <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Delete</button>
+                                          </form>
+                                      </div>
+                                      @endif
                                     </div>
                                 </div>
                                 @empty
@@ -181,13 +216,27 @@
                     </div>
                     @if($latestArticle)
                     <div class="grid w-full">
-                        <div class="bg-white rounded-lg overflow-hidden shadow-md">
-                            <img src="{{ asset('upload/artikel/'.$latestArticle->images) }}" alt="{{ $latestArticle->slug }}" class="w-full h-48 object-cover">
-                            <div class="p-4">
-                                <h3 class="font-bold text-lg mb-2">{{ $latestArticle->title }}</h3>
-                                <p class="text-gray-700 text-base mb-4">{{ $latestArticle->isi_content }}</p>
+                        <a href="{{ route('artikel.show', $latestArticle->id) }}">
+                            <div class="bg-white rounded-lg overflow-hidden shadow-md relative">
+                                <img src="{{ asset('upload/artikel/'.$latestArticle->images) }}" alt="{{ $latestArticle->slug }}" class="w-full h-48 object-cover">
+                                <div class="absolute top-3 right-3 transform rounded-full bg-error text-white text-xs px-2 py-1">{{ $latestArticle->user->name }}</div>
+                                <div class="p-4">
+                                    <h3 class="font-bold text-lg mb-2">{{ $latestArticle->title }}</h3>
+                                    <p class="text-gray-700 text-base mb-4">{{ $latestArticle->isi_content }}</p>
+                                    @if(Auth::user()->roles != 1)
+                                    @else
+                                    <div class="mt-5 mb-5 flex justify-end">
+                                        <a href="{{ route('artikel.edit', $latestArticle->id) }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mr-2 rounded">Edit</a>
+                                        <form action="{{ route('artikel.destroy', $latestArticle->id) }}" method="POST" onsubmit="return confirm('Apakah Anda yakin ingin menghapus artikel ini?')">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Delete</button>
+                                        </form>
+                                    </div>
+                                    @endif
+                                </div>
                             </div>
-                        </div>
+                        </a>
                     </div>
                     @else
                     <p>Tidak Ada Artikel Terbaru.</p>
@@ -205,13 +254,29 @@
             <h1 class="text-3xl font-bold mb-8">Artikel Kesehatan</h1>
             <div class="grid grid-cols-3 gap-8">
                 @forelse ( $articlesKesehatan as $s )
-                <div class="bg-white shadow rounded-lg">
-                    <img src="{{ asset('upload/artikel/'.$s->images) }}" alt="Gambar artikel" class="rounded-t-lg w-full">
-                    <div class="px-6 py-4">
-                      <h2 class="text-lg font-bold mb-2">{{ $s->title }}</h2>
-                      <p class="text-gray-700 text-base mb-2">Tidur yang cukup adalah kebutuhan penting bagi kesehatan fisik dan mental. Namun, beberapa orang menderita insomnia dan mengalami kesulitan untuk tidur atau tetap tertidur.</p>
-                    
-                    </div>
+                <div class="bg-white shadow rounded-lg relative">
+                    <a href="{{ route('artikel.show', $s->id) }}">
+                        <img src="{{ asset('upload/artikel/'.$s->images) }}" alt="Gambar artikel" class="rounded-t-lg w-full">
+                        @if($s->category == "Kesehatan")
+                        <div class="absolute top-3 right-3 transform rounded-full bg-primary text-white text-xs px-2 py-1">{{ $s->user->name }}</div>
+                       @else
+                        @endif
+                        <div class="px-6 py-4">
+                        <h2 class="text-lg font-bold mb-2">{{ $s->title }}</h2>
+                        <p class="text-gray-700 text-base mb-2">{{ $s->isi_content }}</p>
+                        @if(Auth::user()->roles != 1)
+                        @else
+                        <div class="mt-5 mb-5 flex justify-end">
+                            <a href="{{ route('artikel.edit', $s->id) }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mr-2 rounded">Edit</a>
+                            <form action="{{ route('artikel.destroy', $s->id) }}" method="POST" onsubmit="return confirm('Apakah Anda yakin ingin menghapus artikel ini?')">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Delete</button>
+                            </form>
+                        </div>
+                        @endif
+                        </div>
+                    </a>
                 </div>
                 @empty
                     <p>Tidak ada Artikel kesehatan terkait.</p>
@@ -263,15 +328,40 @@
     <div class="grid grid-cols-3 gap-8">
 
         @forelse ($articlesAll as $show)
-        <div class="bg-white shadow rounded-lg option-hover">
-            <a href=" {{  route('artikel.show', $show->id) }}" class="">
-                <img src="{{asset('upload/artikel/'.$show->images)}}" alt="{{ $show->title }}"  class="rounded-t-lg w-full image">
-                <div class="px-6 py-4"> 
-                    <h2 class="text-lg font-bold mb-2">{{ $show->title }}</h2>
-                    <p class="text-gray-700 text-base mb-2">{{ $show->isi_content }}</p>
+        <div class="bg-white shadow rounded-lg option-hover relative">
+            <a href="{{  route('artikel.show', $show->id) }}" class="">
+              <img src="{{asset('upload/artikel/'.$show->images)}}" alt="{{ $show->title }}"  class="rounded-t-lg w-full image">
+              @if($show->category == "Kesehatan")
+              <div class="absolute top-3 right-3 transform rounded-full bg-primary text-white text-xs px-2 py-1">{{ $show->user->name }}</div>
+              @elseif($show->category == "Berita")
+              <div class="absolute top-3 right-3 transform rounded-full bg-accent text-white text-xs px-2 py-1">{{ $show->user->name }}</div>
+              @elseif ($show->category == "Review")
+              <div class="absolute top-3 right-3 transform rounded-full bg-secondary text-white text-xs px-2 py-1">{{ $show->user->name }}</div>
+              @elseif ($show->category == "Tutorial")
+              <div class="absolute top-3 right-3 transform rounded-full bg-neutral text-white text-xs px-2 py-1">{{ $show->user->name }}</div>
+              @elseif ($latestArticle)
+              <div class="absolute top-3 right-3 transform rounded-full bg-error text-white text-xs px-2 py-1">{{ $show->user->name }}</div>
+              @else
+              <div class="absolute top-3 right-3 transform rounded-full bg-ghost text-white text-xs px-2 py-1">{{ $show->user->name }}</div>
+              @endif
+              <div class="px-6 py-4"> 
+                <h2 class="text-lg font-bold mb-2">{{ $show->title }}</h2>
+                <p class="text-gray-700 text-base mb-2">{{ $show->isi_content }} </p>
+                @if(Auth::user()->roles != 1)
+                @else
+                <div class="mt-5 mb-5 flex justify-end">
+                    <a href="{{ route('artikel.edit', $show->id) }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mr-2 rounded">Edit</a>
+                    <form action="{{ route('artikel.destroy', $show->id) }}" method="POST" onsubmit="return confirm('Apakah Anda yakin ingin menghapus artikel ini?')">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Delete</button>
+                    </form>
                 </div>
+                @endif
+              </div>
             </a>
         </div>
+          
         @empty
         <p>Tidak ada Article Terkait</p>
         @endforelse
