@@ -9,14 +9,14 @@
 <div class="flex flex-row ml-48 p-8">
     <div class="basis-5/6">
         <div class="bg-gradient w-full min-h-min p-10 rounded-3xl mt-5 mb-5">
-            <h1 class="text-lg font-serif mb-4">Berobat</h1>
+            <h1 class="text-lg font-serif mb-4">History Pembelian Obat</h1>
             <p class="text-6xl font-serif mt-6 mb-6">8</p>
             <div class="flex flex-row mt-10">
                 <div class="basis-1/4 md:basis-1/3">
                     <div class="stats shadow">
 
                         <div class="stat relative w-40 h-23">
-                          <div class="stat-title">News patient</div>
+                          <div class="stat-title">Total Obat</div>
                           <div class="stat-value text-lg font-normal mt-5 mb-5">40</div>
                           <div class="absolute stat-desc p-2 text-sm top-14 right-0 font-sans bg-success rounded-lg text-white">51% ↗︎</div>
                         </div>
@@ -27,7 +27,7 @@
                     <div class="stats shadow">
 
                         <div class="stat relative  w-40 h-23">
-                          <div class="stat-title">News patient</div>
+                          <div class="stat-title">Total Apotek</div>
                           <div class="stat-value text-lg font-normal mt-5 mb-5">40</div>
                           <div class="absolute stat-desc p-2 text-sm top-14 right-0 font-sans bg-success rounded-lg text-white">51% ↗︎</div>
                         </div>
@@ -38,7 +38,7 @@
                     <div class="stats shadow ">
 
                         <div class="stat relative  w-40 h-23">
-                          <div class="stat-title">News patient</div>
+                          <div class="stat-title">Total Hospital</div>
                           <div class="stat-value text-lg font-normal mt-5 mb-5">40</div>
                           <div class="absolute stat-desc p-2 text-sm top-14 right-0 font-sans bg-success rounded-lg text-white">51% ↗︎</div>
                         </div>
@@ -49,7 +49,7 @@
                     <div class="stats shadow">
 
                         <div class="stat relative  w-32 h-23">
-                          <div class="stat-title">News patient</div>
+                          <div class="stat-title">Total Dokter</div>
                           <div class="stat-value text-lg font-normal mt-5 mb-5">40</div>
                           <div class="absolute stat-desc p-2 text-sm top-14 right-0 font-sans bg-success rounded-lg text-white">51% ↗︎</div>
                         </div>
