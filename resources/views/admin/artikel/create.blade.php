@@ -29,7 +29,7 @@
             </div>
             <div class="mb-4">
                 <label class="block text-gray-700 font-bold mb-2" for="title_content">
-                    Judul Konten Artikel
+                    Judul Konten Artikel (paragraf 1)
                 </label>
                 <input
                     class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -42,7 +42,7 @@
 
             <div class="mb-4">
                 <label class="block text-gray-700 font-bold mb-2" for="isi_content">
-                    Isi Konten Artikel
+                    Isi Konten Artikel (paragraf 1)
                 </label>
                 <textarea
                     class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -106,7 +106,7 @@
             </div>
             <div class="mb-4">
                 <label class="block text-gray-700 font-bold mb-2" for="title_content2">
-                    Judul Konten Artikel 2
+                    Judul Paragraf 2 (opsional) <label for="" class="text-[10px] text-error">* lanjutan dari konten paragraf 1</label>
                 </label>
                 <input
                     class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -116,7 +116,7 @@
             </div>
             <div class="mb-4">
                 <label class="block text-gray-700 font-bold mb-2" for="isi_content2">
-                    Konten Artikel 2 (opsional)
+                   Isi Konten Artikel Paragraf 2 (opsional)
                 </label>
                 <textarea
                     class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -125,7 +125,7 @@
             </div>
             <div class="mb-4">
                 <label class="block text-gray-700 font-bold mb-2" for="title_content3">
-                    Judul Konten Artikel 3
+                    Judul Paragraf  3 (opsional) <label for="" class="text-[10px] text-error">* lanjutan dari konten paragraf 2</label>
                 </label>
                 <input
                     class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -135,7 +135,7 @@
             </div>
             <div class="mb-4">
                 <label class="block text-gray-700 font-bold mb-2" for="isi_content3">
-                    Konten Artikel 3 (opsional)
+                   Isi Konten Paragraf 3 (opsional)
                 </label>
                 <textarea
                     class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -144,7 +144,7 @@
             </div>
             <div class="mb-4">
                 <label class="block text-gray-700 font-bold mb-2" for="title_content4">
-                    Judul Konten Artikel 4
+                    Judul Paragraf 4 (opsional) <label for="" class="text-[10px] text-error">* lanjutan dari konten paragraf 3</label>
                 </label>
                 <input
                     class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -154,7 +154,7 @@
             </div>
             <div class="mb-4">
                 <label class="block text-gray-700 font-bold mb-2" for="isi_content4">
-                    Konten Artikel 4 (opsional)
+                   Isi Konten Artikel 4 (opsional)
                 </label>
                 <textarea
                     class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"

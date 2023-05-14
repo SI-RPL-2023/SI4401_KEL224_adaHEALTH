@@ -24,12 +24,7 @@
                 {{ session('error') }}
             </div>
         @endif
-        <div class=" mt-[100px]">
-                <form action="" class="flex">
-                    <input type="text" placeholder="Cari artikel, seperti mencari peniti ditempat beras" class="input input-bordered flex-1 rounded-full" />
-                    <button type="submit" class="btn btn-primary ml-2 rounded-full w-20 h-8 text font-mono">Cari</button>
-                </form>
-        </div>
+
         @if(Auth::user()->roles != 1)
         @else
         <div class="container my-12 mx-auto px-1 md:px-12 flex flex-row">
@@ -38,9 +33,9 @@
 
                 <a href="{{ route('artikel.create') }}" class="inline-flex items-center mt-5 px-4 py-2 text-sm font-medium btn btn-outline text-center text-gray-900 bg-white border border-gray-300 rounded-lg  focus:ring-4 focus:outline-none focus:ring-gray-200 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-700 dark:focus:ring-gray-700">Buat Artikel Baru  +</a>
             </div>
-           
+
         </div>
-           
+
         @endif
 
         {{-- Bagian Artikel banyak akses --}}
@@ -49,7 +44,7 @@
                 <div class="basis-5/6">
                     <div class="flex flex-row justify-between items-center py-4">
                         <h2 class="text-lg font-bold flex">Artikel Populer <div class="badge badge-ghost bg-gradient text-white ml-3"> @if ($popularArticle){{ $popularArticle->views }} @else  <p>0</p> @endif
-                            
+
                         </div><svg style="width:24px;height:24px" class="ml-3" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>Views</title><path d="M12,9A3,3 0 0,1 15,12A3,3 0 0,1 12,15A3,3 0 0,1 9,12A3,3 0 0,1 12,9M12,4.5C17,4.5 21.27,7.61 23,12C21.27,16.39 17,19.5 12,19.5C7,19.5 2.73,16.39 1,12C2.73,7.61 7,4.5 12,4.5M3.18,12C4.83,15.36 8.24,17.5 12,17.5C15.76,17.5 19.17,15.36 20.82,12C19.17,8.64 15.76,6.5 12,6.5C8.24,6.5 4.83,8.64 3.18,12Z" /></svg></h2>
                         @if(Auth::user()->roles != 1)
                         @else
@@ -64,7 +59,7 @@
                         @endif
                     </div>
                     @if ($popularArticle)
-                    <a href="{{  route('artikel.show', $popularArticle->id) }}">  
+                    <a href="{{  route('artikel.show', $popularArticle->id) }}">
                     <div class="relative bg-gradient2 w-full min-h-min p-10 rounded-3xl mt-5 mb-5">
                         <img src="{{ asset('upload/artikel/'.$popularArticle->images) }}" alt="{{ $popularArticle->title }}" class="rounded-md object-cover object-center w-full h-48 sm:h-56 md:h-64 lg:h-72 xl:h-80">
                         @if($popularArticle)
@@ -89,7 +84,7 @@
                     @else
                     <p>Tidak Ada Artikel Populer</p>
                     @endif
-                    
+
 
                     <div class="flex flex-row justify-between items-center py-4">
                         <h2 class="text-lg font-bold">Artikel Berita</h2>
@@ -130,9 +125,22 @@
                     </div>
 
                 </div>
-                <div class="basis-2/4 p-4 ml-5">
-                    <div class="container">
-                        <h1 class="text-2xl font-bold mb-4">Kalender Bulan <?php
+                <style>
+                    .u-50-w{
+                        width: 50% !important;
+                    }
+                        .text-2sm {
+                        font-size: 1rem;
+                    }
+
+                    .table-auto {
+                        font-size: 0.5rem;
+                    }
+
+                </style>
+                <div class="basis-1/2 ml-5 u-50-w">
+                    <div class="container flex justify-end mt-32">
+                        <h1 class="text-2sm font-bold mb-4">Kalender Bulan <?php
                             // mendapatkan bulan dan tahun dari URL atau default ke bulan dan tahun saat ini
                             $month = isset($_GET['month']) ? $_GET['month'] : date('m');
                             echo date('F', strtotime("2023-$month-01"));
@@ -241,7 +249,7 @@
                     @else
                     <p>Tidak Ada Artikel Terbaru.</p>
                     @endif
-                    
+
                     </div>
 
                 </div>
@@ -283,7 +291,7 @@
                 @endforelse
 
 
-          
+
 
 <section>
 {{-- End Artikel Kesehatan --}}
@@ -296,7 +304,7 @@
   height: 300px;
   object-fit: cover !important;
   object-position: center !important;
-  
+
 }
 .option-hover:hover
 {
@@ -344,7 +352,7 @@
               @else
               <div class="absolute top-3 right-3 transform rounded-full bg-ghost text-white text-xs px-2 py-1">{{ $show->user->name }}</div>
               @endif
-              <div class="px-6 py-4"> 
+              <div class="px-6 py-4">
                 <h2 class="text-lg font-bold mb-2">{{ $show->title }}</h2>
                 <p class="text-gray-700 text-base mb-2">{{ $show->isi_content }} </p>
                 @if(Auth::user()->roles != 1)
@@ -361,7 +369,7 @@
               </div>
             </a>
         </div>
-          
+
         @empty
         <p>Tidak ada Article Terkait</p>
         @endforelse
