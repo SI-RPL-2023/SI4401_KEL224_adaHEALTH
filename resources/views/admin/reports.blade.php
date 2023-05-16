@@ -19,11 +19,39 @@
                     </svg>
                   </div>
                 </div>
+                <style>
+                    .card {
+                        border: 2px solid transparent;
+                        transition: border-color 0.3s ease;
+                    }
+                
+                    .card.active {
+                        border-color: #6A62C4;
+                    }
+                </style>
+                
                 <div>
-                    <a href="{{ route('reports.index') }}" class="btn btn-active btn-ghost text-white">All</a>
-                    <a href="{{ route('reports.index', ['periode' => 'bulan_sekarang']) }}" class="btn btn-active btn-ghost text-white">Bulan Sekarang</a>
-                    <a href="{{ route('reports.index', ['periode' => 'bulan_lalu']) }}" class="btn btn-active btn-ghost text-white">Bulan Kemarin</a>
+                    <a href="{{ route('reports.index') }}" class="btn btn-active btn-ghost text-white" id="btn-all">Semua</a>
+                    <a href="{{ route('reports.index', ['periode' => 'bulan_sekarang']) }}" class="btn btn-active btn-ghost text-white" id="btn-this-month">Bulan Sekarang</a>
+                    <a href="{{ route('reports.index', ['periode' => 'bulan_lalu']) }}" class="btn btn-active btn-ghost text-white" id="btn-last-month">Bulan Kemarin</a>
                 </div>
+                
+                <script>
+                    const btnAll = document.getElementById('btn-all');
+                    const btnThisMonth = document.getElementById('btn-this-month');
+                    const btnLastMonth = document.getElementById('btn-last-month');
+                    
+                    const currentUrl = "<?php echo $_SERVER['REQUEST_URI']; ?>";
+                    
+                    if (currentUrl.includes('periode=') || currentUrl.endsWith('/dashboard')) {
+                        btnAll.classList.add('btn-success');
+                    } else if (currentUrl.includes('periode=bulan_sekarang')) {
+                        btnThisMonth.classList.add('btn-success');
+                    } else if (currentUrl.includes('periode=bulan_lalu')) {
+                        btnLastMonth.classList.add('btn-success');
+                    }
+                </script>
+                
             </div>
             <p class="text-6xl font-serif mt-6 mb-6">
                 @if(isset( $reports->transaction_count  ))
@@ -133,7 +161,7 @@
 <div class="flex flex-row ml-48 p-8">
     <div class="basis-3/4">
         <div class="relative">
-            <h1 class="text-lg font-semibold">List Doctors Buka Mall Praktek</h1>
+            <h1 class="text-lg font-semibold">Daftar Dokter yang Buka Mall Praktek Jam {{ $selectedJam }}</h1>
         </div>
         <div class="overflow-x-auto">
             <table class="table w-full">

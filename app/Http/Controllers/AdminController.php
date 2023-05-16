@@ -35,7 +35,6 @@ class AdminController extends Controller
         $validatedData = $request->validate([
             'nama_dokter' => 'required',
             'email' => 'required|email|unique:dokters',
-            'password' => 'required',
             'foto' => 'required'
         ]);
 
@@ -47,7 +46,6 @@ class AdminController extends Controller
             'nama_dokter' => $validatedData['nama_dokter'],
             'spesialis' => $params['spesialis'],
             'email' => $validatedData['email'],
-            'password' => bcrypt($validatedData['password']),
             'foto' => $image->hashName(),
             'alamat' => $params['alamat'],
             'no_telp' => $params['no_telp'],

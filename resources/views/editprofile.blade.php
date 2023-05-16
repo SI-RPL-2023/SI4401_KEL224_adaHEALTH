@@ -7,6 +7,24 @@
             <img src="{{asset('upload/profile/'.$user->photo)}}" class="rounded-full w-[190px] h-[190px]" alt="userphoto">
         </div>
         <button class="w-[242px] h-[48px] bg-white text-red-500 absolute right-[88px] top-[119px] rounded-[20px] font-bold text-[20px] mt-[48px]">logout</button>
+        <button for="my-modal-3" class="">Ganti Password</button>
+        <!-- The button to open modal -->
+        <label for="my-modal-3" class="btn btn-ghost w-[242px] h-[48px] bg-white text-blue-500 absolute right-[88px] top-[179px] rounded-[20px] font-bold text-[20px] mt-[48px]">Ganti Password</label>
+
+        <!-- Put this part before </body> tag -->
+        <input type="checkbox" id="my-modal-3" class="modal-toggle" />
+        <div class="modal">
+        <div class="modal-box relative">
+            <label for="my-modal-3" class="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
+            <h3 class="text-lg font-bold">Change Your Password!</h3>
+            <form action="" method="POST">
+                @csrf
+                <h1 class="text-start mt-[18px]">Password<span class="text-red-500">*</span></h1>
+                <input type="password" name="password" class="w-full focus:outline-none border-b border-black mt-[6px]" value="{{ $user->password }}">
+                <button type="submit" class="btn btn-primary mt-5">Update Password</button>
+            </form>
+        </div>
+        </div>
     </div>
     <div class="flex flex-col items-center justify-center">
         <h1 class="mt-[120px] text-[40px] font-medium text-[#444444]">{{ $user->email }}</h1>
@@ -19,7 +37,7 @@
             <div class="flex items-center justify-between">
                 <h3 class="font-bold text-lg">Edit Profile</h3>
                 <label for="my-modal">
-                        X         
+                        X
                 </label>
             </div>
             <div class="flex flex-col items-center">
@@ -62,16 +80,17 @@
                     <h1 class="text-start mt-[18px]">Gender<span class="text-red-500">*</span></h1>
                     @if ($user->gender)
                         <p>{{ $user->gender }}</p>
+                        <input type="hidden" name="gender" class="w-full focus:outline-none border-b border-black mt-[6px]" value="{{ $user->gender }}">
                     @else
                     <div class="form-control">
                         <label class="label cursor-pointer">
-                          <span class="label-text">Laki-Laki</span> 
+                          <span class="label-text">Laki-Laki</span>
                           <input type="radio" name="gender" value="Laki-Laki" class="radio checked:bg-red-500" checked />
                         </label>
                       </div>
                       <div class="form-control">
                         <label class="label cursor-pointer">
-                          <span class="label-text">Perempuan</span> 
+                          <span class="label-text">Perempuan</span>
                           <input type="radio" name="gender" value="Perempuan" class="radio checked:bg-blue-500" checked />
                         </label>
                     </div>
@@ -87,8 +106,6 @@
                     <h1 class="text-start mt-[18px]">Phone<span class="text-red-500">*</span></h1>
                     <input type="text" name="phone" class="w-full focus:outline-none border-b border-black mt-[6px]" value="{{ $user->phone }}">
 
-                    <h1 class="text-start mt-[18px]">Password<span class="text-red-500">*</span></h1>
-                    <input type="password" name="password" class="w-full focus:outline-none border-b border-black mt-[6px]" value="{{ $user->password }}">
 
                     <div class="flex w-full justify-center items-center">
                         <button type="submit" class="w-[242px] h-[48px] mt-[20px] bg-[#6A62C4] rounded-[20px] text-white font-semibold">Save</button>

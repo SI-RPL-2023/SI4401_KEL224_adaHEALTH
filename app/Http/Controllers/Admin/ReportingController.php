@@ -17,6 +17,7 @@ class ReportingController extends Controller
 {
     public function index(Request $request)
     {
+
         // Mengambil query parameter "periode" dari URL
         $periode = $request->query('periode', 'semua');
 
@@ -48,13 +49,13 @@ class ReportingController extends Controller
         ->limit(3)
         ->get();
 
-        $currentDayOfWeek = Carbon::now()->dayOfWeekIso;
+        $selectedJam = $this->getCurrentTime();
 
-        $doctors = Dokter::whereRaw('DAYOFWEEK(CURDATE()) = ?', $currentDayOfWeek)
-                ->whereTime('jam_buka', '<=', Carbon::now()->format('H:i'))
-                ->whereTime('jam_tutup', '>=', Carbon::now()->format('H:i'))
-                ->get();
-        return view('admin.reports', compact('reports', 'periode', 'topHospitals', 'topApoteks', 'doctors'));
+        $doctors = Dokter::where(function ($query) use ($selectedJam) {
+            $query->where('jam_buka', '<=', $selectedJam)
+                ->where('jam_tutup', '>=', $selectedJam);
+        })->get();
+        return view('admin.reports', compact('reports', 'periode', 'topHospitals', 'topApoteks', 'doctors', 'selectedJam'));
     }
 
     private function getReportsByPeriode($periode)
@@ -84,5 +85,10 @@ class ReportingController extends Controller
         return $data;
     }
 
-
+    private function getCurrentTime()
+    {
+        $now = now();
+        $currentTime = $now->format('H:i');
+        return $currentTime;
+    }
 }
