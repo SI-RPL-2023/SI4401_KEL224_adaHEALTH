@@ -42,7 +42,7 @@
                   <th class="py-3 px-4 text-left">Bukti Pembayaran</th>
                   <th class="py-3 px-4 text-left">Metode Pembayaran</th>
                   <th class="py-3 px-4 text-left">Status</th>
-                  <th class="py-3 px-4 text-right">Aksi</th>
+                  <th class="py-3 px-4 text-left">Aksi</th>
                 </tr>
               </thead>
               <tbody>
