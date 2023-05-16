@@ -39,6 +39,7 @@ Route::put('/profile/{id}', [UserController::class, 'edit'])->name('updateProfil
 //     return view('historytransaksi');
 // });
 Route::get('/history', [HistoryTransaction::class, 'index']);
+Route::get('/history/{id}', [HistoryTransaction::class, 'show'])->name('detail.transaksi');
 
 Route::get('/help', function () {
     return view('help', ['title'=>'Help']);
@@ -95,7 +96,8 @@ Route::get('/obats', [ObatController::class, 'index']);
 
 Route::get('/obats/detail/{id}', [ObatController::class, 'show']);
 Route::post('/obats/detail/{id}', [ObatController::class, 'store_pesan'])->name('obat.store_pesan');
-Route::post('/obat/detail/{id}', [ObatController::class, 'updateStatus'])->name('transaction.update');
+Route::post('/transaksi/{id}', [ObatController::class, 'updateStatus'])->name('transaction.update');
+Route::delete('/transaksi/{id}/cancel', [ObatController::class, 'cancel_order'])->name('cancel.order');
 
 
 Route::middleware([
@@ -171,6 +173,12 @@ Route::group(['middleware' => ['auth']], function () {
 
         Route::delete('/obat/{id}', [\App\Http\Controllers\Admin\ObatController::class, 'delete'])->name('delete.obat');
         //Add Obat
+        //Transaksi Konfirm
+        Route::get('/transaksi', [\App\Http\Controllers\Admin\ConfirmationController::class, 'index'])->name('index.show');
+        Route::get('/transaksi/{id}/edit', [\App\Http\Controllers\Admin\ConfirmationController::class, 'edit'])->name('show.edit');
+        Route::post('/transaksi/{id}/edit', [\App\Http\Controllers\Admin\ConfirmationController::class, 'update'])->name('show.update');
+        Route::get('/transaksi/{id}/delete', [\App\Http\Controllers\Admin\ConfirmationController::class, 'destroy'])->name('show.delete');
+        //end Konfirm
     });
 
     Route::group(['middleware' => ['CekRoleMiddleware:2']], function () {

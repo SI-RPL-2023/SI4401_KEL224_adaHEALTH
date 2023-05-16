@@ -54,7 +54,7 @@
         <p class="">Harga : Rp. {{ $transaction->total_harga }}</p>
         <span class="">Status : <div class="badge badge-error text-white">{{ $transaction->status }}</div></span>
         <div class="w-full border-b-2  border-slate-100 mt-4"></div>
-        <form action="{{ route('transaction.update', $transaction->id) }}" method="POST" onsubmit="return validateForm();">
+        <form action="{{ route('transaction.update', $transaction->id) }}" method="POST" onsubmit="return validateForm();" enctype="multipart/form-data">
             @csrf
             <p class="font-medium mt-3">Metode Pembayaran : </p>
             <select class="select w-full max-w-xs" name="metode_payment" id="metode_payment" required>
@@ -64,7 +64,38 @@
                 <option value="LINK AJA">LINK AJA</option>
                 <option value="GOPAY">GOPAY</option>
             </select>
+            <div class="col-span-6 sm:col-span-4">
+                <label class="block text-sm font-medium leading-6 text-gray-900">Upload Images</label>
+                <div class="flex items-center justify-center w-full">
+                <label for="thumbnail" class="flex flex-col items-center justify-center w-full h-32 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
+                    <div class="flex flex-col items-center justify-center pt-5 pb-6">
+                        <svg aria-hidden="true" class="w-5 h-5 mb-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path></svg>
+                        <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">Click to upload</p>
+                        <p class="text-xs text-gray-500 dark:text-gray-400">PNG or JPG</p>
+                    </div>
+                    <input id="thumbnail" type="file" name="images" accept=".jpg,.jpeg,.png" class="hidden" />
+                </label>
+            </div>
+
+            <div class="col-span-6 sm:col-span-4">
+                <figure class="max-w-lg mx-auto mt-6">
+                    @if($transaction->images != null)
+                    <img class="h-auto max-w-full rounded-lg mx-auto" src="{{asset('upload/payment/'.$transaction->images)}}" width="100" height="100" id="images" alt="image description">
+                    <figcaption class="mt-2 text-sm text-center text-gray-500 dark:text-gray-400" id="image-caption">{{ $transaction->images }}</figcaption>
+                    @else
+                    <img class="h-[200px] max-w-full rounded-lg mx-auto" src="{{asset('images/thumbnail.jpg')}}" id="images" alt="image description">
+                    <figcaption class="mt-2 text-sm text-center text-gray-500 dark:text-gray-400" id="image-caption">Image Caption</figcaption>
+                    @endif
+                </figure>
+            </div>
             <button type="submit" class="mt-10 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Bayar Sekarang</button>
+        </form>
+        <form action="{{ route('cancel.order', $transaction->id) }}" method="POST" onsubmit="return confirm('Apakah Anda yakin ingin membatalkan pesanan ini?')">
+            @csrf
+            @method('DELETE')
+            <button type="submit" class="mt-10 flex w-full items-center justify-center rounded-md border border-transparent bg-red-600 px-8 py-3 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2">
+                Cancel Order
+            </button>
         </form>
     </div>
     <script>
@@ -78,6 +109,7 @@
     </script>
 
     @empty
+
     @endforelse
     @else
 
@@ -108,18 +140,55 @@
                     <p class="font-medium">Pesan Sekarang <label for="" class="text-[8px] text-[#c93030] mt-5">*pembelian min 5 pcs</label></p>
                     <div class="w-full border-b-2  border-slate-100 mt-4"></div>
 
-                    <form method="POST" action="{{ route('obat.store_pesan', ['id' => $obat->id]) }}">
-                        @csrf
-                        <h2 class="mt-5">Masukkan Jumlah</h2>
-                        <input type="number" class="input input-bordered mt-3" name="qty" step="1" min="5" max="10" placeholder="5" required> / Rp{{ number_format($obat->harga, 0, ',', '.') }}
-                        <button type="submit" class="mt-10 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Pesan</button>
-                    </form>
+                    @guest
+                        <button onclick="showLoginAlert()" class="mt-10 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Pesan</button>
+                    @else
+                        <form method="POST" action="{{ route('obat.store_pesan', ['id' => $obat->id]) }}">
+                            @csrf
+                            <h2 class="mt-5">Masukkan Jumlah</h2>
+                            <input type="number" class="input input-bordered mt-3" name="qty" step="1" min="5" max="10" placeholder="5" required> / Rp{{ number_format($obat->harga, 0, ',', '.') }}
+                            <button type="submit" class="mt-10 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Pesan</button>
+                        </form>
+                    @endguest
                 </div>
+
+                <script>
+                    function showLoginAlert() {
+                        alert('Anda harus login terlebih dahulu.');
+                        // Ganti alert dengan fungsi lain, seperti menampilkan modal, redirect ke halaman login, atau menampilkan pesan di bagian lain sesuai kebutuhan Anda.
+                    }
+                </script>
+
 
             </div>
         </div>
     </div>
 
 
+    <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.js"></script>
+    <script>
 
+        $('#thumbnail').change(function() {
+            var file = $('#thumbnail')[0].files[0].name;
+            $('#image-caption').text(file);
+        });
+        // image preview
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#images').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        $("#thumbnail").change(function(){
+            readURL(this);
+        });
+        // END of image preview
+        </script>
 @endsection
