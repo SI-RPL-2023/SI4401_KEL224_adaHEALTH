@@ -1,35 +1,33 @@
 <?php
+
 namespace Database\Seeders;
 
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use App\Models\Hospital;
-use App\Models\HospitalRating;
-use App\Models\User;
+use Illuminate\Support\Facades\DB;
 
 class HospitalRatingSeeder extends Seeder
 {
     /**
      * Run the database seeds.
-     *
-     * @return void
      */
-    public function run()
+    public function run(): void
     {
-        // mendapatkan semua data rumah sakit
-        // $hospitals = Hospital::all();
+        // Ambil ID user dan hospital yang sudah ada
+        $users = DB::table('users')->pluck('id');
+        $hospitals = DB::table('hospitals')->pluck('id');
 
-        // // mendapatkan semua data pengguna
-        // $users = User::all();
-
-        // // untuk setiap rumah sakit, tambahkan beberapa rating
-        // foreach ($hospitals as $hospital) {
-        //     for ($i = 1; $i <= 5; $i++) {
-        //         $rating = new HospitalRating();
-        //         $rating->hospital_id = $hospital->id;
-        //         $rating->user_id = $users->random()->id;
-        //         $rating->rating = rand(1, 5);
-        //         $rating->save();
-        //     }
-        // }
+        // Generate rating acak untuk setiap user dan hospital
+        foreach ($users as $userId) {
+            foreach ($hospitals as $hospitalId) {
+                DB::table('hospital_ratings')->insert([
+                    'user_id' => $userId,
+                    'hospital_id' => $hospitalId,
+                    'rating' => rand(1, 5), // Rating acak dari 1 hingga 5
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ]);
+            }
+        }
     }
 }

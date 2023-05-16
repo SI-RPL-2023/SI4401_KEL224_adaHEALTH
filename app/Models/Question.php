@@ -12,12 +12,11 @@ class Question extends Model
     protected $fillable = [
         'id', 'user_id', 'name', 'email', 'mesagges',
     ];
-    public function users(){
-        return $this->belongsTo(User::class, 'user_id', 'name', 'email');
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
-    public function user(){
-        return $this->hasMany(User::class, 'user_id', 'name', 'email');
-    }
+    
 
     public function answers()
     {

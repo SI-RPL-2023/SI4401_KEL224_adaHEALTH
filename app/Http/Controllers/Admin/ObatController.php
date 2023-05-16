@@ -103,7 +103,8 @@ class ObatController extends Controller
                 if(file_exists($path)) {
                     unlink($path);
                 } else {
-                    return response()->json(['message' => 'File not found.'], 404);
+                    $obat->photo = $imageName->hashName();
+                    // return response()->json(['message' => 'File not found.'], 404);
                 }
             }
 

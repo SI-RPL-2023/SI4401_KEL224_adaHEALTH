@@ -27,13 +27,13 @@
     <a href="{{ route('add.obat') }}" class="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700 hover:text-gray-100">
       Add Obat
     </a>
-    <a href="#" class="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700 hover:text-gray-100">
-      Add User
-    </a>
-    <a href="#" class="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700 hover:text-gray-100">
+    <a href="{{ url('/dokter') }}" class="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700 hover:text-gray-100">
       Add Dokter
     </a>
-  </div>
+    <a href="{{ url('/transaksi') }}" class="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700 hover:text-gray-100">
+      Transaksi
+    </a>
+</div>
 
   <script>
     // Ambil elemen tombol dan sidebar

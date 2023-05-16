@@ -64,4 +64,13 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+    public function transaction()
+    {
+        return $this->belongsTo(Transaction::class);
+    }
+
+    public static function countNewUsers($startDate, $endDate)
+    {
+        return self::whereBetween('created_at', [$startDate, $endDate])->count();
+    }
 }

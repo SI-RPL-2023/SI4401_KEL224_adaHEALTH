@@ -15,6 +15,9 @@ use App\Http\Controllers\HospitalController;
 use App\Http\Controllers\ServicesController;
 use App\Http\Controllers\FeedbackUserController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\ReportingController;
+use App\Http\Controllers\Admin\ConfirmationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,11 +42,12 @@ Route::put('/profile/{id}', [UserController::class, 'edit'])->name('updateProfil
 //     return view('historytransaksi');
 // });
 Route::get('/history', [HistoryTransaction::class, 'index']);
+Route::get('/history/{id}', [HistoryTransaction::class, 'show'])->name('detail.transaksi');
 
 Route::get('/help', function () {
     return view('help', ['title'=>'Help']);
 });
-
+Route::post('/help', [HelpController::class, 'submitForm'])->name('submit.form');
 
 Route::get('/', function () {
     return view('LandingPage', ['title' => 'Home']);
@@ -77,15 +81,6 @@ Route::get('/help', [HelpController::class, 'index'])->name('help.index');
 Route::get('apotek/{id}/rate', [ApotekController::class, 'createRating'])->name('apotek.createRating');
 Route::post('apotek/{id}/rate', [ApotekController::class, 'storeRating'])->name('apotek.storeRating');
 
-Route::middleware([
-    'auth:sanctum',
-    config('jetstream.auth_session'),
-    'verified'
-])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
-});
 
 Route::get('/hargadanjenisobat', function () {
     return view('hargadanjenisobat');
@@ -95,7 +90,9 @@ Route::get('/obats', [ObatController::class, 'index']);
 
 Route::get('/obats/detail/{id}', [ObatController::class, 'show']);
 Route::post('/obats/detail/{id}', [ObatController::class, 'store_pesan'])->name('obat.store_pesan');
-Route::post('/obat/detail/{id}', [ObatController::class, 'updateStatus'])->name('transaction.update');
+Route::post('/transaksi/{id}', [ObatController::class, 'updateStatus'])->name('transaction.update');
+Route::delete('/transaksi/{id}/cancel', [ObatController::class, 'cancel_order'])->name('cancel.order');
+
 
 
 Route::middleware([
@@ -104,7 +101,7 @@ Route::middleware([
     'verified'
 ])->group(function () {
     Route::get('/dashboard', function () {
-        return view('dashboard');
+        return view('reports');
     })->name('dashboard');
 });
 
@@ -131,12 +128,17 @@ Route::group(['middleware' => ['auth']], function () {
     });
 
     Route::group(['middleware' => ['CekRoleMiddleware:1']], function () {
-        Route::resource('dashboard', AdminController::class);
+        Route::resource('dashboard', \App\Http\Controllers\Admin\DashboardController::class);
+       
+        Route::get('/dashboard', [ReportingController::class, 'index'])->name('reports.index');
+   
+        //Add Dokter
         Route::get('dokter/add', [AdminController::class, 'form_tambah']);
         Route::post('dokter/save', [AdminController::class, 'form_save']);
         Route::get('dokter/edit/{id}', [AdminController::class, 'form_edit']);
         Route::post('dokter/update/{id}', [AdminController::class, 'form_update']);
         Route::get('dokter/delete/{id}', [AdminController::class, 'form_delete']);
+        //End Add DOkter
         //AddHospital
         Route::get('/add/hospital', [\App\Http\Controllers\Admin\HospitalController::class, 'show'])->name('add.hospital');
         Route::post('/add/hospital', [\App\Http\Controllers\Admin\HospitalController::class, 'store'])->name('store.hospital');
@@ -171,6 +173,13 @@ Route::group(['middleware' => ['auth']], function () {
 
         Route::delete('/obat/{id}', [\App\Http\Controllers\Admin\ObatController::class, 'delete'])->name('delete.obat');
         //Add Obat
+
+        //Transaksi Konfirm
+        Route::get('/transaksi', [\App\Http\Controllers\Admin\ConfirmationController::class, 'index'])->name('index.show');
+        Route::get('/transaksi/{id}/edit', [\App\Http\Controllers\Admin\ConfirmationController::class, 'edit'])->name('show.edit');
+        Route::post('/transaksi/{id}/edit', [\App\Http\Controllers\Admin\ConfirmationController::class, 'update'])->name('show.update');
+        Route::get('/transaksi/{id}/delete', [\App\Http\Controllers\Admin\ConfirmationController::class, 'destroy'])->name('show.delete');
+        //end Konfirm
     });
 
     Route::group(['middleware' => ['CekRoleMiddleware:2']], function () {

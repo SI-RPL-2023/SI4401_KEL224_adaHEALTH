@@ -32,6 +32,12 @@
             <input type="text" id="simple-search" class="bg-gray-50 border focus:outline-none    border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 " placeholder="Search" required>
         </div>
     </form>
+    <style>
+        .text-desc{
+            height: 4.5em; /* Atur ketinggian maksimum yang diinginkan */
+            overflow: hidden;
+        }
+    </style>
     <div class="container mx-auto py-8">
         <h1 class="text-2xl font-bold mb-4">{{ $title }}</h1>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -41,7 +47,7 @@
                 <a href="{{ url('obats/detail/'.$obat->id) }}">
                     <div class="p-4">
                         <h2 class="text-xl font-bold mb-2">{{ $obat->nama }}</h2>
-                        <p class="text-gray-700 text-base">{{ $obat->deskripsi }}</p>
+                        <p class="text-gray-700 text-base text-desc">{{ $obat->deskripsi }}</p>
                         <p class="text-gray-700 text-base mt-2">Harga: {{ $obat->harga }}</p>
                         <p class="text-gray-700 text-base mt-2">Kategori: {{ $obat->kategori }}</p>
                     </div>

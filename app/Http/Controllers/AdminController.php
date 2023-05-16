@@ -17,10 +17,7 @@ use Carbon\Carbon;
 
 class AdminController extends Controller
 {
-    public function index(Request $request)
-    {
-        return view('admin.dashboard');
-    }
+
 
     // DOKTER CRUD
     public function dokter_view() {

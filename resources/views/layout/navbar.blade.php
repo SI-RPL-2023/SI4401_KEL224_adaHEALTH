@@ -22,24 +22,47 @@
                     <div class="hidden sm:ml-6 sm:block">
                         <div class="flex space-x-4">
                             <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-                            <a href="{{ url('/') }}" class="text-gray-300 hover:bg-gray-700 text-white rounded-md px-3 py-2 text-sm font-medium" aria-current="page">Home</a>
+                            <a href="{{ url('/') }}" class="text-gray-300 hover:bg-gray-700 text-white rounded-md px-3 py-2 text-sm font-medium" aria-current="page">Beranda</a>
 
-                            <a href="{{ url('/') }}" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Service</a>
+                            <a href="{{ url('/') }}" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Layanan</a>
 
-                            <a href="{{ url('/') }}" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">AboutUs</a>
+                            <a href="{{ url('/') }}" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Tentang</a>
 
-                            <a href="{{ url('/help') }}" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Help </a>
+                            <a href="{{ url('/help') }}" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Bantuan </a>
                         </div>
                     </div>
                 </div>
                 @auth
+                <img src="{{ asset('upload/profile/' . Auth::user()->photo) }}" class="rounded-full w-8 h-8" alt="userphoto">
+                <div class="dropdown dropdown-hover">
+                    <label tabindex="0" class="flex">
+                        <span class="text-gray-300 text-white rounded-md px-3 py-2 text-sm font-medium" aria-current="page">{{ Auth::user()->email }}</span>
+                        <svg class="w-6 h-6 text-white-100" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><title>arrow-down-bold</title><path d="M9,4H15V12H19.84L12,19.84L4.16,12H9V4Z" /></svg>
+                        
+                    </label>
+                    <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
+                      <li><a href="{{ route('profile.show', ['id' => Auth::user()->id]) }}">Profile</a></li>
+                      <li><a href="{{ url('/feedback') }}">Ulasan Aplikasi</a></li>
+                      <li><a href="{{ url('/history') }}">History Transaksi Obat</a></li>
+                      <li>
+                        <form action="{{ route('logout') }}" method="post">
+                            @csrf
+                            <button class="w-full" type="submit">
+                                Logout
+                            </button>
+                        </form>
+                      </li>
+                      
+                    </ul>
+                </div>
+                  
                 <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                     <!-- Profile dropdown -->
                     <div class="relative ml-3">
                         <div>
                             <button type="button" class="flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800" id="user-menu-button" aria-expanded="false" aria-haspopup="true">
                                 <span class="sr-only">Open user menu</span>
-                                <img src="{{ asset('/storage/'.Auth::user()->photo) }}" class="rounded-full w-8 h-8" alt="userphoto">
+                                
                             </button>
 
                         </div>
@@ -56,10 +79,10 @@
 
                     </div>
                     <div class="group">
-                        <a href="#" class="text-gray-300 text-white rounded-md px-3 py-2 text-sm font-medium" aria-current="page">{{ Auth::user()->email }}</a>
+                        
 
                         <div class="group-hover:block hidden w-[100px] h-[150px] bg-white shadow-lg absolute mt-[5px]">
-                            <button class="border-b border-black w-full flex items-center justify-center"><a href="{{ route('profile.show', ['id' => Auth::user()->id]) }}"></a> Profile</button>
+                            <button class="border-b border-black w-full flex items-center justify-center mt-5"><a href="{{ route('profile.show', ['id' => Auth::user()->id]) }}"></a> Profile</button>
                             <button class="border-b border-black w-full flex items-center justify-center"> <a href="{{ url('/feedback') }}"> Feedback Application</a></button>
 
                             <button class="border-b border-black w-full flex items-center justify-center"><a href="{{ url('/history') }}" class="">History Pembelian</a></button>
