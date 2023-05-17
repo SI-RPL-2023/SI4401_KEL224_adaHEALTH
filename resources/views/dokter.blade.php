@@ -15,15 +15,33 @@
         <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
     </button>
 </div>
+@elseif(session()->has('warning'))
+<div id="toast-warning" class="fixed top-5 right-5 flex items-center w-full max-w-xs p-4 text-gray-500 bg-white rounded-lg shadow dark:text-gray-400 dark:bg-gray-800" role="alert">
+    <div class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-orange-500 bg-orange-100 rounded-lg dark:bg-orange-700 dark:text-orange-200">
+        <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path></svg>
+        <span class="sr-only">Warning icon</span>
+    </div>
+    <div class="ml-3 text-sm font-normal">{{ Session::get('warning') }}</div>
+    <button type="button" class="ml-auto -mx-1.5 -my-1.5 bg-white text-gray-400 hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex h-8 w-8 dark:text-gray-500 dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700" data-dismiss-target="#toast-warning" aria-label="Close">
+        <span class="sr-only">Close</span>
+        <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+    </button>
+</div>
 @endif
 <div class="container my-12 mx-auto px-1 md:px-12 space-y-5">
-    <p class="normal-case ...">Chat dokter spesialis</p>
-    @if(Auth::user()->roles != 1)
-    @else
+    @if(Auth::user()->roles != 2)
+    <h4 class="text-2xl font-bold dark:text-white">Chat Dokter Spesialis</h4>
+    @endif
+    @if(Auth::user()->roles == 1) 
     <a href="{{ url('dokter/add') }}" class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-gray-900 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-700 dark:focus:ring-gray-700">Tambah Dokter</a>
+    @endif
+    
+    @if(Auth::user()->roles == 0) 
+    <a href="{{ url('riwayat-konsultasi') }}" class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-gray-900 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-700 dark:focus:ring-gray-700">Riwayat Konsultasi</a>
     @endif
 </div>
 
+@if(Auth::user()->roles != 2)
 <div class="container my-12 mx-auto px-1 md:px-12 space-y-5">
     <div class="flex flex-wrap -mx-1 lg:-mx-4">
         
@@ -46,7 +64,7 @@
                     @if(Auth::user()->roles == 1)
                     <div class="flex mt-4 space-x-3 md:mt-6">
                         <a href="{{ url('dokter/edit/'.Crypt::encryptString($d->id)) }}" class="focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900">Edit</a>
-                        <a href="{{ url('dokter/delete/'.Crypt::encryptString($d->id)) }}" class="text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900">Delete</a>
+                        <a href="{{ url('dokter/delete/'.Crypt::encryptString($d->id)) }}" onclick="return confirm('Apakah anda yakin ingin menghapus data?')" class="text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900">Hapus</a>
                     </div>
                     @else
                     @endif
@@ -60,7 +78,93 @@
         <!-- END Column -->
     </div>
 </div>
-
+@else
+<div class="container my-12 mx-auto px-1 md:px-12 space-y-5">
+    <a href="{{ url('konsultasi/add') }}" class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-gray-900 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-700 dark:focus:ring-gray-700">Tambah Konsultasi</a>
+    <a href="#" class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-gray-900 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-700 dark:focus:ring-gray-700">Surat Rujukan RS</a>
+    <h4 class="text-2xl font-bold dark:text-white">Riwayat Konsultasi</h4>
+    <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+        <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                <tr>
+                    <th scope="col" class="px-6 py-3">
+                        Nama Dokter
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Spesialis
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Nama Pasien
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Email Pasien
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Penyakit
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Rekomendasi Obat
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Saran
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Rujukan RS
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @forelse($konsultasi as $row)
+                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                    <td class="px-6 py-4">
+                    {{ $row->nama_dokter }}
+                    </td>
+                    <td class="px-6 py-4">
+                    {{ $row->spesialis }}
+                    </td>
+                    <td class="px-6 py-4">
+                    {{ $row->nama_pasien }}
+                    </td>
+                    <td class="px-6 py-4">
+                    {{ $row->email_pasien }}
+                    </td>
+                    <td class="px-6 py-4">
+                    {{ $row->penyakit }}
+                    </td>
+                    <td class="px-6 py-4">
+                    {{ $row->obat }}
+                    </td>
+                    <td class="px-6 py-4">
+                    {{ $row->saran }}
+                    </td>
+                    <td class="px-6 py-4">
+                    @if($row->rujukan_rs == 0)
+                    <span class="bg-red-100 text-red-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full dark:bg-red-900 dark:text-red-300">Tidak Disetujui</span>
+                    @elseif($row->rujukan_rs == 1)
+                    <span class="bg-green-100 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full dark:bg-green-900 dark:text-green-300">Disetujui</span>
+                    @endif
+                    </td>
+                    <td class="px-6 py-4 text-right">
+                        <a href="{{ url('konsultasi/edit/'.Crypt::encryptString($row->id)) }}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                    </td>
+                    <td class="px-6 py-4 text-right">
+                        <a href="{{ url('konsultasi/delete/'.Crypt::encryptString($row->id)) }}" onclick="return confirm('Apakah anda yakin ingin menghapus data?')" class="font-medium text-red-600 dark:text-red-500 hover:underline">Hapus</a>
+                    </td>
+                </tr>
+                @empty
+                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                    <td class="px-6 py-4" colspan="9" align="center">Tidak ada data</td>
+                </tr>
+                @endforelse
+            </tbody>
+        </table>
+    </div>
+</div>
+@endif
 <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.js"></script>
 <script>

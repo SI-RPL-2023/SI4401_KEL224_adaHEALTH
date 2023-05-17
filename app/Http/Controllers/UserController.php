@@ -38,4 +38,15 @@ class UserController extends Controller
 
             return redirect('/')->with('success', 'Edit Success');
         }
+
+        function riwayat_konsultasi() {
+            $konsultasi = DB::table('konsultasi as a')
+                        ->join('users as b', 'a.id_dokter', '=', 'b.id')
+                        ->join('users as c', 'a.id_pasien', '=', 'c.id')
+                        ->join('dokters as d', 'b.email', '=', 'd.email')
+                        ->select('a.*', 'b.name as nama_dokter', 'c.name as nama_pasien', 'd.spesialis')
+                        ->where('a.id_pasien', '=', Auth::user()->id)
+                        ->get();
+            return view('riwayat-konsultasi-pasien-view', compact('konsultasi'));
+        }
 }

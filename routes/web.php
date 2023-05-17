@@ -118,10 +118,12 @@ Route::controller(LoginController::class)->group(function () {
 
 //Middleware Group setelah login
 Route::group(['middleware' => ['auth']], function () {
-    Route::get('dokter', [AdminController::class, 'dokter_view']);
+
+    Route::get('dokter', [DokterController::class, 'dokter_view']);
 
     Route::group(['middleware' => ['CekRoleMiddleware:0']], function () {
         Route::resource('/user', UserController::class);
+        Route::get('riwayat-konsultasi', [UserController::class, 'riwayat_konsultasi']);
         //Route untuk Fitur Feedback CRUD
         Route::get('/feedback', [FeedbackUserController::class, 'show'])->name('feedback.show');
         Route::post('/feedback', [FeedbackUserController::class, 'store'])->name('feedback.store');
@@ -174,7 +176,12 @@ Route::group(['middleware' => ['auth']], function () {
     });
 
     Route::group(['middleware' => ['CekRoleMiddleware:2']], function () {
-        // Route::resource('dokter', DokterController::class);
+        Route::get('konsultasi/add', [DokterController::class, 'form_konsultasi']);
+        Route::post('konsultasi/save', [DokterController::class, 'save_konsultasi']);
+        Route::get('konsultasi/edit/{id}', [DokterController::class, 'form_konsultasi_edit']);
+        Route::post('konsultasi/update/{id}', [DokterController::class, 'form_konsultasi_update']);
+        Route::get('konsultasi/delete/{id}', [DokterController::class, 'form_konsultasi_delete']);
+        
     });
 
 
