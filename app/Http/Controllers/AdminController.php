@@ -19,64 +19,45 @@ use Carbon\Carbon;
 
 class AdminController extends Controller
 {
-    public function index(Request $request)
-    {
-        return view('admin.dashboard');
+
+
+    // DOKTER CRUD
+    public function dokter_view() {
+        $dokter = Dokter::all();
+        return view('dokter', compact('dokter'));
+    }
+    public function form_tambah() {
+        return view('dokter-form-tambah');
     }
 
+    public function form_save(Request $request)
+    {
+        $params = $request->all();
+        // validate the input data
+        $validatedData = $request->validate([
+            'nama_dokter' => 'required',
+            'email' => 'required|email|unique:dokters',
+            'foto' => 'required'
+        ]);
+
+        $image = $request->file('foto');
+        $image->store('upload/dokter', ['disk' => 'public_uploads']);
+
+        // create a new dokter instance with the validated data
+        $dokter = new Dokter([
+            'nama_dokter' => $validatedData['nama_dokter'],
+            'spesialis' => $params['spesialis'],
+            'email' => $validatedData['email'],
+            'foto' => $image->hashName(),
+            'alamat' => $params['alamat'],
+            'no_telp' => $params['no_telp'],
+            'gender' => $params['gender'],
+            'tanggal_lahir' => $params['tanggal_lahir'],
+            'role' => 'dokter',
+            'jam_buka' => $params['jam_buka'],
+            'jam_tutup' => $params['jam_tutup']
+        ]);
 // DOKTER CRUD
-public function form_tambah() {
-    return view('dokter-form-tambah');
-}
-
-public function form_save(Request $request)
-{
-    $params = $request->all();
-    // validate the input data
-    $validatedData = $request->validate([
-        'nama_dokter' => 'required',
-        'email' => 'required|email|unique:dokters',
-        'password' => 'required',
-        'foto' => 'required'
-    ]);
-
-    $image = $request->file('foto');
-    $image->store('upload/dokter', ['disk' => 'public_uploads']);
-
-    // create a new dokter instance with the validated data
-    $dokter = new Dokter([
-        'nama_dokter' => $validatedData['nama_dokter'],
-        'spesialis' => $params['spesialis'],
-        'email' => $validatedData['email'],
-        'password' => Hash::make($validatedData['password']),
-        'foto' => $image->hashName(),
-        'alamat' => $params['alamat'],
-        'no_telp' => $params['no_telp'],
-        'gender' => $params['gender'],
-        'tanggal_lahir' => $params['tanggal_lahir'],
-        'role' => 'dokter',
-        'jam_buka' => $params['jam_buka'],
-        'jam_tutup' => $params['jam_tutup']
-    ]);
-
-    // save the dokter instance to the database
-    $dokter->save();
-
-    // insert the credentials into user table
-    $user = new User([
-        'email' => $validatedData['email'],
-        'phone' => $params['no_telp'],
-        'password' => Hash::make($validatedData['password']),
-        'name' => $validatedData['nama_dokter'],
-        'roles' => 2
-    ]);
-
-    $user->save();
-
-    // return a response indicating success
-    // return response()->json(['message' => 'User created successfully'], 201);
-    return redirect()->to('dokter')->with('success', 'Data berhasil ditambahkan');
-}
 
 public function form_edit($id) {
     $id = Crypt::decryptString($id);

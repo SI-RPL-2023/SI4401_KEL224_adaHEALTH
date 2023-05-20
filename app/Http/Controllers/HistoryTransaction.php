@@ -16,8 +16,17 @@ class HistoryTransaction extends Controller
     public function index()
     {
         $user = Auth::user();
-        $transactions =  Transaction::where('id_user', $user->id)->get();
-        return view('historytransaksi', compact('transactions'));
+        $pendingTransactions = Transaction::where('id_user', $user->id)
+                ->where('status', 'Tertunda')
+                ->get();
+
+        $acceptedTransactions = Transaction::where('id_user', $user->id)
+                ->where('status', 'Selesai')
+                ->get();
+        $invalid = Transaction::where('id_user', $user->id)
+                ->where('status', 'Gagal')
+                ->get();
+        return view('historytransaksi',compact('pendingTransactions', 'acceptedTransactions', 'invalid'));
     }
 
     /**
@@ -64,7 +73,7 @@ class HistoryTransaction extends Controller
     public function show($id)
     {
         $transaction = Transaction::findOrFail($id);
-        return view('transactions.show', compact('transaction'));
+        return view('historytransaksi_detail', compact('transaction'));
     }
 
     /**
