@@ -1,22 +1,27 @@
 @extends('layout.layout-admin')
 
 @section('content')
-<div class="ml-48 p-8">
-    <div class="bg-[#f8ff27] rounded-full w-100 inline-block align-middle p-2">
-        <span class="text-1xl font-bold text-gray-900">Dashboard</span>
-    </div>
+<div class="ml-32 p-8">
+            <div class="bg-[#6266F4]  rounded-lg max-h-max w-full  p-10">
+                <span class="text-1xl font-italic text-white text-lg tracking-widest">Selamat Datang , <span class="font-bold text-lg">{{ Auth::user()->name }}</span></span>
+                <p class="text-slate-300 mt-5">Semoga hari-hari mu senin terus. :)</p>
+                <div class="relative">
+                    <div class="bottom-0 right-0 "></div>
+                    <div class="absolute -right-1 -bottom-0 text-slate-300 ">
+                            <a href="{{ url('/logout') }}"> <div class=" p-3 rounded-md btn btn-active btn-ghost text-white">Keluar <span class="mdi mdi-logout ml-3"></span></div></a>
+
+                    </div>
+                </div>
+            </div>
 </div>
 
-<div class="flex flex-row  ml-48 p-8">
-    <div class="basis-2/4">
-        <div class="bg-gradient min-w-min min-h-min p-10 rounded-3xl mt-5 mb-5">
+<div class="flex flex-row  ml-32 p-8">
+    <div class="basis-3/4">
+        <div class="bg-[#6266F4] min-w-min min-h-min p-10 rounded-3xl mt-5 mb-5">
             <div class="flex justify-between items-center">
                 <div class="relative">
-                    <h1 class="text-lg font-semibold">Histori Pembelian Obat</h1>
+                    <h1 class="text-lg font-semibold text-white">Laporan Pembelian Obat</h1>
                   <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-                    <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                      <path d="M9 11l3 3l3-3l1.41 1.41L10 16.83l-4.41-4.42L6 11l3 3z" />
-                    </svg>
                   </div>
                 </div>
                 <style>
@@ -24,25 +29,25 @@
                         border: 2px solid transparent;
                         transition: border-color 0.3s ease;
                     }
-                
+
                     .card.active {
                         border-color: #6A62C4;
                     }
                 </style>
-                
+
                 <div>
                     <a href="{{ route('reports.index') }}" class="btn btn-active btn-ghost text-white" id="btn-all">Semua</a>
                     <a href="{{ route('reports.index', ['periode' => 'bulan_sekarang']) }}" class="btn btn-active btn-ghost text-white" id="btn-this-month">Bulan Sekarang</a>
                     <a href="{{ route('reports.index', ['periode' => 'bulan_lalu']) }}" class="btn btn-active btn-ghost text-white" id="btn-last-month">Bulan Kemarin</a>
                 </div>
-                
+
                 <script>
                     const btnAll = document.getElementById('btn-all');
                     const btnThisMonth = document.getElementById('btn-this-month');
                     const btnLastMonth = document.getElementById('btn-last-month');
-                    
+
                     const currentUrl = "<?php echo $_SERVER['REQUEST_URI']; ?>";
-                    
+
                     if (currentUrl.includes('periode=') || currentUrl.endsWith('/dashboard')) {
                         btnAll.classList.add('btn-success');
                     } else if (currentUrl.includes('periode=bulan_sekarang')) {
@@ -51,15 +56,15 @@
                         btnLastMonth.classList.add('btn-success');
                     }
                 </script>
-                
+
             </div>
             <p class="text-6xl font-serif mt-6 mb-6">
                 @if(isset( $reports->transaction_count  ))
                 {{ $reports->transaction_count  }}
                 @else
-                
+
                 @endif
-    
+
             </p>
             <div class="flex flex-row mt-10">
                 <div class="basis-1/4 md:basis-1/3">
@@ -72,15 +77,15 @@
                             </div>
                             <div class="ml-4">
                                 <h6 class="text-gray-500 font-semibold">Transaksi Tertunda</h6>
-    
+
                                     <h6 class="font-extrabold mb-0">{{ $reports->tertunda_count }}</h6>
-    
+
                             </div>
                         </div>
                     </div>
-    
+
                 </div>
-    
+
                 <div class="basis-1/3 md:basis-1/3 ml-3">
                     <div class="bg-white rounded-lg shadow-md p-10">
                         <div class="flex items-center">
@@ -91,10 +96,10 @@
                             </div>
                             <div class="ml-4">
                                 <h6 class="text-gray-500 font-semibold">Transaksi Gagal </h6>
-    
+
                                     <h6 class="font-extrabold mb-0">{{ $reports->gagal_count }}</h6>
-    
-    
+
+
                             </div>
                         </div>
                     </div>
@@ -109,9 +114,9 @@
                             </div>
                             <div class="ml-4">
                                 <h6 class="text-gray-500 font-semibold">Transaksi Selesai </h6>
-                    
+
                                 <h6 class="font-extrabold mb-0">{{ $reports->selesai_count }}</h6>
-      
+
                             </div>
                         </div>
                     </div>
@@ -119,17 +124,46 @@
             </div>
         </div>
     </div>
-    <div class="basis-2/5 bg-white ml-5 p-10 rounded-3xl mt-5 mb-5 drop-shadow-lg w-[100px]">
+
+
+    <div class="basis-2/5 bg-blue-300 ml-5 p-10 rounded-3xl mt-5 mb-5 drop-shadow-lg w-[100px] ">
       <!-- Konten 2 -->
       <div class="relative">
-        <h1 class="text-lg font-semibold">Rating Rumah Sakit Tertinggi</h1>
-            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-                    <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                    <path d="M9 11l3 3l3-3l1.41 1.41L10 16.83l-4.41-4.42L6 11l3 3z" />
-                    </svg>
-            </div>
+        <h1 class="text-lg font-semibold mt-3">Transaksi Terakhir Pemesanan Obat</h1>
+
       </div>
-      <div class="overflow-x-auto">
+        <div class="basis-1/4 md:basis-1/3">
+
+            <div class="bg-white rounded-lg shadow-md mt-3">
+                <div class="flex items-center">
+                    <div class="ml-4">
+                        <ul role="list" class="divide-y divide-gray-100 p-3">
+                            @foreach ($last_transaksi as $transaction)
+
+                            @if ($transaction)
+                            <li class="flex justify-between mt-3">
+                              <div class="flex">
+                                <img class="h-12 w-12 flex-none rounded-full bg-gray-50" src="{{asset('upload/profile/'.$transaction->user->photo)}}" alt="">
+                                <div class="min-w-0 flex-auto">
+                                  <p class="text-sm font-semibold leading-6 text-gray-900 ml-3">   {{ ucwords($transaction->user->name) }}  </p>
+                                  <div class="flex">
+                                    <p class="mt-1 truncate text-xs leading-5 text-gray-500 ml-3">  {{$transaction->type}}  </p>
+                                    <span class="mt-1 truncate text-xs leading-5 text-gray-500"> &nbsp;&nbsp; </span>
+                                    <p class="mt-1 truncate text-xs leading-5 text-gray-500"> {{ date('d F Y H:i:s', strtotime($transaction->created_at)) }} </p>
+                                  </div>
+
+                                </div>
+                              </div>
+                            </li>
+                            @endif
+                            @endforeach
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+      {{-- <div class="overflow-x-auto">
         <table class="table w-full mt-5">
           <!-- head -->
           <thead>
@@ -155,77 +189,122 @@
             @endforelse
           </tbody>
         </table>
-      </div>
+      </div> --}}
     </div>
 </div>
-<div class="flex flex-row ml-48 p-8">
-    <div class="basis-3/4">
+
+<div class="flex flex-row ml-32 p-8 place-items-center">
+    <div class="basis-1/2">
+        <div class="relative">
+            <h1 class="text-lg font-semibold">Total Keseluruhan.</h1>
+            <div class="grid grid-cols-4 gap-4 ">
+                <div class=" bg-white shadow-lg p-5 justify-center rounded-lg ">
+                    <div class="bg-[#6266F4] rounded-lg flex justify-center min-w-min p-3">
+
+                        <span class="mdi mdi-account-multiple-plus text-white text-[30px]"></span>
+                    </div>
+                    <div class="text-center">
+                        <p class="text-slate-300 justify-self-center">User</p>
+                        <p class="font-medium mt-4">{{ $reports->user_count }}</p>
+                    </div>
+                </div>
+                <div class=" bg-white shadow-lg p-5 justify-center rounded-lg ">
+                    <div class="bg-error rounded-lg flex justify-center min-w-min p-3">
+
+
+                        <span class="mdi mdi-doctor text-white text-[30px]"></span>
+                    </div>
+                    <div class="text-center">
+                        <p class="text-slate-300 justify-self-center">Dokter</p>
+                        <p class="font-medium mt-4">{{ $reports->doctor_count }}</p>
+                    </div>
+                </div>
+                <div class=" bg-white shadow-lg p-5 justify-center rounded-lg ">
+                    <div class="bg-accent rounded-lg flex justify-center min-w-min p-3">
+
+                        <span class="mdi mdi-phone-message text-white text-[30px]"></span>
+                    </div>
+                    <div class="text-center">
+                        <p class="text-slate-300 justify-self-center">Konsultasi</p>
+                        <p class="font-medium mt-4">{{ $reports->user_count }}</p>
+                    </div>
+                </div>
+                <div class=" bg-white shadow-lg p-5 justify-center rounded-lg ">
+                    <div class="bg-info rounded-lg flex justify-center min-w-min p-3">
+
+                        <span class="mdi mdi-pill-multiple text-white text-[30px]"></span>
+                    </div>
+                    <div class="text-center">
+                        <p class="text-slate-300 justify-self-center">Obat</p>
+                        <p class="font-medium mt-4">{{ $reports->obat_count }}</p>
+                    </div>
+                </div>
+                <div class=" bg-white shadow-lg p-5 justify-center rounded-lg ">
+                    <div class="bg-secondary rounded-lg flex justify-center min-w-min p-3">
+
+                        <span class="mdi mdi-hospital-building text-white text-[30px]"></span>
+                    </div>
+                    <div class="text-center">
+                        <p class="text-slate-300 justify-self-center">Rumah Sakit</p>
+                        <p class="font-medium mt-4">{{ $reports->rs_count }}</p>
+                    </div>
+                </div>
+                <div class=" bg-white shadow-lg p-5 justify-center rounded-lg ">
+                    <div class="bg-success rounded-lg flex justify-center min-w-min p-3">
+
+                        <span class="mdi mdi-medical-cotton-swab text-white text-[30px]"></span>
+                    </div>
+                    <div class="text-center">
+                        <p class="text-slate-300 justify-self-center">Apotek</p>
+                        <p class="font-medium mt-4">{{ $reports->apotek_count }}</p>
+                    </div>
+                </div>
+                <div class=" bg-white shadow-lg p-5 justify-center rounded-lg ">
+                    <div class="bg-orange-300 rounded-lg flex justify-center min-w-min p-3">
+
+                        <span class="mdi mdi-medical-bag text-white text-[30px]"></span>
+                    </div>
+                    <div class="text-center">
+                        <p class="text-slate-300 justify-self-center">Layanan</p>
+                        <p class="font-medium mt-4">{{ $reports->service_count }}</p>
+                    </div>
+                </div>
+                <div class=" bg-white shadow-lg p-5 justify-center rounded-lg ">
+                    <div class="bg-secondary-focus rounded-lg flex justify-center min-w-min p-3">
+
+                        <span class="mdi mdi-star-plus text-white text-[30px]"></span>
+                    </div>
+                    <div class="text-center">
+                        <p class="text-slate-300 justify-self-center">Rating</p>
+                        <p class="font-medium mt-4">{{ $reports->user_count }}</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="basis-3/4 bg-white ml-5 p-10 rounded-3xl mt-5 mb-5 drop-shadow-lg w-[100px]">
         <div class="relative">
             <h1 class="text-lg font-semibold">Daftar Dokter yang Buka Mall Praktek Jam {{ $selectedJam }}</h1>
         </div>
-        <div class="overflow-x-auto">
-            <table class="table w-full">
-              <!-- head -->
-              <thead>
-                <tr>
-                  <th>Name</th>
-                  <th>Spesialis</th>
-                  <th>Buka Praktek</th>
-                  <th>Tutup Praktek</th>
-                </tr>
-              </thead>
-              <tbody>
-                @forelse ($doctors as $doctor)
-                <tr>
-                    <td>{{ $doctor->nama_dokter }}</td>
-                    <td>{{ $doctor->spesialis }}</td>
-                    <td>{{ $doctor->jam_buka }}</td>
-                    <td>{{ $doctor->jam_tutup }}</td>
-                </tr>
-                @empty
-                <td>Tidak ada Dokter dijam segini</td>
-                @endforelse
-              </tbody>
-            </table>
-          </div>
-    
-    </div>
-    <div class="basis-2/4 bg-white ml-5 p-10 rounded-3xl mt-5 mb-5 drop-shadow-lg w-[100px]">
-            <div class="relative">
-                <h1 class="text-lg font-semibold">Rating Apotek Tertinggi</h1>
-                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-                            <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                            <path d="M9 11l3 3l3-3l1.41 1.41L10 16.83l-4.41-4.42L6 11l3 3z" />
-                            </svg>
-                    </div>
-            </div>
-          <div class="overflow-x-auto">
-            <table class="table w-full mt-5">
-              <!-- head -->
-              <thead>
-                <tr>
-                  <th>Rangking</th>
-                  <th>Name</th>
-                  <th>Rating rata-rata</th>
-                  <th>Total User rating</th>
-                </tr>
-              </thead>
-              <tbody>
-                <!-- row 1 -->
-                @forelse ($topApoteks as $key => $apotek)
-                <tr>
-                        <td>{{ $key+1 }}</td>
-                        <td>{{ $apotek->name }}</td>
-                        <td>{{ $apotek->average_rating }}</td>
-                        <td>{{ $apotek->total_rating }}</td>
-    
-                </tr>
-                @empty
-                <td>Belum ada rating tertinggi.</td>
-                @endforelse
-              </tbody>
-            </table>
-          </div>
+        <ul role="list" class="divide-y divide-gray-100">
+            @foreach ($doctors as $doctor)
+            <li class="flex justify-between gap-x-6 py-5">
+              <div class="flex gap-x-4">
+                <img class="h-12 w-12 flex-none rounded-full bg-gray-50" src="{{asset('upload/dokter/'.$doctor->foto)}}" alt="">
+                <div class="min-w-0 flex-auto">
+                  <p class="text-sm font-semibold leading-6 text-gray-900">{{ $doctor->nama_dokter }}</p>
+                  <p class="mt-1 truncate text-xs leading-5 text-gray-500">{{$doctor->email}}</p>
+                </div>
+              </div>
+              <div class="hidden sm:flex sm:flex-col sm:items-end">
+                <p class="badge badge-accent badge-outline text-sm leading-6 text-white">{{ $doctor->spesialis }}</p>
+                <p class="mt-1 text-xs leading-5 text-success">{{ $doctorStatuses[$doctor->id] }} </p>
+              </div>
+            </li>
+            @endforeach
+        </ul>
+
     </div>
 </div>
 

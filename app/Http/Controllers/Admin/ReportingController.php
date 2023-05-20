@@ -10,6 +10,9 @@ use App\Models\Hospital;
 
 use Carbon\Carbon;
 use App\Models\Dokter;
+use App\Models\Obat;
+use App\Models\Apotek;
+use App\Models\Service;
 
 use Illuminate\Support\Facades\DB;
 
@@ -24,6 +27,10 @@ class ReportingController extends Controller
         // Mengambil data berdasarkan periode
         $reports = $this->getReportsByPeriode($periode);
 
+        $last_transaksi = Transaction::whereMonth('created_at', '=', now()->month)
+        ->latest('created_at')
+        ->take(3)
+        ->get();
 
         $topHospitals = DB::table('hospital_ratings')
         ->join('hospitals', 'hospital_ratings.hospital_id', '=', 'hospitals.id')
@@ -46,16 +53,36 @@ class ReportingController extends Controller
         )
         ->groupBy('apotek.name')
         ->orderByDesc('average_rating')
-        ->limit(3)
+        ->limit(1)
         ->get();
 
-        $selectedJam = $this->getCurrentTime();
-
+        $selectedJam = Carbon::now()->format('H:i');
         $doctors = Dokter::where(function ($query) use ($selectedJam) {
             $query->where('jam_buka', '<=', $selectedJam)
                 ->where('jam_tutup', '>=', $selectedJam);
         })->get();
-        return view('admin.reports', compact('reports', 'periode', 'topHospitals', 'topApoteks', 'doctors', 'selectedJam'));
+
+        $doctorStatuses = [];
+        foreach ($doctors as $doctor) {
+            $status = 'Last Seen ' . $doctor->jam_buka;
+
+            // Periksa apakah dokter sedang dalam rentang waktu praktek
+            if ($doctor->jam_buka <= $selectedJam && $doctor->jam_tutup >= $selectedJam) {
+                $status = 'Online';
+            }
+
+            $doctorStatuses[$doctor->id] = $status;
+        }
+
+
+
+        // $selectedJam = $this->getCurrentTime();
+
+        // $doctors = Dokter::where(function ($query) use ($selectedJam) {
+        //     $query->where('jam_buka', '<=', $selectedJam)
+        //         ->where('jam_tutup', '>=', $selectedJam);
+        // })->get();
+       return view('admin.reports', compact('reports', 'periode', 'topHospitals', 'topApoteks', 'doctors', 'selectedJam', 'doctorStatuses', 'last_transaksi'));
     }
 
     private function getReportsByPeriode($periode)
@@ -75,12 +102,18 @@ class ReportingController extends Controller
             $data->tertunda_count = Transaction::whereMonth('created_at', '=', now()->month)->where('status', 'Tertunda')->count();
             $data->gagal_count = Transaction::whereMonth('created_at', '=', now()->month)->where('status', 'Gagal')->count();
             $data->selesai_count = Transaction::whereMonth('created_at', '=', now()->month)->where('status', 'Selesai')->count();
-        } else {    
+        } else {
             $data->user_count = User::count();
             $data->transaction_count = Transaction::count();
             $data->tertunda_count = Transaction::where('status', 'Tertunda')->count();
             $data->gagal_count = Transaction::where('status', 'Gagal')->count();
             $data->selesai_count = Transaction::where('status', 'Selesai')->count();
+            $data->doctor_count = Dokter::all()->count();
+            $data->obat_count = Obat::all()->count();
+            $data->rs_count = Hospital::all()->count();
+            $data->apotek_count = Apotek::all()->count();
+            $data->service_count = Service::all()->count();
+
         }
         return $data;
     }

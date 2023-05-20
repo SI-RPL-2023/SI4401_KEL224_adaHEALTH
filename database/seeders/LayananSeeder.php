@@ -15,15 +15,16 @@ class LayananSeeder extends Seeder
     {
                 // Pelatihan
                 Service::create([
-                    'nama' => 'Pelatihan atau Pengetahuan',
-                    'deskripsi' => 'Layanan pelatihan untuk meningkatkan pengetahuan dan keterampilan.
+                    'nama' => 'Pelatihan (Sertifikasi)',
+                    'deskripsi' => '
                     Pelatihan secara online atau daring.
-                    Anda bisa mendapatkan promo menarik untuk mengikutisesi pelatihan ini !.',
-                    'kategori' => 'Pelatihan',
-                    'durasi' => 60,
-                    'biaya' => 0,
+                    Anda bisa mendapatkan promo menarik untuk mengikuti sesi pelatihan ini !
+                    ',
+                    'kategori' => 'Sertifikasi',
+                    'spesialis' => 'Spesialis layanan 1',
+                    'lokasi' => 'Daring',
                 ]);
-        
+
                 // Chat Dokter Spesialis
                 Service::create([
                     'nama' => 'Chat Dokter Spesialis',
@@ -36,29 +37,29 @@ class LayananSeeder extends Seeder
                     di RS atau pemeriksaan diagnostik jika diperlukan.
                     Dapat diintegrasikan dengan asuransimu agar
                     kebutuhan kesehatan online terjamin asuransi.',
-                    'kategori' => 'Konsultasi Kesehatan',
+                    'kategori' => 'Konsultasi',
                     'durasi' => 30,
                     'biaya' => 50000,
                 ]);
-        
+
                 // Layanan Kesehatan
                 Service::create([
                     'nama' => 'Layanan Kesehatan',
                     'deskripsi' => 'Layanan umum dalam bidang kesehatan',
-                    'kategori' => 'Layanan Kesehatan',
+                    'kategori' => 'Kesehatan',
                     'durasi' => 45,
                     'biaya' => 0,
                 ]);
-        
+
                 // Pelacakan Kesehatan
                 Service::create([
                     'nama' => 'Pelacakan Kesehatan',
                     'deskripsi' => 'Layanan untuk memantau dan melacak kondisi kesehatan',
-                    'kategori' => 'Layanan Kesehatan',
+                    'kategori' => 'Kesehatan',
                     'durasi' => 60,
                     'biaya' => 0,
                 ]);
-        
+
                 // Kalkulator BMI
                 Service::create([
                     'nama' => 'Kalkulator BMI',
@@ -71,14 +72,14 @@ class LayananSeeder extends Seeder
                     Jauhi obesitas.
                     ',
                     'disclaimer'=> 'BMI adalah alat penghitungan indeks massa tubuh yang dirancang
-                     untuk memberikan perkiraan kasar tentang berat badan ideal seseorang berdasarkan 
+                     untuk memberikan perkiraan kasar tentang berat badan ideal seseorang berdasarkan
                      tinggi dan berat badannya. Namun, hasil kalkulator BMI tidak dapat dianggap sebagai
                       diagnosis medis atau pengganti saran medis yang diberikan oleh dokter atau profesional kesehatan lainnya.',
-                    'kategori' => 'Kalkulator',
+                    'kategori' => 'Kesehatan',
                     'durasi' => 15,
                     'biaya' => 0,
                 ]);
-        
+
                 // Rekomendasi Rumah Sakit
                 Service::create([
                     'nama' => 'Rekomendasi Rumah Sakit',
@@ -88,7 +89,7 @@ class LayananSeeder extends Seeder
                     'durasi' => 10,
                     'biaya' => 0,
                 ]);
-        
+
                 // Rekomendasi Apotek
                 Service::create([
                     'nama' => 'Rekomendasi Apotek',
@@ -98,11 +99,12 @@ class LayananSeeder extends Seeder
                     'durasi' => 10,
                     'biaya' => 0,
                 ]);
-        
+
                 // Rekomendasi Obat
                 Service::create([
                     'nama' => 'Rekomendasi Obat',
-                    'deskripsi' => 'Layanan untuk memberikan rekomendasi obat sesuai gejala',
+                    'deskripsi' => 'Layanan untuk memberikan rekomendasi obat sesuai gejala.
+                    Pelajari cara mengembangkan pengetahuan kesehatan tentang obat yang anda sukai dengan fasilitas yang kami rekomendasikan.',
                     'kategori' => 'Rekomendasi',
                     'durasi' => 15,
                     'biaya' => 20.00,
