@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -38,4 +39,9 @@ class UserController extends Controller
 
             return redirect('/')->with('success', 'Edit Success');
         }
+    
+    public function logout(Request $request) {
+        Auth::logout();
+        return redirect('/');
+    }
 }

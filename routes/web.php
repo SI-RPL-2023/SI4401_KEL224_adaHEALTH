@@ -115,6 +115,7 @@ Route::controller(LoginController::class)->group(function () {
     Route::post('login/proses', 'proses');
     Route::get('logout', 'logout');
 });
+Route::get('/logout', [UserController::class, 'logout'])->name('logout');
 
 //Middleware Group setelah login
 Route::group(['middleware' => ['auth']], function () {

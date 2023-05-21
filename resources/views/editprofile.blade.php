@@ -6,7 +6,7 @@
         <div class="w-[190px] h-[190px] flex justify-center items-center bg-white rounded-full absolute top-[209px] shadow-lg">
             <img src="{{ asset('/storage/'.$user->photo) }}" class="rounded-full w-[190px] h-[190px]" alt="userphoto">
         </div>
-        <button class="w-[242px] h-[48px] bg-white text-red-500 absolute right-[88px] top-[119px] rounded-[20px] font-bold text-[20px] mt-[48px]">logout</button>
+        <a href="{{ route('logout') }}" class="w-[242px] h-[48px] bg-white text-red-500 absolute right-[88px] top-[119px] rounded-[20px] font-bold text-[20px] mt-[48px]">logout</a>
     </div>
     <div class="flex flex-col items-center justify-center">
         <h1 class="mt-[120px] text-[40px] font-medium text-[#444444]">{{ $user->email }}</h1>
