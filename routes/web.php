@@ -31,6 +31,10 @@ use App\Http\Controllers\HistoryTransaction;
 // Route::get('/history', function () {
 //     return view('historytransaksi');
 // });
+Route::get('/rekomobat', function () {
+    return view('rekomendasiobat');
+});
+
 Route::get('/history', [HistoryTransaction::class, 'index']);
 
 Route::get('/help', function () {
