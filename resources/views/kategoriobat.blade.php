@@ -15,7 +15,7 @@
                 <a href=""><div class="w-[251px] h-[155px] rounded-[20px] bg-white pb-[17px] flex justify-center items-end font-bold">LUKA KULIT</div></a>
                 <a href=""><div class="w-[251px] h-[155px] rounded-[20px] bg-white pb-[17px] flex justify-center items-end font-bold">COVID-19</div></a>
             </div>
-            <h1 class="text-white text-[24px] mt-[70px] font-medium">Lainnya&nbsp;></h1>
+            <h1 class="text-white text-[24px] mt-[70px] font-medium">lainnya&nbsp;></h1>
         </div>
     </div>
 @endsection
