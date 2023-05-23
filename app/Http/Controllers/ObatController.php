@@ -71,5 +71,20 @@ class ObatController extends Controller
         return redirect()->back()->with('success', 'Pembayaran berhasil dilakukan. Silakan Cek Kembali Pesanan.');
     }
 
+    public function kategoriobat()
+{
+    $kategoriObat = Obat::select('kategori')->distinct()->get();
+
+    return view('kategoriobat', compact('kategoriObat'));
+}
+
+    public function obatkategori($kategori)
+    {
+        $obats = Obat::where('kategori', $kategori)->get();
+
+        return view('hargadanjenisobat', ['obats' => $obats, 'title' => 'Obat']);
+    }
+
+
 
 }
