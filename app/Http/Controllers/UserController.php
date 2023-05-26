@@ -38,4 +38,12 @@ class UserController extends Controller
 
             return redirect('/')->with('success', 'Edit Success');
         }
+
+    public function hapusfoto($id)
+    {
+        $user = User::find($id);
+        Storage::disk('public')->delete($user->photo);
+        
+        return redirect('/')->with('success', 'Edit Success');
+    }
 }

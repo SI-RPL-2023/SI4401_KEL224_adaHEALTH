@@ -12,6 +12,11 @@
         <h1 class="mt-[120px] text-[40px] font-medium text-[#444444]">{{ $user->email }}</h1>
         <h1 class="mt-[14px] text-[20px] text-[#444444]">Pribadi, {{ $user->phone }}</h1>
         <label for="my-modal" class="w-[242px] btn h-[48px] bg-[#6A62C4] text-white rounded-[20px] font-bold text-[20px] lowercase mt-[48px]">edit profile</label>
+        <form method="POST" action="{{ route('hapusfoto', ['id' => Auth::user()->id]) }}">
+            @csrf
+            @method('POST')
+            <button type="submit" class="mt-[11px] text-red-500">Hapus Foto</button>
+        </form>
     </div>
     <input type="checkbox" id="my-modal" class="modal-toggle" />
     <div class="modal">

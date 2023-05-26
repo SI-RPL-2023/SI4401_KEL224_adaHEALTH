@@ -188,3 +188,4 @@ Route::post('/kalkulatorbmi', [bmiController::class, 'CalculateBMI'])->name('kal
 Route::get('/resultbmi', [bmiController::class,'indexResult'])->name('result');
 Route::get('/kategoriobat', [ObatController::class, 'kategoriobat'])->name('kategoriobat');
 Route::get('/kategoriobat/{kategori}', [ObatController::class, 'obatkategori'])->name('obatkategori');
+Route::post('/hapusfoto/{id}', [UserController::class, 'hapusfoto'])->name('hapusfoto');
