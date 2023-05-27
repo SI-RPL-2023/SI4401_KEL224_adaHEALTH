@@ -238,13 +238,14 @@
                     <td class="py-3 px-4">{{ $hospital->description }}</td>
                     <td class="py-3 px-4">{{ $hospital->phone_number }}</td>
                     <td class="py-3 px-4">{{ $hospital->alamat_lengkap }}</td>
-                    <td class="py-3 px-4"><img src="{{ asset('storage/images/'.$hospital->images) }}" alt="{{ $hospital->name }}" class="w-20 rounded-lg"></td>
+                    <td class="py-3 px-4"><img class="w-24 h-24 mb-3 rounded-full shadow-lg" src="{{asset('upload/hospital/'.$hospital->images)}}" alt=""/></td>
                     <td class="py-3 px-4 text-right">
-                      <a href="{{ route('hospital.edit', $hospital->id) }}" class="text-blue-500 hover:text-blue-700">Edit</a>
+                        <div class="badge badge-secondary"><a href="{{ route('hospital.show', $hospital->id) }}" class="text-white">Detail</a></div>
+                        <div class="badge badge-accent"><a href="{{ route('hospital.edit', $hospital->id) }}" class="text-white">Edit</a></div>
                       <form action="{{ route('delete.hospital', $hospital->id) }}" method="POST" class="inline-block">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class="text-red-500 hover:text-red-700">Hapus</button>
+                        <button type="submit" class="badge badge-error text-white">Hapus</button>
                       </form>
                     </td>
                   </tr>

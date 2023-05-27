@@ -15,6 +15,7 @@ class Obat extends Model
      * @var array<int, string>
      */
     protected $fillable = [
+        'id',
         'nama',
         'jenis',
         'kategori',
@@ -24,4 +25,8 @@ class Obat extends Model
         'photo',
     ];
 
+    public function transactions()
+    {
+        return $this->hasMany(Transaction::class, 'id_obat');
+    }
 }

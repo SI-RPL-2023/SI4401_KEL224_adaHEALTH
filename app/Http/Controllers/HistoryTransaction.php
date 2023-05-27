@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Transaction;
+use Illuminate\Support\Facades\Auth;
 
 class HistoryTransaction extends Controller
 {
@@ -14,7 +15,8 @@ class HistoryTransaction extends Controller
      */
     public function index()
     {
-        $transactions = Transaction::all();
+        $user = Auth::user();
+        $transactions =  Transaction::where('id_user', $user->id)->get();
         return view('historytransaksi', compact('transactions'));
     }
 
@@ -121,6 +123,6 @@ class HistoryTransaction extends Controller
         // Redirect ke halaman daftar transaksi dengan pesan sukses
         return redirect()->route('transactions.index')->with('success', 'Transaksi berhasil dihapus.');
     }
-    
-    
+
+
 }
