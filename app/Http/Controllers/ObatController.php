@@ -6,6 +6,8 @@ use App\Models\Obat;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
 
+use function App\Models\obat;
+
 class ObatController extends Controller
 {
     public function index()
@@ -71,5 +73,18 @@ class ObatController extends Controller
         return redirect()->back()->with('success', 'Pembayaran berhasil dilakukan. Silakan Cek Kembali Pesanan.');
     }
 
+    public function search(Request $request)
+    {
+        $search = $request->get('search');
+        $obats = Obat::where('nama', 'like', '%'.$search.'%')
+            ->orWhere('deskripsi', 'like', '%'.$search.'%')
+            ->get();
+
+        $title = "Search Results for '{$search}'";
+
+        return view('hargadanjenisobat', compact('obats', 'title'));
+    }
+    
+    // ... method-method lainnya ...
 
 }
