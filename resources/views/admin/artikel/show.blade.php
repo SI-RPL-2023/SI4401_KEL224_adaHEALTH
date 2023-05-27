@@ -17,7 +17,7 @@
       <p class="text-sm mt-8 self-end">Published {{ $article->created_at->diffForHumans() }}</p>
     </div>
   </div>
-  
+
 <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 mt-[100px]">
     <a href="{{ url('/artikel') }}" class="flex">
         <svg style="width:24px;height:24px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -42,7 +42,7 @@
                 <span class="badge badge-accent badge-outline ">@if($article->category) {{ $article->category }} @else @endif</span>
                 <span class="text-sm ml-5 text-[#7a6b6b]"> {{ $article->created_at->diffForHumans() }}</span>
                 <span class="ml-5 text-[#7a6b6b]">-</span> <span class="text-[#7a6b6b] ml-2">Dibuat oleh</span>
-                <a href="" class="ml-5 text-[#3b68d7]"> {{ $article->user->name }}</a> 
+                <a href="" class="ml-5 text-[#3b68d7]"> {{ $article->user->name }}</a>
                 <span class="ml-3 text-[#7a6b6b]">{{ date('d M Y', strtotime($article->created_at)) }}</span>
             </div>
             <div class="mb-4">
@@ -51,15 +51,9 @@
             <div class="text-gray-700 text-lg mb-4">
                 <strong>{{ $article->title_content }}</strong>
                 <div class="text-gray-700 text-lg mb-4 mt-8">
-                    <p class="mt-8"> {{ $article->isi_content }}</p>
+                    <p class="mt-8"> {!! $article->isi_content !!}</p>
                     <hr>
-                    <strong class="mt-8">{{ $article->title_content2 }}</strong>
-                    <p class="mt-8">{{ $article->isi_content2 }}</p>
-                    <hr>
-                    <strong class="mt-8">{{ $article->title_content3 }}</strong>
-                    <p class="mt-8">{{ $article->isi_content3 }}</p>
-                    <strong class="mt-8">{{ $article->title_content4 }}</strong>
-                    <p class="mt-8">{{ $article->isi_content4 }}</p>
+
                 </div>
             </div>
         </div>
@@ -71,7 +65,7 @@
                     <img src="{{ asset('upload/artikel/'.$relatedArticle->images) }}" alt="Article Image" class="w-1/3 h-32 object-cover rounded-lg rounded-r-none">
                     <div class="p-4 flex flex-col justify-between">
                         <h3 class="text-md font-medium text-gray-900 mb-4">{{ $relatedArticle->title }}</h3>
-                        <p class="text-sm leading-relaxed mb-2">{{ Str::limit(strip_tags($relatedArticle->isi_content), 80) }}</p>
+                        <p class="text-sm leading-relaxed mb-2">{!! Str::limit(strip_tags($relatedArticle->isi_content), 80) !!}</p>
                         <div class="flex justify-between items-center">
                             <a href="{{ url('/artikel/'.$relatedArticle->id) }}" class="text-md font-medium text-[#3b529d] hover:text-[#5b5b5b]">Read more</a>
                             <div class="flex items-center">

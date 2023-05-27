@@ -29,31 +29,6 @@
                 @enderror
             </div>
             <div class="mb-4">
-                <label class="block text-gray-700 font-bold mb-2" for="title_content">
-                    Judul Konten Artikel
-                </label>
-                <input
-                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                    id="title_content" name="title_content" placeholder="Tips Agar Wajah Kamu Cerah"
-                    value="{{ $article->title_content }}" required>
-                @error('title_content')
-                    <p class="text-red-500 text-xs italic">{{ $message }}</p>
-                @enderror
-            </div>
-
-            <div class="mb-4">
-                <label class="block text-gray-700 font-bold mb-2" for="isi_content">
-                    Isi Konten Artikel
-                </label>
-                <textarea
-                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                    id="isi_content" name="isi_content" placeholder="1. Jangan Tidur Larut Malam. 2. Tidur Harus dibawah jam 22.00."
-                    required rows="18" cols="80">{{ $article->isi_content }}</textarea>
-                @error('isi_content')
-                    <p class="text-red-500 text-xs italic">{{ $message }}</p>
-                @enderror
-            </div>
-            <div class="mb-4">
                 <div class="col-span-full">
                     <label class="block text-sm font-medium leading-6 text-gray-900">Foto Artikel Anda Ganti?</label>
                     <div class="flex items-center justify-center w-full">
@@ -65,7 +40,7 @@
                         </div>
                         <input id="thumbnail" type="file" name="images" accept=".jpg,.jpeg,.png" class="hidden" />
                     </label>
-                </div> 
+                </div>
                 <figure class="max-w-lg mx-auto mt-6">
                     @if($article->images != null)
                     <img class="h-auto max-w-full rounded-lg mx-auto" src="{{asset('upload/artikel/'.$article->images)}}" width="300" height="300" id="foto" alt="image description">
@@ -97,61 +72,23 @@
                 @enderror
             </div>
             <div class="mb-4">
-                <label class="block text-gray-700 font-bold mb-2" for="title_content2">
-                    Judul Konten Artikel 2
+                <label class="block text-gray-700 font-bold mb-2" for="title_content">
+                    Judul Konten Artikel
                 </label>
                 <input
                     class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                    id="title_content2" name="title_content2" placeholder="Lakukan ini Agar Tidur Nyenyak"
-                   value="{{ $article->title_content2 }}" >
+                    id="title_content" name="title_content" placeholder="Lakukan ini Agar Tidur Nyenyak"
+                   value="{{ $article->title_content }}" >
 
             </div>
             <div class="mb-4">
-                <label class="block text-gray-700 font-bold mb-2" for="isi_content2">
-                    Konten Artikel 2 (opsional)
+                <label class="block text-gray-700 font-bold mb-2" for="editor">
+                    Konten Artikel  (opsional)
                 </label>
                 <textarea
                     class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                    id="isi_content2" name="isi_content2" rows='8' cols='80'
-                    placeholder="1. Mandi Selepas Pukul 18.00. 2. Tidur Dibawah Pukul 22.00" value="{{ $article->isi_content2 }}">{{ $article->isi_content2 }}</textarea>
-            </div>
-            <div class="mb-4">
-                <label class="block text-gray-700 font-bold mb-2" for="title_content3">
-                    Judul Konten Artikel 3
-                </label>
-                <input
-                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                    id="title_content3" name="title_content3" placeholder="Lakukan ini Agar Tidur Nyenyak"
-                    value="{{ $article->title_content3 }}">
-
-            </div>
-            <div class="mb-4">
-                <label class="block text-gray-700 font-bold mb-2" for="isi_content3">
-                    Konten Artikel 3 (opsional)
-                </label>
-                <textarea
-                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                    id="isi_content3" name="isi_content3" rows='8' cols='80'
-                    placeholder="1. Mandi Selepas Pukul 18.00. 2. Tidur Dibawah Pukul 22.00" value="{{ $article->isi_content3 }}">{{ $article->isi_content3 }}</textarea>
-            </div>
-            <div class="mb-4">
-                <label class="block text-gray-700 font-bold mb-2" for="title_content4">
-                    Judul Konten Artikel 4
-                </label>
-                <input
-                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                    id="title_content4" name="title_content4" placeholder="Lakukan ini Agar Tidur Nyenyak"
-                    value="{{ $article->title_content4 }}">
-
-            </div>
-            <div class="mb-4">
-                <label class="block text-gray-700 font-bold mb-2" for="isi_content4">
-                    Konten Artikel 4 (opsional)
-                </label>
-                <textarea
-                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                    id="isi_content4" name="isi_content4" rows='8' cols='80'
-                    placeholder="1. Mandi Selepas Pukul 18.00. 2. Tidur Dibawah Pukul 22.00" value="{{ $article->isi_content4 }}">{{ $article->isi_content4 }}</textarea>
+                    id="editor" name="editor" rows='8' cols='80'
+                    placeholder="1. Mandi Selepas Pukul 18.00. 2. Tidur Dibawah Pukul 22.00" value="{!! $article->isi_content !!}">{!! $article->isi_content !!}</textarea>
             </div>
             <div class="mt-6 flex items-center justify-end gap-x-6">
                 <a href="{{ url('/artikel') }}" class="text-sm font-semibold leading-6 text-gray-900">Batal</a>

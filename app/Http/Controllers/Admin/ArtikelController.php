@@ -40,8 +40,8 @@ class ArtikelController extends Controller
         $request->validate([
             'title' => 'required|unique:articles|max:255',
             'title_content' => 'required',
-            'isi_content' => 'required',
-            'images' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'editor' => 'required',
+            'images' => 'required|image|mimes:jpeg,png,jpg,gif,svg',
             'category' => 'required|in:Berita,Tutorial,Review,Kesehatan,Penyakit Diabetes,Penyakit Flu,All Penyakit',
         ]);
 
@@ -54,20 +54,14 @@ class ArtikelController extends Controller
         $article->slug = \Str::slug($request->title);
 
         $article->title_content = $request->title_content;
-        $article->isi_content = $request->isi_content;
+        $article->isi_content = $request->editor;
 
-        $article->title_content2 = $request->title_content2;
-        $article->isi_content2 = $request->isi_content2;
 
-        $article->title_content3 = $request->title_content3;
-        $article->isi_content3 = $request->isi_content3;
-
-        $article->title_content4 = $request->title_content4;
-        $article->isi_content4 = $request->isi_content4;
 
         $article->category = $request->category;
         $article->images = $imagePath->hashName();
         $article->user_id = auth()->user()->id;
+
         $article->save();
 
         return redirect()->route('artikel.index')->with('success', 'Artikel berhasil ditambahkan.');
@@ -104,28 +98,13 @@ class ArtikelController extends Controller
     public function update(Request $request, $id)
     {
         $article = Article::findOrFail($id);
-        
-        $request->validate([
-            'title' => 'required|max:255',
-            'title_content' => 'required|max:255',
-            'isi_content' => 'required',
-            'images' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
-        ]);
-        
+
+
         $article->title = $request->title;
         $article->slug = \Str::slug($request->title);
 
         $article->title_content = $request->title_content;
-        $article->isi_content = $request->isi_content;
-
-        $article->title_content2 = $request->title_content2;
-        $article->isi_content2 = $request->isi_content2;
-
-        $article->title_content3 = $request->title_content3;
-        $article->isi_content3 = $request->isi_content3;
-
-        $article->title_content4 = $request->title_content4;
-        $article->isi_content4 = $request->isi_content4;
+        $article->isi_content = $request->editor;
 
         $article->category = $request->category;
         if($request->hasFile('images')) {
@@ -145,9 +124,10 @@ class ArtikelController extends Controller
             // Simpan nama gambar yang baru ke dalam database
             $article->images = $imageName->hashName(); // atau $imageName->getClientOriginalName()
         }
-        
+
+
         $article->save();
-        
+
         return redirect()->route('artikel.index')->with('success', 'Artikel berhasil diperbarui.');
     }
 
@@ -155,9 +135,26 @@ class ArtikelController extends Controller
     {
         $artikel = Article::findOrFail($id);
         $artikel->delete();
-    
+
         return redirect()->route('artikel.index')->with('success', 'Artikel berhasil dihapus');
     }
-    
+
+    public function search(Request $request)
+    {
+        $keyword = $request->input('keyword');
+
+        if (!empty($keyword)) {
+            $searchResults = Article::where('title', 'like', '%' . $keyword . '%')
+                ->orWhere('category', 'like', '%' . $keyword . '%')
+                ->orWhere('isi_content', 'like', '%' . $keyword . '%')
+                ->orWhere('title_content', 'like', '%' . $keyword . '%')
+                ->get();
+        } else {
+            $searchResults = collect(); // Menggunakan koleksi kosong jika keyword tidak ada
+        }
+
+        return view('admin.artikel.search', compact('searchResults', 'keyword'));
+    }
+
 
 }

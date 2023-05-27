@@ -17,12 +17,6 @@ return new class extends Migration
             $table->string('slug')->unique();
             $table->text('title_content')->nullable();
             $table->text('isi_content')->nullable();
-            $table->text('title_content2')->nullable();
-            $table->text('isi_content2')->nullable();
-            $table->text('title_content3')->nullable();
-            $table->text('isi_content3')->nullable();
-            $table->text('title_content4')->nullable();
-            $table->text('isi_content4')->nullable();
             $table->string('category');
             $table->string('images');
             $table->unsignedBigInteger('user_id');

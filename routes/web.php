@@ -121,6 +121,9 @@ Route::group(['middleware' => ['auth']], function () {
         Route::put('/artikel/{id}/update', [App\Http\Controllers\Admin\ArtikelController::class, 'update'])->name('artikel.update');
         Route::get('/artikel/{id}',  [App\Http\Controllers\Admin\ArtikelController::class, 'destroy'])->name('artikel.destroy');
 
+        Route::get('/search', [App\Http\Controllers\Admin\ArtikelController::class, 'search'])->name('artikel.search');
+
+
         //End artikel
     Route::group(['middleware' => ['CekRoleMiddleware:0']], function () {
         Route::resource('/user', UserController::class);

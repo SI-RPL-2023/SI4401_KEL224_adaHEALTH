@@ -27,31 +27,10 @@
                     <p class="text-red-500 text-xs italic">{{ $message }}</p>
                 @enderror
             </div>
-            <div class="mb-4">
-                <label class="block text-gray-700 font-bold mb-2" for="title_content">
-                    Judul Konten Artikel (paragraf 1)
-                </label>
-                <input
-                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                    id="title_content" name="title_content" placeholder="Tips Agar Wajah Kamu Cerah"
-                    value="{{ old('title_content') }}" required>
-                @error('title_content')
-                    <p class="text-red-500 text-xs italic">{{ $message }}</p>
-                @enderror
-            </div>
 
-            <div class="mb-4">
-                <label class="block text-gray-700 font-bold mb-2" for="isi_content">
-                    Isi Konten Artikel (paragraf 1)
-                </label>
-                <textarea
-                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                    id="isi_content" name="isi_content" placeholder="1. Jangan Tidur Larut Malam. 2. Tidur Harus dibawah jam 22.00."
-                    required rows="18" cols="80">{{ old('isi_content') }}</textarea>
-                @error('isi_content')
-                    <p class="text-red-500 text-xs italic">{{ $message }}</p>
-                @enderror
-            </div>
+
+
+
             <div class="mb-4">
                 <div class="col-span-full">
                     <label class="block text-sm font-medium leading-6 text-gray-900">Foto Artikel</label>
@@ -85,6 +64,26 @@
                 @enderror
             </div>
             <div class="mb-4">
+                <label class="block text-gray-700 font-bold mb-2" for="title_content">
+                    Judul Konten Artikel
+                </label>
+                <input
+                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    id="title_content" name="title_content" placeholder="Tips Agar Wajah Kamu Cerah"
+                    value="{{ old('title_content') }}" required>
+                @error('title_content')
+                    <p class="text-red-500 text-xs italic">{{ $message }}</p>
+                @enderror
+            </div>
+            <div class="mb-4">
+                <label for="editor" class="block text-gray-700 font-bold mb-2">Konten</label>
+                <textarea id="editor" name="editor" value="{{ old('editor') }}"></textarea>
+
+                @error('editor')
+                <p class="text-red-500 text-xs italic">{{ $message }}</p>
+                 @enderror
+            </div>
+            <div class="mb-4">
                 <label class="block text-gray-700 font-bold mb-2" for="category">
                     Kategori Artikel
                 </label>
@@ -104,63 +103,7 @@
                     <p class="text-red-500 text-xs italic">{{ $message }}</p>
                 @enderror
             </div>
-            <div class="mb-4">
-                <label class="block text-gray-700 font-bold mb-2" for="title_content2">
-                    Judul Paragraf 2 (opsional) <label for="" class="text-[10px] text-error">* lanjutan dari konten paragraf 1</label>
-                </label>
-                <input
-                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                    id="title_content2" name="title_content2" placeholder="Lakukan ini Agar Tidur Nyenyak"
-                   value="{{ old('title_content2') }}" >
 
-            </div>
-            <div class="mb-4">
-                <label class="block text-gray-700 font-bold mb-2" for="isi_content2">
-                   Isi Konten Artikel Paragraf 2 (opsional)
-                </label>
-                <textarea
-                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                    id="isi_content2" name="isi_content2" rows='8' cols='80'
-                    placeholder="1. Mandi Selepas Pukul 18.00. 2. Tidur Dibawah Pukul 22.00" value="{{ old('isi_content2') }}"></textarea>
-            </div>
-            <div class="mb-4">
-                <label class="block text-gray-700 font-bold mb-2" for="title_content3">
-                    Judul Paragraf  3 (opsional) <label for="" class="text-[10px] text-error">* lanjutan dari konten paragraf 2</label>
-                </label>
-                <input
-                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                    id="title_content3" name="title_content3" placeholder="Lakukan ini Agar Tidur Nyenyak"
-                    value="{{ old('title_content3') }}">
-
-            </div>
-            <div class="mb-4">
-                <label class="block text-gray-700 font-bold mb-2" for="isi_content3">
-                   Isi Konten Paragraf 3 (opsional)
-                </label>
-                <textarea
-                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                    id="isi_content3" name="isi_content3" rows='8' cols='80'
-                    placeholder="1. Mandi Selepas Pukul 18.00. 2. Tidur Dibawah Pukul 22.00" value="{{ old('isi_content3') }}"></textarea>
-            </div>
-            <div class="mb-4">
-                <label class="block text-gray-700 font-bold mb-2" for="title_content4">
-                    Judul Paragraf 4 (opsional) <label for="" class="text-[10px] text-error">* lanjutan dari konten paragraf 3</label>
-                </label>
-                <input
-                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                    id="title_content4" name="title_content4" placeholder="Lakukan ini Agar Tidur Nyenyak"
-                    value="{{ old('title_content4') }}">
-
-            </div>
-            <div class="mb-4">
-                <label class="block text-gray-700 font-bold mb-2" for="isi_content4">
-                   Isi Konten Artikel 4 (opsional)
-                </label>
-                <textarea
-                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                    id="isi_content4" name="isi_content4" rows='8' cols='80'
-                    placeholder="1. Mandi Selepas Pukul 18.00. 2. Tidur Dibawah Pukul 22.00" value="{{ old('isi_content4') }}"></textarea>
-            </div>
             <div class="flex items-center justify-between">
                 <button
                     class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"

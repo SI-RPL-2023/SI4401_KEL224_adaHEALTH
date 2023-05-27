@@ -37,7 +37,21 @@
         </div>
 
         @endif
-
+        <div class="flex justify-center">
+            <div class="min-w-min">
+                <form action="{{ route('artikel.search') }}" method="GET" class="flex">
+                    <input
+                        type="text"
+                        name="keyword"
+                        placeholder="Search"
+                        class="px-4 py-2 pr-10 rounded-lg border-2 border-gray-200 focus:outline-none focus:border-blue-500"
+                    >
+                    <button type="submit" class="ml-2 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600">
+                        Search
+                    </button>
+                </form>
+            </div>
+        </div>
         {{-- Bagian Artikel banyak akses --}}
         <section class="mt-[100px]">
             <div class="flex flex-row p-8">
@@ -49,12 +63,16 @@
                         @if(Auth::user()->roles != 1)
                         @else
                         <div class="mt-5 mb-5 flex justify-end">
+                            @if ($popularArticle)
+
+
                             <a href="{{ route('artikel.edit', $popularArticle->id) }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mr-2 rounded">Edit</a>
                             <form action="{{ route('artikel.destroy', $popularArticle->id) }}" method="POST" onsubmit="return confirm('Apakah Anda yakin ingin menghapus artikel ini?')">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Delete</button>
                             </form>
+                            @endif
                         </div>
                         @endif
                     </div>
@@ -75,9 +93,20 @@
                         <div class="absolute top-3 right-3 transform rounded-full bg-gradient text-white text-xs px-2 py-1">Terpopuler</div>
                        @else
                         @endif
-                        <div class="absolute bottom-0 left-0 w-full bg-black bg-opacity-50 text-center rounded-3xl">
+                        <style>
+                            .clamp-text {
+                                display: -webkit-box;
+                                -webkit-line-clamp: 3;
+                                -webkit-box-orient: vertical;
+                                overflow: hidden;
+                                text-overflow: ellipsis;
+                                }
+                        </style>
+                        <div class="absolute bottom-0 left-0 w-full bg-black bg-opacity-50 text-center rounded-3xl clamp-text">
                             <h1 class="text-lg font-serif mb-4 text-white">{{ $popularArticle->title }}</h1>
-                            <p class="text-sm font-serif mt-6 mb-6 text-white">{{ $popularArticle->isi_content }}</p>
+                            <h1 class="text-lg font-serif mb-4 text-white">{{ $popularArticle->title_content }}</h1>
+                            <p class="text-sm font-serif mt-6 mb-6 text-white ">{!! $popularArticle->isi_content !!}</p>
+
                         </div>
                     </div>
                     </a>
@@ -100,9 +129,10 @@
                                     <div class="absolute top-3 right-3 transform rounded-full bg-accent text-white text-xs px-2 py-1">{{ $b->user->name }}</div>
                                    @else
                                     @endif
-                                    <div class="px-6 py-4">
+                                    <div class="px-6 py-4 clamp-text">
                                       <h2 class="text-lg font-bold mb-2">{{ $b->title }}</h2>
-                                      <p class="text-gray-700 text-base mb-2">{{ $b->isi_content }}</p>
+                                      <h3 class="text-lg font-medium mb-2">{{ $b->title_content }}</h3>
+                                      <p class="text-gray-700 text-base mb-2">{!! $b->isi_content !!}</p>
                                       @if(Auth::user()->roles != 1)
                                       @else
                                       <div class="mt-5 mb-5 flex justify-end">
@@ -228,9 +258,10 @@
                             <div class="bg-white rounded-lg overflow-hidden shadow-md relative">
                                 <img src="{{ asset('upload/artikel/'.$latestArticle->images) }}" alt="{{ $latestArticle->slug }}" class="w-full h-48 object-cover">
                                 <div class="absolute top-3 right-3 transform rounded-full bg-error text-white text-xs px-2 py-1">{{ $latestArticle->user->name }}</div>
-                                <div class="p-4">
+                                <div class="p-4 clamp-text">
                                     <h3 class="font-bold text-lg mb-2">{{ $latestArticle->title }}</h3>
-                                    <p class="text-gray-700 text-base mb-4">{{ $latestArticle->isi_content }}</p>
+                                    <h3 class="font-bold text-medium mb-2">{{ $latestArticle->title_content }}</h3>
+                                    <p class="text-gray-700 text-base mb-4">{!! $latestArticle->isi_content !!}</p>
                                     @if(Auth::user()->roles != 1)
                                     @else
                                     <div class="mt-5 mb-5 flex justify-end">
@@ -269,9 +300,10 @@
                         <div class="absolute top-3 right-3 transform rounded-full bg-primary text-white text-xs px-2 py-1">{{ $s->user->name }}</div>
                        @else
                         @endif
-                        <div class="px-6 py-4">
+                        <div class="px-6 py-4 clamp-text">
                         <h2 class="text-lg font-bold mb-2">{{ $s->title }}</h2>
-                        <p class="text-gray-700 text-base mb-2">{{ $s->isi_content }}</p>
+                        <h2 class="text-medium font-bold mb-2">{{ $s->title_content }}</h2>
+                        <p class="text-gray-700 text-base mb-2">{!! $s->isi_content !!}</p>
                         @if(Auth::user()->roles != 1)
                         @else
                         <div class="mt-5 mb-5 flex justify-end">
@@ -352,9 +384,10 @@
               @else
               <div class="absolute top-3 right-3 transform rounded-full bg-ghost text-white text-xs px-2 py-1">{{ $show->user->name }}</div>
               @endif
-              <div class="px-6 py-4">
+              <div class="px-6 py-4 clamp-text">
                 <h2 class="text-lg font-bold mb-2">{{ $show->title }}</h2>
-                <p class="text-gray-700 text-base mb-2">{{ $show->isi_content }} </p>
+                <h2 class="text-medium font-bold mb-2">{{ $show->title_content }}</h2>
+                <p class="text-gray-700 text-base mb-2">{!! $show->isi_content !!} </p>
                 @if(Auth::user()->roles != 1)
                 @else
                 <div class="mt-5 mb-5 flex justify-end">
