@@ -39,6 +39,7 @@
                     <a href="{{ route('reports.index') }}" class="btn btn-active btn-ghost text-white" id="btn-all">Semua</a>
                     <a href="{{ route('reports.index', ['periode' => 'bulan_sekarang']) }}" class="btn btn-active btn-ghost text-white" id="btn-this-month">Bulan Sekarang</a>
                     <a href="{{ route('reports.index', ['periode' => 'bulan_lalu']) }}" class="btn btn-active btn-ghost text-white" id="btn-last-month">Bulan Kemarin</a>
+                    <a href="{{ route('detail.report')}}" class="btn btn-active btn-ghost text-white" id="btn-last-month">Rincian Laporan</a>
                 </div>
 
                 <script>
@@ -163,33 +164,6 @@
             </div>
 
         </div>
-      {{-- <div class="overflow-x-auto">
-        <table class="table w-full mt-5">
-          <!-- head -->
-          <thead>
-            <tr>
-              <th>Rangking</th>
-              <th>Name</th>
-              <th>Rating rata-rata</th>
-              <th>Total User rating</th>
-            </tr>
-          </thead>
-          <tbody>
-            <!-- row 1 -->
-            @forelse ($topHospitals as $key => $hospital)
-            <tr>
-                    <td>{{ $key+1 }}</td>
-                    <td>{{ $hospital->name }}</td>
-                    <td>{{ $hospital->average_rating }}</td>
-                    <td>{{ $hospital->total_rating }}</td>
-
-            </tr>
-            @empty
-            <td>Belum ada rating tertinggi.</td>
-            @endforelse
-          </tbody>
-        </table>
-      </div> --}}
     </div>
 </div>
 
@@ -276,7 +250,7 @@
                     </div>
                     <div class="text-center">
                         <p class="text-slate-300 justify-self-center">Rating</p>
-                        <p class="font-medium mt-4">{{ $reports->user_count }}</p>
+                        <p class="font-medium mt-4">{{ $reports->rating_count }}</p>
                     </div>
                 </div>
 

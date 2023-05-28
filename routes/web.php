@@ -131,9 +131,12 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::group(['middleware' => ['CekRoleMiddleware:1']], function () {
         Route::resource('dashboard', \App\Http\Controllers\Admin\DashboardController::class);
-       
+
         Route::get('/dashboard', [ReportingController::class, 'index'])->name('reports.index');
-   
+        Route::get('/reporting', [\App\Http\Controllers\Admin\ReportingController::class, 'report'])->name('detail.report');
+        Route::get('/download-transactions/{period?}', [\App\Http\Controllers\Admin\ReportingController::class, 'downloadTransactions'])->name('download.transactions');
+
+
         //Add Dokter
         Route::get('dokter/add', [AdminController::class, 'form_tambah']);
         Route::post('dokter/save', [AdminController::class, 'form_save']);
@@ -190,7 +193,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('konsultasi/edit/{id}', [DokterController::class, 'form_konsultasi_edit']);
         Route::post('konsultasi/update/{id}', [DokterController::class, 'form_konsultasi_update']);
         Route::get('konsultasi/delete/{id}', [DokterController::class, 'form_konsultasi_delete']);
-        
+
     });
 
 
