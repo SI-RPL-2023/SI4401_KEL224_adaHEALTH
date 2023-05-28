@@ -45,7 +45,7 @@
                     <span class="">Wait! Please complete your profile before send questions.</span>
                 </div>
                 <div class="flex-none">
-                    <button class="btn btn-sm"><a href="{{ url('profile') }}"></a> Isi Profile</button>
+                    <a href="{{ route('profile.show', ['id' => Auth::user()->id]) }}">Isi Profile</a>
                 </div>
             </div>
             @else
