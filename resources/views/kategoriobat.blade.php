@@ -11,12 +11,28 @@
             <h1 class="font-bold text-3xl mt-[150px]">Kategori</h1>
             <div class="mt-[62px] flex gap-[46px] justify-center text-[#6A62C4]">
                 @foreach ($kategoriObat->take(4) as $kategori)
-                    <a href="{{ route('obatkategori', ['kategori' => $kategori->kategori]) }}"><div class="w-[251px] h-[155px] rounded-[20px] bg-white pb-[17px] flex justify-center items-end font-bold uppercase">{{ $kategori->kategori }}</div></a>
+                    @php
+                        $obat = App\Models\Obat::where('kategori', $kategori->kategori)->first();
+                    @endphp
+                    <a href="{{ route('obatkategori', ['kategori' => $kategori->kategori]) }}">
+                        <div class="w-[251px] h-[155px] rounded-[20px] bg-white pb-[17px] flex flex-col items-center font-bold uppercase">
+                            <img class="w-full object-cover mb-2 rounded-t-[20px] h-[100px]" src="{{ asset('upload/obat/'. $obat->photo) }}" />
+                            {{ $kategori->kategori }}
+                        </div>
+                    </a>
                 @endforeach
             </div>
             <div id="hiddenDiv" class="mt-[62px] hidden flex gap-[46px] justify-center text-[#6A62C4]">
                 @foreach ($kategoriObat->skip(4)->take(4) as $kategori)
-                    <a href=""><div class="w-[251px] h-[155px] rounded-[20px] bg-white pb-[17px] flex justify-center items-end font-bold uppercase">{{ $kategori->kategori }}</div></a>
+                    @php
+                        $obat = App\Models\Obat::where('kategori', $kategori->kategori)->first();
+                    @endphp
+                    <a href="{{ route('obatkategori', ['kategori' => $kategori->kategori]) }}">
+                        <div class="w-[251px] h-[155px] rounded-[20px] bg-white pb-[17px] flex flex-col items-center font-bold uppercase">
+                            <img class="w-full object-cover mb-2 rounded-t-[20px] h-[100px]" src="{{ asset('upload/obat/'. $obat->photo) }}" />
+                            {{ $kategori->kategori }}
+                        </div>
+                    </a>
                 @endforeach
             </div>
             <div id="toggleBtn"><h1 id="toggleText" class="text-white text-[24px] mt-[70px] font-medium">see more&nbsp;></h1></div>

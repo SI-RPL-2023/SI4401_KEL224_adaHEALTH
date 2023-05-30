@@ -74,8 +74,9 @@ class ObatController extends Controller
     public function kategoriobat()
 {
     $kategoriObat = Obat::select('kategori')->distinct()->get();
+    $obat = Obat::all();
 
-    return view('kategoriobat', compact('kategoriObat'));
+    return view('kategoriobat', compact('kategoriObat'), ['obat' => $obat]);
 }
 
     public function obatkategori($kategori)
