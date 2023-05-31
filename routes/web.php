@@ -95,9 +95,9 @@ Route::get('/obats', [ObatController::class, 'index']);
 
 Route::get('/obats/detail/{id}', [ObatController::class, 'show']);
 Route::get('/obats/search', [ObatController::class, 'search'])->name('obat.search');
+Route::post('/recommend', [ObatController::class, 'recommend'])->name('recommend');
 Route::post('/obats/detail/{id}', [ObatController::class, 'store_pesan'])->name('obat.store_pesan');
 Route::post('/obat/detail/{id}', [ObatController::class, 'updateStatus'])->name('transaction.update');
-
 
 Route::middleware([
     'auth:sanctum',

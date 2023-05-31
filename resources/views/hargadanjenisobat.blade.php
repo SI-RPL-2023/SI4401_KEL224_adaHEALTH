@@ -31,6 +31,7 @@
             <input type="search" name="search" class="bg-gray-50 border focus:outline-none    border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 " placeholder="Search" required>
         </div>
     </form>
+
     <div class="container mx-auto py-8">
         <h1 class="text-2xl font-bold mb-4">{{ $title }}</h1>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -40,6 +41,7 @@
                 <a href="{{ url('obats/detail/'.$obat->id) }}">
                     <div class="p-4">
                         <h2 class="text-xl font-bold mb-2">{{ $obat->nama }}</h2>
+                        <h2 class="text-[#6A62C4] font-bold">{{ $obat->rekomendasi }}</h2>
                         <p class="text-gray-700 text-base">{{ $obat->deskripsi }}</p>
                         <p class="text-gray-700 text-base mt-2">Harga: {{ $obat->harga }}</p>
                         <p class="text-gray-700 text-base mt-2">Kategori: {{ $obat->kategori }}</p>
@@ -59,22 +61,21 @@
         </div>
     </div>
 
-    <div class="mx-auto py-8">
-        <h1 class="font-bold text-2xl">Rekomendasi Lainnya</h1>
-    </div>
+    <h1 for="recommend" class="block text-[#6A62C4] font-bold mt-[14px] text-2xl">Obat Rekomendasi</h1>
 
     <div class="container mx-auto py-8">
         <h1 class="text-2xl font-bold mb-4">{{ $title }}</h1>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            @forelse($obats as $obat)
+            @forelse($rekomendasi as $item)
             <div class="bg-white rounded-lg shadow-lg overflow-hidden">
-                <img class="object-cover h-56 w-full" src="{{ asset('storage/images/'.$obat->photo) }}" alt="{{ $obat->nama }}">
-                <a href="{{ url('obats/detail/'.$obat->id) }}">
+                <img class="object-cover h-56 w-full" src="{{ asset('storage/images/'.$item->photo) }}" alt="{{ $item->nama }}">
+                <a href="{{ url('obats/detail/'.$item->id) }}">
                     <div class="p-4">
-                        <h2 class="text-xl font-bold mb-2">{{ $obat->nama }}</h2>
-                        <p class="text-gray-700 text-base">{{ $obat->deskripsi }}</p>
-                        <p class="text-gray-700 text-base mt-2">Harga: {{ $obat->harga }}</p>
-                        <p class="text-gray-700 text-base mt-2">Kategori: {{ $obat->kategori }}</p>
+                        <h2 class="text-xl font-bold mb-2">{{ $item->nama }}</h2>
+                        <h2 class="text-[#6A62C4] font-bold">{{ $item->rekomendasi }}</h2>
+                        <p class="text-gray-700 text-base">{{ $item->deskripsi }}</p>
+                        <p class="text-gray-700 text-base mt-2">Harga: {{ $item->harga }}</p>
+                        <p class="text-gray-700 text-base mt-2">Kategori: {{ $item->kategori }}</p>
                     </div>
                 </a>
             </div>
@@ -141,7 +142,6 @@
         </div>
     </div> --}}
 </div>
-
 
 
 
