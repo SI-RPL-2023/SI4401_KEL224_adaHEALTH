@@ -22,15 +22,15 @@
             <div class="form-group mb-6">
               <input type="text"
                 class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                id="name" name="name" placeholder="Name" value="{{ auth()->user()->name }}" readonly/>
+                id="name" name="name" placeholder="Name" value="{{ isset(auth()->user()->name) ? auth()->user()->name : '' }}" readonly/>
             </div>
               <input type="hidden"
                 class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                id="user_id" name="user_id" placeholder="Name" value="{{ auth()->user()->id }}" readonly/>
+                id="user_id" name="user_id" placeholder="Name" value="{{ isset(auth()->user()->id) ? auth()->user()->id : '' }}" readonly/>
             <div class="form-group mb-6">
               <input type="email"
                 class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                id="email" name="email" placeholder="Email address"value="{{ auth()->user()->email }}" readonly/>
+                id="email" name="email" placeholder="Email address"value="{{ isset(auth()->user()->email) ? auth()->user()->email : '' }}" readonly/>
             </div>
             <div class="form-group mb-6">
               <textarea
@@ -63,26 +63,32 @@
                       <th>Name</th>
                       <th>Question</th>
                       <th>Answer</th>
+                      <th>Action</th>
                     </tr>
               </thead>
-            <tbody>
+              <tbody>
                 <!-- row 1 -->
                 @if (count($questions) > 0)
                 @foreach ($questions as $question)
-                    <tr>
-                        <th>{{ $question->user->name }}</th>
-                        <td>{{ $question->messages }}</td>
-                        @forelse ($question->answers as $answer)
-                            <td> {{ $answer->description }} </td>
-                        @empty
-                        <td>Belum ada Jawaban</td>
-                        @endforelse
+                  <tr>
+                    <th>{{ $question->user->name }}</th>
+                    <td>{{ $question->messages }}</td>
+                    @forelse ($question->answers as $answer)
+                      <td> {{ $answer->answer }} </td>
+                    @empty
+                      <td>Belum ada Jawaban</td>
+                    @endforelse
+                    <td>
+                      <!-- Tambahkan tombol atau tautan untuk aksi jawab -->
+                      <a href="{{ route('answer', ['question_id' => $question->id]) }}" class="text-blue-600 underline">Detail</a>
+                    </td>
+                  </tr>
                 @endforeach
-                    </tr>
                 @else
-                    <td class="text-center mt-10">Belum ada pertanyaan dan jawaban yang tersedia.</td>
+                  <td class="text-center mt-10">Belum ada pertanyaan dan jawaban yang tersedia.</td>
                 @endif
               </tbody>
+
             </table>
           </div>
 

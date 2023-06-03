@@ -32,27 +32,18 @@
         </div>
     </form>
 
-    <style>
-        .text-desc{
-            height: 4.5em; /* Atur ketinggian maksimum yang diinginkan */
-            overflow: hidden;
-        }
-    </style>
-
     <div class="container mx-auto py-8">
         <h1 class="text-2xl font-bold mb-4">{{ $title }}</h1>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             @forelse($obats as $obat)
+
             <div class="bg-white rounded-lg shadow-lg overflow-hidden">
-                <img class="object-cover h-56 w-full" src="{{asset('upload/obat/'.$obat->photo)}}" alt="{{ $obat->nama }}">
+                <img class="object-cover h-56 w-full" src=" {{asset('upload/obat/'.$obat->photo)}}" alt="{{ $obat->nama }}">
                 <a href="{{ url('obats/detail/'.$obat->id) }}">
                     <div class="p-4">
                         <h2 class="text-xl font-bold mb-2">{{ $obat->nama }}</h2>
-
-                        <p class="text-gray-700 text-base text-desc">{{ $obat->deskripsi }}</p>
-
                         <h2 class="text-[#6A62C4] font-bold">{{ $obat->rekomendasi }}</h2>
-
+                        <p class="text-gray-700 text-base">{{ $obat->deskripsi }}</p>
                         <p class="text-gray-700 text-base mt-2">Harga: {{ $obat->harga }}</p>
                         <p class="text-gray-700 text-base mt-2">Kategori: {{ $obat->kategori }}</p>
                     </div>
@@ -78,7 +69,7 @@
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             @forelse($rekomendasi as $item)
             <div class="bg-white rounded-lg shadow-lg overflow-hidden">
-                <img class="object-cover h-56 w-full" src="{{ asset('storage/images/'.$item->photo) }}" alt="{{ $item->nama }}">
+                <img class="object-cover h-56 w-full" src="{{ asset('upload/obat/'.$item->photo) }}" alt="{{ $item->nama }}">
                 <a href="{{ url('obats/detail/'.$item->id) }}">
                     <div class="p-4">
                         <h2 class="text-xl font-bold mb-2">{{ $item->nama }}</h2>

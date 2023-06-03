@@ -92,6 +92,19 @@
                 </div>
 
                 <div class="mb-4">
+                    <label for="rekomendasi" class="block text-gray-700 font-bold mb-2">Rekomendasi Obat:</label>
+                    <select name="rekomendasi" id="rekomendasi" class="">
+                        <option value="Rekomendasi Dokter">Rekomendasi Dokter</option>
+                        <option value="Tidak">Tidak</option>
+                    </select>
+
+                    @error('rekomendasi')
+                        <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                    @enderror
+                </div>
+
+
+                <div class="mb-4">
                     <label for="qty" class="block text-gray-700 font-bold mb-2">Jumlah Stock Obat</label>
                     <input type="text" name="qty" id="qty" class="border rounded-lg py-2 px-3 w-full @error('qty') border-red-500 @enderror" value="{{ old('qty') }}" placeholder="Enter Stock obat , ex : 100">
 

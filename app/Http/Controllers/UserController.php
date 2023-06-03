@@ -30,7 +30,7 @@ class UserController extends Controller
             if (!$user) {
                 return redirect()->back()->with('error', 'User not found.');
             }
-        
+
             // Validasi input
             // $validatedData = $request->validate([
             //     'name' => 'required',
@@ -44,7 +44,7 @@ class UserController extends Controller
             if($request->hasFile('photo')) {
                 $imageName = $request->file('photo');
                 $imageName->store('upload/profile', ['disk' => 'public_uploads']);
-    
+
                 //delete gambar image
                 if($user->photo != null) {
                     $path = public_path('upload/profile/'.$user->photo);
@@ -55,7 +55,7 @@ class UserController extends Controller
                         // return response()->json(['message' => 'File not found.'], 404);
                     }
                 }
-    
+
                 // Simpan nama gambar yang baru ke dalam database
                 $user->photo = $imageName->hashName(); // atau $imageName->getClientOriginalName()
             }
@@ -71,7 +71,7 @@ class UserController extends Controller
             }
 
 
-            
+
             $user->save();
 
             return redirect('/')->with('success', 'Edit Success');

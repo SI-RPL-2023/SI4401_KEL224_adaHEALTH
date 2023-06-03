@@ -40,6 +40,7 @@ class ObatController extends Controller
             'deskripsi' => 'required',
             'harga' => 'required',
             'qty' => 'required',
+            'rekomendasi' => 'required',
         ]);
 
         $imageName = $request->file('photo');
@@ -49,6 +50,7 @@ class ObatController extends Controller
         $obat = Obat::create([
             'nama' => $request->input('nama'),
             'deskripsi' => $request->input('deskripsi'),
+            'rekomendasi' => $request->input('rekomendasi'),
             'jenis' => $request->input('jenis'),
             'kategori' => $request->input('kategori'),
             'harga' => $request->input('harga'),

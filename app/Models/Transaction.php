@@ -27,7 +27,6 @@ class Transaction extends Model
         'total_harga',
         'metode_payment',
         'status',
-        'images',
     ];
     public function obat()
     {
