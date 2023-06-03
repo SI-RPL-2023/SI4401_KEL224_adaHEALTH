@@ -29,7 +29,6 @@ class Transaction extends Model
         'status',
         'images',
     ];
-
     public function obat()
     {
         return $this->belongsTo(Obat::class, 'id_obat');

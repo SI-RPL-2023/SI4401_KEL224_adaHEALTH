@@ -73,51 +73,13 @@
 
 
 
-{{-- <div class="drawer drawer-mobile fixed active " >
-    <input id="my-drawer-2" type="checkbox" class="drawer-toggle"/>
-    <div class="drawer-content flex flex-col items-center justify-center">
-      <!-- Page content here -->
-      <label for="my-drawer-2" class="btn btn-primary drawer-button lg:hidden">Open drawer</label>
-
-    </div>
-    <div class="drawer-side place-items-center">
-      <label for="my-drawer-2" class="drawer-overlay"></label>
-      <ul class="menu p-4 w-15 bg-[#6266F4] text-white place-items-center">
-        <!-- Sidebar content here -->
-        <li style="background-color: rgba(0, 0, 0, 0.2);border-radius:0.5rem">
-            <a class="tooltip tooltip-right tooltip-primary text-red" data-tip="Ini Dashboard">
-                <span class="mdi mdi-view-dashboard"></span>
-            </a>
-        </li>
-        <li><a><span class="mdi mdi-view-dashboard"></span></a></li>
-      </ul>
-
-    </div>
-</div> --}}
 
 
 
-{{-- <div class="bg-gray-800 text-gray-100 w-48 py-7 px-2 fixed left-0 top-0 h-full hidden ">
 
-    <a href="{{ url('/dashboard') }}" class="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700 hover:text-gray-100">
-      Dashboard
-    </a>
-    <a href="{{ route('add.hospital') }}" class="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700 hover:text-gray-100">
-      Add Hospital
-    </a>
-    <a href="{{ route('add.apotek') }}" class="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700 hover:text-gray-100">
-      Add Apotek
-    </a>
-    <a href="{{ route('add.obat') }}" class="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700 hover:text-gray-100">
-      Add Obat
-    </a>
-    <a href="{{ url('/dokter') }}" class="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700 hover:text-gray-100">
-      Add Dokter
-    </a>
-    <a href="{{ url('/transaksi') }}" class="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700 hover:text-gray-100">
-      Transaksi
-    </a>
-</div> --}}
+
+</div>
+
 
   <script>
     // Ambil elemen tombol dan sidebar

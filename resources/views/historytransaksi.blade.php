@@ -54,7 +54,7 @@
                 @elseif($show->status == "Selesai")
                 <h1 class="badge badge-success ml-[100px] text-[14px] text-white">{{ $show->status}}</h1>
                 @endif
-                
+
               </td>
               <td>Rp{{ number_format($show->total_harga, 0, ',', '.') }}</td>
               <td>

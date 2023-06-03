@@ -69,8 +69,10 @@ class User extends Authenticatable
         return $this->belongsTo(Transaction::class);
     }
 
+
     public static function countNewUsers($startDate, $endDate)
     {
         return self::whereBetween('created_at', [$startDate, $endDate])->count();
     }
+
 }
