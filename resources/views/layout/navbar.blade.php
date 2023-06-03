@@ -22,66 +22,56 @@
                     <div class="hidden sm:ml-6 sm:block">
                         <div class="flex space-x-4">
                             <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-                            <a href="{{ url('/') }}" class="text-gray-300 hover:bg-gray-700 text-white rounded-md px-3 py-2 text-sm font-medium" aria-current="page">Home</a>
+                            <a href="{{ url('/') }}" class="text-gray-300 hover:bg-gray-700 text-white rounded-md px-3 py-2 text-sm font-medium" aria-current="page">Beranda</a>
 
-                            <a href="{{ url('/') }}" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Service</a>
+                            <a href="{{ url('/') }}" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Layanan</a>
 
-                            <a href="{{ url('/') }}" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">AboutUs</a>
+                            <a href="{{ url('/') }}" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Tentang</a>
 
-                            <a href="{{ url('/help') }}" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Help </a>
+                            <a href="{{ url('/help') }}" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Bantuan </a>
                         </div>
                     </div>
                 </div>
                 @auth
-                <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-                    <!-- Profile dropdown -->
-                    <div class="relative ml-3">
-                        <div>
-                            <button type="button" class="flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800" id="user-menu-button" aria-expanded="false" aria-haspopup="true">
-                                <span class="sr-only">Open user menu</span>
-                                <img src="{{ asset('/storage/'.Auth::user()->photo) }}" class="rounded-full w-8 h-8" alt="userphoto">
-                            </button>
-
-                        </div>
-                        <!--
-                  Dropdown menu, show/hide based on menu state.
-
-                  Entering: "transition ease-out duration-100"
-                    From: "transform opacity-0 scale-95"
-                    To: "transform opacity-100 scale-100"
-                  Leaving: "transition ease-in duration-75"
-                    From: "transform opacity-100 scale-100"
-                    To: "transform opacity-0 scale-95"
-                -->
-
+                <div class="relative">
+                    <div class="flex items-center">
+                        <img src="{{ asset('upload/profile/' . Auth::user()->photo) }}" class="rounded-full w-8 h-8" alt="userphoto">
+                        <button type="button" class="flex rounded-md bg-gray-800 text-sm text-gray-300 px-3 py-2 font-medium focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800" id="user-menu-button" aria-expanded="false" aria-haspopup="true" onclick="toggleDropdown()">
+                            <span class="mr-1">{{ Auth::user()->email }}</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-4 h-4 text-white" fill="currentColor"><title>menu-down</title><path d="M7,10L12,15L17,10H7Z" /></svg>
+                        </button>
                     </div>
-                    <div class="group">
-                        <a href="#" class="text-gray-300 text-white rounded-md px-3 py-2 text-sm font-medium" aria-current="page">{{ Auth::user()->email }}</a>
 
-                        <div class="group-hover:block hidden w-[100px] h-[150px] bg-white shadow-lg absolute mt-[5px]">
-                            <button class="border-b border-black w-full flex items-center justify-center"><a href="{{ route('profile.show', ['id' => Auth::user()->id]) }}"></a> Profile</button>
-                            <button class="border-b border-black w-full flex items-center justify-center"> <a href="{{ url('/feedback') }}"> Feedback Application</a></button>
-
-                            <button class="border-b border-black w-full flex items-center justify-center"><a href="{{ url('/history') }}" class="">History Pembelian</a></button>
-                        <div class="group-hover:block hidden w-[100px] h-[60px] bg-white shadow-lg absolute mt-[5px]">
-
+                    <ul id="user-menu" class="hidden absolute right-0 mt-2 w-52 bg-white rounded-md shadow-lg py-1" role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button">
+                        <li><a href="{{ route('profile.show', ['id' => Auth::user()->id]) }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Profile</a></li>
+                        <li><a href="{{ url('/feedback') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Feedback Application</a></li>
+                        <li><a href="{{ url('/history') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">History Pembelian</a></li>
+                        <li>
                             <form action="{{ route('logout') }}" method="post">
                                 @csrf
-                                <button class="w-full" type="submit">
-                                    Logout
-                                </button>
+                                <button class="w-full block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" type="submit">Logout</button>
                             </form>
-                        </div>
-                    </div>
-                    @else
-                    <button class="bg-sky-500 hover:bg-sky-700 p-1.5 ml-1.5 rounded-lg">
-                        <a href="{{ url('/login') }}">Login</a>
-                    </button>
-                    <button class="bg-[#4c1d95] text-white hover:bg-sky-700 p-1.5 ml-1.5 rounded-lg">
-                        <a href="{{ url('/register') }}">Register</a>
-                    </button>
+                        </li>
+                    </ul>
+                </div>
 
-                    @endauth
+                <script>
+                    function toggleDropdown() {
+                        var dropdown = document.getElementById("user-menu");
+                        dropdown.classList.toggle("hidden");
+                    }
+                </script>
+                @else
+                    <div>
+                        <button class="bg-sky-500 hover:bg-sky-700 p-1.5 ml-1.5 rounded-lg">
+                            <a href="{{ url('/login') }}">Login</a>
+                        </button>
+                        <button class="bg-[#4c1d95] text-white hover:bg-sky-700 p-1.5 ml-1.5 rounded-lg">
+                            <a href="{{ url('/register') }}">Register</a>
+                        </button>
+                    </div>
+                @endauth
+
                 </div>
             </div>
         </div>

@@ -12,7 +12,9 @@
     <div class=" top-0 left-[202px] flex items-center mb-32">
         <div class="text-sm breadcrumbs">
             <ul>
+
               <li><a href="{{ url('/dashboard') }}" class="text-grey">Dashboard</a></li>
+
               <li><a href="" class="text-primary"> Transaksi Pemesanan Obat </a></li>
             </ul>
         </div>
@@ -42,7 +44,9 @@
                   <th class="py-3 px-4 text-left">Bukti Pembayaran</th>
                   <th class="py-3 px-4 text-left">Metode Pembayaran</th>
                   <th class="py-3 px-4 text-left">Status</th>
+
                   <th class="py-3 px-4 text-left">Aksi</th>
+
                 </tr>
               </thead>
               <tbody>

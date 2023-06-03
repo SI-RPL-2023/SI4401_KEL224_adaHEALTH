@@ -5,13 +5,13 @@
     <div class="bg-[#6A62C4] h-[471px] w-screen">
         <div class="flex">
             <div class="w-[314px] flex flex-col justify-center items-center h-[471px]">
-                <h1 class="text-white">-> Services</h1>
+                <h1 class="text-white">-> Layanan</h1>
                 <ul class="mt-[23px] text-[#BBBBBB]">
                     <li>
-                        <a href="#">Pelatihan</a>
+                        <a href="{{ url('/url') }}">Pelatihan</a>
                     </li>
                     <li>
-                        <a href="#">Chat dokter Spesialis</a>
+                        <a href="{{ url('/dokter') }}">Chat dokter Spesialis</a>
                     </li>
                     <li>
                         <a href="#">Layanan kesehatan</a>
@@ -24,7 +24,7 @@
                     </li>
                 </ul>
                 <label for="my-modal-3" class="btn btn-outline w-[136px] h-[35px] border border-white rounded-[10px] text-white mt-[32px]">
-                    Show All
+                    Lihat Semua
                 </label>
                 <!-- The button to open modal -->
 
@@ -33,7 +33,7 @@
                 <div class="modal modal-bottom sm:modal-middle">
                 <div class="modal-box relative">
                     <label for="my-modal-3" class="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
-                    <h3 class="font-bold text-lg">All - Services</h3>
+                    <h3 class="font-bold text-lg">Semua - Layanan</h3>
                     <div class="p-5 py-5 grid grid-cols-4 gap-4">
                         <button class="btn btn-active bg-[#6A62C4] border-none"><a href="">Pelatihan</a></button>
                         <button class="btn btn-active bg-[#6A62C4] border-none"><a href="{{ url('dokter') }}">Chat Dokter Spesialis</a></button>
@@ -84,7 +84,7 @@
                     <button>
                         <a href="{{ route('index.services') }}">
                             <div class="bg-white bg-opacity-50 w-[174px] h-[103px] rounded-[15px] flex items-end p-[15px]">
-                                Show All
+                                Lihat Semua
                             </div>
                         </a>
                     </button>
@@ -102,7 +102,7 @@
                     promo menarik untuk mengikuti</br>
                     sesi pelatihan ini !
                 </h1>
-                <button class="w-[111px] h-[38px] rounded-[10px] mt-[54px] bg-[#B982FF] text-white">Join Now</button>
+                <button class="w-[134px] h-[38px] rounded-[10px] mt-[60px] bg-[#B982FF] text-white text-[10px]"><a href="{{ url('/pelatihan') }}">Gabung Sekarang</a> </button>
             </div>
         </div>
         <div class="w-[4px] h-[273px] bg-[#D9D9D9]"></div>
@@ -124,7 +124,7 @@
                         <p>Dapat diintegrasikan dengan asuransimu agar</br>kebutuhan kesehatan online terjamin asuransi.</p>
                     </li>
                 </ul>
-                <button class="w-[111px] h-[38px] rounded-[10px] mt-[19px] bg-[#B982FF] text-white">Lihat Dokter</button>
+                <button class="w-[111px] h-[38px] rounded-[10px] mt-[19px] bg-[#B982FF] text-white"><a href="{{ url('/dokter') }}">Lihat Dokter</a> </button>
             </div>
             <img src="{{ url('asset/dokter.png') }}" alt="" class="w-[337px]">
         </div>

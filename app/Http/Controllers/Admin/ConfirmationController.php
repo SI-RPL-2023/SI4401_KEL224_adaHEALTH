@@ -39,14 +39,14 @@ class ConfirmationController extends Controller
         if ($status == 'Selesai' || $status == 'Gagal') {
             $transaction->status = $status;
             $transaction->save();
-    
+
             if ($status == 'Gagal') {
                 // Mengembalikan stok obat sesuai dengan qty_item yang dipesan
                 $obat = Obat::find($transaction->id_obat);
                 $obat->qty += $transaction->qty_item;
                 $obat->save();
             }
-    
+
             return redirect()->route('index.show')->with('success', 'Status transaksi berhasil diperbarui.');
         }
 

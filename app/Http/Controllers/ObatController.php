@@ -21,16 +21,19 @@ class ObatController extends Controller
     public function show($id)
     {
         $obat = Obat::find($id);
-        $transactions = Transaction::with('obat')
-                  ->where('status', 'Belum Bayar')
-                  ->get();
 
         if (!$obat) {
             abort(404);
         }
 
+        $transactions = Transaction::where('id_obat', $obat->id)
+            ->where('id_user', auth()->id())
+            ->where('status', 'Belum Bayar')
+            ->get();
 
-        return view('show_obat_detail', ['obat' => $obat], ['transactions' => $transactions], compact('obat'), ['title'=>'Detail Obat']);
+
+
+        return view('show_obat_detail', compact('obat', 'transactions'))->with(['title' => 'Detail Obat']);
     }
 
     // public function detail($id)
@@ -109,6 +112,7 @@ class ObatController extends Controller
         $transaction->save();
 
         return view('payment', compact('transaction'))->with('success', 'Pembayaran berhasil dilakukan. Silakan Tunggu Konfirmasi Accepeted. Cek Histori transaksi anda.');
+
     }
 
     public function search(Request $request)
@@ -124,6 +128,7 @@ class ObatController extends Controller
         $title = "Search Results for '{$search}'";
 
         return view('hargadanjenisobat', compact('obats', 'title', 'rekomendasi'));
+
     }
 
     // public function recommend(Request $request)
