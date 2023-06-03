@@ -1,6 +1,7 @@
 @extends('layout.layout')
 
 @section('content')
+{{-- fix --}}
 <div class="relative w-screen h-screen">
     <div class="bg-[#6A62C4] h-[303px] flex justify-center">
         <div class="w-[190px] h-[190px] flex justify-center items-center bg-white rounded-full absolute top-[209px] shadow-lg">
