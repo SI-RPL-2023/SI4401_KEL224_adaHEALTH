@@ -95,10 +95,11 @@ Route::get('/hargadanjenisobat', function () {
 Route::get('/obats', [ObatController::class, 'index']);
 
 Route::get('/obats/detail/{id}', [ObatController::class, 'show']);
+Route::get('/obats/search', [ObatController::class, 'search'])->name('obat.search');
+Route::post('/recommend', [ObatController::class, 'recommend'])->name('recommend');
 Route::post('/obats/detail/{id}', [ObatController::class, 'store_pesan'])->name('obat.store_pesan');
 Route::post('/transaksi/{id}', [ObatController::class, 'updateStatus'])->name('transaction.update');
 Route::delete('/transaksi/{id}/cancel', [ObatController::class, 'cancel_order'])->name('cancel.order');
-
 
 Route::middleware([
     'auth:sanctum',
