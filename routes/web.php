@@ -15,6 +15,9 @@ use App\Http\Controllers\HospitalController;
 use App\Http\Controllers\ServicesController;
 use App\Http\Controllers\FeedbackUserController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\SertifikasiController;
+use App\Http\Controllers\CertificateController;
+use FPDF\FPDF;;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,6 +34,35 @@ use App\Http\Controllers\Auth\RegisterController;
 //     return view('welcome');
 // });
 
+// Route::get('/quiz', [SertifikasiController::class, 'index'])->name('quiz');
+// Route::get('/quizs', [SertifikasiController::class, 'start'])->name('start');
+// Route::post('/quiz/submit', [SertifikasiController::class, 'submit'])->name('quiz.submit');
+
+Route::get('/sertifikasi-home', function () {
+    return view('landingquiz');
+})->name('landingquiz');
+
+Route::get('/sertifkasi', [SertifikasiController::class, 'start'])
+    ->name('quiz.start')
+    ->middleware('auth');
+
+Route::get('/sertifikasi/{questionNumber}', [SertifikasiController::class, 'show'])
+    ->name('quiz.show')
+    ->middleware('auth');
+
+Route::post('/sertifikasi/submit', [SertifikasiController::class, 'submit'])
+    ->name('quiz.submit')
+    ->middleware('auth');
+
+Route::get('/sertifikasi/result', [SertifikasiController::class, 'showResult'])
+    ->name('quiz.result')
+    ->middleware('auth');
+
+Route::get('/sertifikasi/go-to/{questionNumber}', [SertifikasiController::class, 'goToQuestion'])
+    ->name('quiz.goToQuestion')
+    ->middleware('auth');
+
+Route::post('/certificate/generate', [CertificateController::class, 'generate'])->name('certificate.generate');
 
 Route::get('/profile/{id}', [UserController::class, 'show'])->name('profile.show');
 Route::put('/profile/{id}', [UserController::class, 'edit'])->name('updateProfile.put');
