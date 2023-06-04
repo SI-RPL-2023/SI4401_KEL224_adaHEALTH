@@ -66,4 +66,5 @@ class Kernel extends HttpKernel
         'CekRoleMiddleware' => \App\Http\Middleware\CekRoleMiddleware::class,
 
     ];
+
 }

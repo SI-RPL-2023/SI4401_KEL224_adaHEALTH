@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('jenis');
             $table->string('kategori');
             $table->text('deskripsi');
+            $table->string('rekomendasi');
             $table->string('harga');
             $table->string('qty');
             $table->timestamps();

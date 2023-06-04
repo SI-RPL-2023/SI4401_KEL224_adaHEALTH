@@ -21,29 +21,62 @@
     </div>
 
 
-    <form class="flex items-center justify-end">
-        <label for="simple-search" class="sr-only">Search</label>
+    <form action="/obats/search" class="flex items-center justify-end" method="GET">
         <div class=" top-52 w-[300px] right-0">
             <div class="absolute mt-3 flex items-center pl-3 pointer-events-none">
                 <svg aria-hidden="true" class="w-5 h-5 text-gray-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                     <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"></path>
                 </svg>
             </div>
-            <input type="text" id="simple-search" class="bg-gray-50 border focus:outline-none    border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 " placeholder="Search" required>
+            <input type="search" name="search" class="bg-gray-50 border focus:outline-none    border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 " placeholder="Search" required>
         </div>
     </form>
+
     <div class="container mx-auto py-8">
         <h1 class="text-2xl font-bold mb-4">{{ $title }}</h1>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             @forelse($obats as $obat)
+
             <div class="bg-white rounded-lg shadow-lg overflow-hidden">
-                <img class="object-cover h-56 w-full" src="{{asset('upload/obat/'.$obat->photo)}}" alt="{{ $obat->nama }}">
+                <img class="object-cover h-56 w-full" src=" {{asset('upload/obat/'.$obat->photo)}}" alt="{{ $obat->nama }}">
                 <a href="{{ url('obats/detail/'.$obat->id) }}">
                     <div class="p-4">
                         <h2 class="text-xl font-bold mb-2">{{ $obat->nama }}</h2>
+                        <h2 class="text-[#6A62C4] font-bold">{{ $obat->rekomendasi }}</h2>
                         <p class="text-gray-700 text-base">{{ $obat->deskripsi }}</p>
                         <p class="text-gray-700 text-base mt-2">Harga: {{ $obat->harga }}</p>
                         <p class="text-gray-700 text-base mt-2">Kategori: {{ $obat->kategori }}</p>
+                    </div>
+                </a>
+            </div>
+            @empty
+            <div class="alert alert-info shadow-lg">
+                <div>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="stroke-current flex-shrink-0 w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                    <span>Tidak ada obat.</span>
+                </div>
+            </div>
+            @endforelse
+        </div>
+    </div>
+
+    <h1 for="recommend" class="block text-[#6A62C4] font-bold mt-[14px] text-2xl">Obat Rekomendasi</h1>
+
+    <div class="container mx-auto py-8">
+        <h1 class="text-2xl font-bold mb-4">{{ $title }}</h1>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            @forelse($rekomendasi as $item)
+            <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+                <img class="object-cover h-56 w-full" src="{{ asset('upload/obat/'.$item->photo) }}" alt="{{ $item->nama }}">
+                <a href="{{ url('obats/detail/'.$item->id) }}">
+                    <div class="p-4">
+                        <h2 class="text-xl font-bold mb-2">{{ $item->nama }}</h2>
+                        <h2 class="text-[#6A62C4] font-bold">{{ $item->rekomendasi }}</h2>
+                        <p class="text-gray-700 text-base">{{ $item->deskripsi }}</p>
+                        <p class="text-gray-700 text-base mt-2">Harga: {{ $item->harga }}</p>
+                        <p class="text-gray-700 text-base mt-2">Kategori: {{ $item->kategori }}</p>
                     </div>
                 </a>
             </div>
@@ -110,7 +143,6 @@
         </div>
     </div> --}}
 </div>
-
 
 
 

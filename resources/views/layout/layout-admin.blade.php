@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="https://unpkg.com/tailwindcss/dist/tailwind.min.css" />
     <link rel="stylesheet" href="https://unpkg.com/@fullcalendar/core/main.min.css" />
     <link rel="stylesheet" href="https://unpkg.com/@fullcalendar/daygrid/main.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@7.2.96/css/materialdesignicons.min.css">
     <style>
         .bg-gradient{
             /* background-image: linear-gradient( 109.6deg,  rgba(79,148,243,0.73) 11.2%, rgba(140,105,193,0.87) 91.2% ); */

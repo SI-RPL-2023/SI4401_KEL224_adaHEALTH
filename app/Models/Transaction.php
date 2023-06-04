@@ -28,10 +28,13 @@ class Transaction extends Model
         'metode_payment',
         'status',
     ];
-
     public function obat()
     {
         return $this->belongsTo(Obat::class, 'id_obat');
+    }
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'id_user');
     }
 }
 

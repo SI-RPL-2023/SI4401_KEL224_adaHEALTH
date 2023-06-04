@@ -10,14 +10,13 @@ class Question extends Model
     use HasFactory;
 
     protected $fillable = [
-        'id', 'user_id', 'name', 'email', 'mesagges',
+        'id', 'user_id', 'name', 'email', 'mesagges','description',
     ];
-    public function users(){
-        return $this->belongsTo(User::class, 'user_id', 'name', 'email');
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
-    public function user(){
-        return $this->hasMany(User::class, 'user_id', 'name', 'email');
-    }
+
 
     public function answers()
     {
