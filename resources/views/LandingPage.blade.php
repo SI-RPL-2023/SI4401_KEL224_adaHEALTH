@@ -39,7 +39,7 @@
                         <button class="btn btn-active bg-[#6A62C4] border-none"><a href="{{ url('dokter') }}">Chat Dokter Spesialis</a></button>
                         <button class="btn btn-active bg-[#6A62C4] border-none"><a href="">Layanan Kesehatan</a></button>
                         <button class="btn btn-active bg-[#6A62C4] border-none"><a href="{{ url('kalkulatorbmi') }}">Kalkulator BMI</a></button>
-                        <button class="btn btn-active bg-[#6A62C4] border-none"><a href="{{ url('pelacakkesehatan') }}">Pelacakan Kesehatan</a></button>
+                        <button class="btn btn-active bg-[#6A62C4] border-none"><a href="{{ route('pelacak.view') }}">Pelacakan Kesehatan</a></button>
                         <button class="btn btn-active bg-[#6A62C4] border-none"><a href="{{ url('rekomendasirs') }}">Rekomendasi Rumah Sakit</a></button>
                         <button class="btn btn-active bg-[#6A62C4] border-none"><a href="{{ url('/apotek') }}">Rekomendasi Apotek</a></button>
                         <button class="btn btn-active bg-[#6A62C4] border-none"><a href="{{ url('/kategoriobat') }}">Rekomendasi Obat</a></button>

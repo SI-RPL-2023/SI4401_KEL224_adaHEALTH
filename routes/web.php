@@ -97,6 +97,10 @@ Route::get('/sertifikasi/go-to/{questionNumber}', [SertifikasiController::class,
 
 Route::post('/certificate/generate', [CertificateController::class, 'generate'])->name('certificate.generate');
 
+// Pelacak Route
+Route::get('/pelacak', [PelacakController::class, 'pelacakView'])->name('pelacak.view');
+Route::post('/pelacak/request', [PelacakController::class, 'pelacakRequest'])->name('pelacakRequest');
+
 //Hospital Route-----------------------------------------------------------------------------
 Route::get('/rekomendasirs', [HospitalController::class, 'index']);
 Route::get('/hospitals/{id}', [HospitalController::class, 'show'])->name('hospital.show');
