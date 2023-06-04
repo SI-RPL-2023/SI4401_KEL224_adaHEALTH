@@ -18,6 +18,36 @@
 
                 </div>
                 <div class="flex flex-shrink-0 items-center">
+
+                <div class="flex flex-1 items-center justify-center  sm:justify-start">
+                    <div class="w-[5px] h-[40px] bg-[#FFFFFF] ml-[95px]"></div>
+                    <label for="default-search" class="mb-2 text-sm font-medium  sr-only">Search</label>
+                    <div class="relative">
+                        <div class="absolute inset-y-0 ml-[20px] flex items-center pointer-events-none">
+                            <svg aria-hidden="true" class="w-5 h-5 text-gray-500 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                            </svg>
+                        </div>
+                        <input class=" w-[500px] ml-[10px] p-4 pl-10 text-sm bg-transparent focus:outline-none text-white placeholder:text-white " placeholder="Search">
+
+                    </div>
+                    <div class="flex flex-shrink-0 items-center">
+                    </div>
+                    <div class="hidden sm:ml-6 sm:block">
+                        <div class="flex space-x-4">
+                            <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
+                            <a href="{{ url('/') }}" class="text-gray-300 hover:bg-gray-700 text-white rounded-md px-3 py-2 text-sm font-medium" aria-current="page">Home</a>
+
+                            <a href="{{ url('/service') }}" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Service</a>
+
+                            <a href="{{ url('/artikel') }}" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Article</a>
+
+                            <a href="{{ url('/aboutus') }}" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">AboutUs</a>
+
+                            <a href="{{ url('/help') }}" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Help </a>
+                        </div>
+                    </div>
+
                 </div>
                 <div class="hidden sm:ml-6 sm:block">
                     <div class="flex space-x-4">

@@ -116,8 +116,26 @@ Route::controller(LoginController::class)->group(function () {
 //Middleware Group setelah login
 Route::group(['middleware' => ['auth']], function () {
 
+
     Route::get('dokter', [DokterController::class, 'dokter_view']);
 
+    Route::get('dokter', [AdminController::class, 'dokter_view']);
+        //Artikel
+
+
+        Route::resource('artikel', \App\Http\Controllers\Admin\ArtikelController::class);
+        Route::get('/artikel', [App\Http\Controllers\Admin\ArtikelController::class, 'index'])->name('artikel.index');
+        Route::get('/artikel/create', [App\Http\Controllers\Admin\ArtikelController::class, 'create'])->name('artikel.create');
+        Route::post('/artikel', [App\Http\Controllers\Admin\ArtikelController::class, 'store'])->name('artikel.store');
+        Route::get('/artikel/{article}',  [App\Http\Controllers\Admin\ArtikelController::class, 'show'])->name('artikel.show');
+        Route::get('/artikel/{id}/edit', [App\Http\Controllers\Admin\ArtikelController::class, 'edit'])->name('artikel.edit');
+        Route::put('/artikel/{id}/update', [App\Http\Controllers\Admin\ArtikelController::class, 'update'])->name('artikel.update');
+        Route::get('/artikel/{id}',  [App\Http\Controllers\Admin\ArtikelController::class, 'destroy'])->name('artikel.destroy');
+
+        Route::get('/search', [App\Http\Controllers\Admin\ArtikelController::class, 'search'])->name('artikel.search');
+
+
+        //End artikel
     Route::group(['middleware' => ['CekRoleMiddleware:0']], function () {
         Route::resource('/user', UserController::class);
         Route::get('riwayat-konsultasi', [UserController::class, 'riwayat_konsultasi']);
@@ -185,6 +203,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::post('/transaksi/{id}/edit', [\App\Http\Controllers\Admin\ConfirmationController::class, 'update'])->name('show.update');
         Route::get('/transaksi/{id}/delete', [\App\Http\Controllers\Admin\ConfirmationController::class, 'destroy'])->name('show.delete');
         //end Konfirm
+
     });
 
     Route::group(['middleware' => ['CekRoleMiddleware:2']], function () {
