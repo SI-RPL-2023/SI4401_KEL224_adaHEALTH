@@ -12,13 +12,14 @@ use App\Http\Controllers\ApotekController;
 use App\Http\Controllers\DokterController;
 use App\Http\Controllers\HistoryTransaction;
 use App\Http\Controllers\HospitalController;
+use App\Http\Controllers\PDFController;
 use App\Http\Controllers\ServicesController;
 use App\Http\Controllers\FeedbackUserController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ReportingController;
 use App\Http\Controllers\Admin\ConfirmationController;
-
+use Barryvdh\DomPDF\Facade as PDF;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -150,11 +151,17 @@ Route::group(['middleware' => ['auth']], function () {
     Route::group(['middleware' => ['CekRoleMiddleware:1']], function () {
         Route::resource('dashboard', \App\Http\Controllers\Admin\DashboardController::class);
 
+    
+;
+        
+
+
         Route::get('/dashboard', [ReportingController::class, 'index'])->name('reports.index');
         Route::get('/reporting', [\App\Http\Controllers\Admin\ReportingController::class, 'report'])->name('detail.report');
         Route::get('/download-transactions/{period?}', [\App\Http\Controllers\Admin\ReportingController::class, 'downloadTransactions'])->name('download.transactions');
 
 
+      
         //Add Dokter
         Route::get('dokter/add', [AdminController::class, 'form_tambah']);
         Route::post('dokter/save', [AdminController::class, 'form_save']);
@@ -230,4 +237,15 @@ Route::get('/kategoriobat/{kategori}', [ObatController::class, 'obatkategori'])-
 Route::post('/hapusfoto/{id}', [UserController::class, 'hapusfoto'])->name('hapusfoto');
 
 Route::get('/resultbmi', [bmiController::class,'indexResult'])->name('result');
+
+
+Route::get('/suratrujukan', function () {
+    return view('suratrujukan');
+});
+
+Route::get('/hasilsuratpdf', function () {
+    return view('hasilsuratpdf');
+});
+
+Route::post('/generate-pdf', [PDFController::class, 'generatePDF'])->name('generate-pdf');
 
