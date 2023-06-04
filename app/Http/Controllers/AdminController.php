@@ -14,8 +14,10 @@ session_start();
 use App\Models\Hospital;
 use App\Models\Apotek;
 use App\Models\Obat;
-use Carbon\Carbon;
 
+use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
+use DB;
 
 class AdminController extends Controller
 {
@@ -24,7 +26,14 @@ class AdminController extends Controller
     // DOKTER CRUD
     public function dokter_view() {
         $dokter = Dokter::all();
-        return view('dokter', compact('dokter'));
+        $konsultasi = DB::table('konsultasi as a')
+        ->join('users as b', 'a.id_dokter', '=', 'b.id')
+        ->join('users as c', 'a.id_pasien', '=', 'c.id')
+        ->join('dokters as d', 'b.email', '=', 'd.email')
+        ->select('a.*', 'b.name as nama_dokter', 'c.name as nama_pasien', 'd.spesialis')
+        ->where('a.id_dokter', '=', Auth::user()->id)
+        ->get();
+        return view('dokter', compact('dokter', 'konsultasi'));
     }
     public function form_tambah() {
         return view('dokter-form-tambah');
@@ -43,6 +52,7 @@ class AdminController extends Controller
 
         $image = $request->file('foto');
         $image->store('upload/dokter', ['disk' => 'public_uploads']);
+        $image->store('upload/profile', ['disk' => 'public_uploads']);
 
         // create a new dokter instance with the validated data
         $dokter = new Dokter([
@@ -59,18 +69,29 @@ class AdminController extends Controller
             'jam_buka' => $params['jam_buka'],
             'jam_tutup' => $params['jam_tutup']
         ]);
+        $dokterUser = new User([
+            'name' => $validatedData['nama_dokter'],
+            'email' => $validatedData['email'],
+            'password' => bcrypt($validatedData['password']),
+            'photo' => $image->hashName(),
+            'address' => $params['alamat'],
+            'phone' => $params['no_telp'],
+            'gender' => $params['gender'],
+            'date_birth' => $params['tanggal_lahir'],
+            'roles' => 2
+
+        ]);
 
         // save the dokter instance to the database
         $dokter->save();
+        $dokterUser->save();
 
         // return a response indicating success
         // return response()->json(['message' => 'User created successfully'], 201);
         return redirect()->to('dokter')->with('success', 'Data berhasil ditambahkan');
     }
 
-// DOKTER CRUD
-            return redirect('/dokter')->with('success', 'Dokter Berhasil dibuat.');
-    }
+
 public function form_edit($id) {
     $id = Crypt::decryptString($id);
 

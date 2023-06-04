@@ -127,7 +127,7 @@
                 <a href="{{ url('dokter') }}">
                     <button class="w-[111px] h-[38px] rounded-[10px] mt-[19px] bg-[#B982FF] text-white">Lihat Dokter</button>
                 </a>
-                <button class="w-[111px] h-[38px] rounded-[10px] mt-[19px] bg-[#B982FF] text-white"><a href="{{ url('/dokter') }}">Lihat Dokter</a> </button>
+
             </div>
             <img src="{{ url('asset/dokter.png') }}" alt="" class="w-[337px]">
         </div>
