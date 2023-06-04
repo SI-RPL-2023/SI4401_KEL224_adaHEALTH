@@ -90,11 +90,11 @@ Route::get('/hargadanjenisobat', function () {
 Route::get('/obats', [ObatController::class, 'index']);
 
 Route::get('/obats/detail/{id}', [ObatController::class, 'show']);
+Route::get('/obats/search', [ObatController::class, 'search'])->name('obat.search');
+Route::post('/recommend', [ObatController::class, 'recommend'])->name('recommend');
 Route::post('/obats/detail/{id}', [ObatController::class, 'store_pesan'])->name('obat.store_pesan');
 Route::post('/transaksi/{id}', [ObatController::class, 'updateStatus'])->name('transaction.update');
 Route::delete('/transaksi/{id}/cancel', [ObatController::class, 'cancel_order'])->name('cancel.order');
-
-
 
 Route::middleware([
     'auth:sanctum',
@@ -117,8 +117,26 @@ Route::controller(LoginController::class)->group(function () {
 //Middleware Group setelah login
 Route::group(['middleware' => ['auth']], function () {
 
+
     Route::get('dokter', [DokterController::class, 'dokter_view']);
 
+    Route::get('dokter', [AdminController::class, 'dokter_view']);
+        //Artikel
+
+
+        Route::resource('artikel', \App\Http\Controllers\Admin\ArtikelController::class);
+        Route::get('/artikel', [App\Http\Controllers\Admin\ArtikelController::class, 'index'])->name('artikel.index');
+        Route::get('/artikel/create', [App\Http\Controllers\Admin\ArtikelController::class, 'create'])->name('artikel.create');
+        Route::post('/artikel', [App\Http\Controllers\Admin\ArtikelController::class, 'store'])->name('artikel.store');
+        Route::get('/artikel/{article}',  [App\Http\Controllers\Admin\ArtikelController::class, 'show'])->name('artikel.show');
+        Route::get('/artikel/{id}/edit', [App\Http\Controllers\Admin\ArtikelController::class, 'edit'])->name('artikel.edit');
+        Route::put('/artikel/{id}/update', [App\Http\Controllers\Admin\ArtikelController::class, 'update'])->name('artikel.update');
+        Route::get('/artikel/{id}',  [App\Http\Controllers\Admin\ArtikelController::class, 'destroy'])->name('artikel.destroy');
+
+        Route::get('/search', [App\Http\Controllers\Admin\ArtikelController::class, 'search'])->name('artikel.search');
+
+
+        //End artikel
     Route::group(['middleware' => ['CekRoleMiddleware:0']], function () {
         Route::resource('/user', UserController::class);
         Route::get('riwayat-konsultasi', [UserController::class, 'riwayat_konsultasi']);
@@ -132,9 +150,18 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::group(['middleware' => ['CekRoleMiddleware:1']], function () {
         Route::resource('dashboard', \App\Http\Controllers\Admin\DashboardController::class);
+
     
-        Route::get('/dashboard', [ReportingController::class, 'index'])->name('reports.index');
+;
         
+
+
+        Route::get('/dashboard', [ReportingController::class, 'index'])->name('reports.index');
+        Route::get('/reporting', [\App\Http\Controllers\Admin\ReportingController::class, 'report'])->name('detail.report');
+        Route::get('/download-transactions/{period?}', [\App\Http\Controllers\Admin\ReportingController::class, 'downloadTransactions'])->name('download.transactions');
+
+
+      
         //Add Dokter
         Route::get('dokter/add', [AdminController::class, 'form_tambah']);
         Route::post('dokter/save', [AdminController::class, 'form_save']);
@@ -183,6 +210,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::post('/transaksi/{id}/edit', [\App\Http\Controllers\Admin\ConfirmationController::class, 'update'])->name('show.update');
         Route::get('/transaksi/{id}/delete', [\App\Http\Controllers\Admin\ConfirmationController::class, 'destroy'])->name('show.delete');
         //end Konfirm
+
     });
 
     Route::group(['middleware' => ['CekRoleMiddleware:2']], function () {
@@ -191,7 +219,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('konsultasi/edit/{id}', [DokterController::class, 'form_konsultasi_edit']);
         Route::post('konsultasi/update/{id}', [DokterController::class, 'form_konsultasi_update']);
         Route::get('konsultasi/delete/{id}', [DokterController::class, 'form_konsultasi_delete']);
-        
+
     });
 
 
@@ -202,7 +230,14 @@ Route::group(['middleware' => ['auth']], function () {
 Route::get('/kalkulatorbmi', [bmiController::class,'index']);
 Route::post('/kalkulatorbmi', [bmiController::class, 'CalculateBMI'])->name('kalkulatorbmi.check');
 
+
 Route::get('/resultbmi', [bmiController::class,'indexResult'])->name('result');
+Route::get('/kategoriobat', [ObatController::class, 'kategoriobat'])->name('kategoriobat');
+Route::get('/kategoriobat/{kategori}', [ObatController::class, 'obatkategori'])->name('obatkategori');
+Route::post('/hapusfoto/{id}', [UserController::class, 'hapusfoto'])->name('hapusfoto');
+
+Route::get('/resultbmi', [bmiController::class,'indexResult'])->name('result');
+
 
 Route::get('/suratrujukan', function () {
     return view('suratrujukan');
@@ -213,3 +248,4 @@ Route::get('/hasilsuratpdf', function () {
 });
 
 Route::post('/generate-pdf', [PDFController::class, 'generatePDF'])->name('generate-pdf');
+

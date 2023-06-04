@@ -40,9 +40,9 @@
                         <button class="btn btn-active bg-[#6A62C4] border-none"><a href="">Layanan Kesehatan</a></button>
                         <button class="btn btn-active bg-[#6A62C4] border-none"><a href="{{ url('kalkulatorbmi') }}">Kalkulator BMI</a></button>
                         <button class="btn btn-active bg-[#6A62C4] border-none"><a href="{{ url('pelacakkesehatan') }}">Pelacakan Kesehatan</a></button>
-                        <button class="btn btn-active bg-[#6A62C4] border-none"><a href="{{ url('pelacakkesehatan') }}">Rekomendasi Rumah Sakit</a></button>
-                        <button class="btn btn-active bg-[#6A62C4] border-none"><a href="{{ url('pelacakkesehatan') }}">Rekomendasi Apotek</a></button>
-                        <button class="btn btn-active bg-[#6A62C4] border-none"><a href="{{ url('pelacakkesehatan') }}">Rekomendasi Obat</a></button>
+                        <button class="btn btn-active bg-[#6A62C4] border-none"><a href="{{ url('rekomendasirs') }}">Rekomendasi Rumah Sakit</a></button>
+                        <button class="btn btn-active bg-[#6A62C4] border-none"><a href="{{ url('/apotek') }}">Rekomendasi Apotek</a></button>
+                        <button class="btn btn-active bg-[#6A62C4] border-none"><a href="{{ url('/kategoriobat') }}">Rekomendasi Obat</a></button>
 
 
                     </div>
@@ -74,7 +74,7 @@
                             </div>
                         </button>
                     </a>
-                    <a href="{{ url('/obats') }}">
+                    <a href="{{ url('/kategoriobat') }}">
                     <button>
                         <div class="bg-white w-[174px] h-[103px] rounded-[15px] text-start flex items-end p-[15px]">
                             Rekomendasi</br>Obat
@@ -124,6 +124,9 @@
                         <p>Dapat diintegrasikan dengan asuransimu agar</br>kebutuhan kesehatan online terjamin asuransi.</p>
                     </li>
                 </ul>
+                <a href="{{ url('dokter') }}">
+                    <button class="w-[111px] h-[38px] rounded-[10px] mt-[19px] bg-[#B982FF] text-white">Lihat Dokter</button>
+                </a>
                 <button class="w-[111px] h-[38px] rounded-[10px] mt-[19px] bg-[#B982FF] text-white"><a href="{{ url('/dokter') }}">Lihat Dokter</a> </button>
             </div>
             <img src="{{ url('asset/dokter.png') }}" alt="" class="w-[337px]">

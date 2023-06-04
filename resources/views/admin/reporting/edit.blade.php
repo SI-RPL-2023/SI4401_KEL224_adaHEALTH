@@ -6,7 +6,8 @@
 
     <div class="text-sm breadcrumbs">
         <ul>
-          <li><a href="{{ url('/reports') }}" class="text-grey">Dashboard</a></li>
+
+          <li><a href="{{ url('/dashboard') }}" class="text-grey">Dashboard</a></li>
           <li><a href="" class="text-primary">Detail Transaksi Pemesanan Obat # {{ $transaction->id }}</a></li>
         </ul>
     </div>

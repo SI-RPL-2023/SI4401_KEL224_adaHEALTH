@@ -59,6 +59,11 @@
                 <span class="mdi mdi-doctor"></span>
             </a>
         </li>
+        <li class="flex justify-center">
+            <a href="{{ url('/transaksi') }}" class="flex items-center justify-center tooltip tooltip-right tooltip-primary text-red" data-tip="Konfirmasi Pesanan">
+                <span class="mdi mdi-cart"></span>
+            </a>
+        </li>
         <div class="relative h-full flex flex-col justify-end items-end">
             <li class="flex justify-center">
                 <a href="{{ url('/logout') }}" class="flex items-center justify-center tooltip tooltip-right tooltip-primary text-red" data-tip="Logout">
