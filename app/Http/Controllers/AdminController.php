@@ -37,6 +37,7 @@ class AdminController extends Controller
         $validatedData = $request->validate([
             'nama_dokter' => 'required',
             'email' => 'required|email|unique:dokters',
+            'password' => 'required',
             'foto' => 'required'
         ]);
 
@@ -48,6 +49,7 @@ class AdminController extends Controller
             'nama_dokter' => $validatedData['nama_dokter'],
             'spesialis' => $params['spesialis'],
             'email' => $validatedData['email'],
+            'password' => bcrypt($validatedData['password']),
             'foto' => $image->hashName(),
             'alamat' => $params['alamat'],
             'no_telp' => $params['no_telp'],
@@ -57,6 +59,15 @@ class AdminController extends Controller
             'jam_buka' => $params['jam_buka'],
             'jam_tutup' => $params['jam_tutup']
         ]);
+
+        // save the dokter instance to the database
+        $dokter->save();
+
+        // return a response indicating success
+        // return response()->json(['message' => 'User created successfully'], 201);
+        return redirect()->to('dokter')->with('success', 'Data berhasil ditambahkan');
+    }
+
 // DOKTER CRUD
 
 public function form_edit($id) {
