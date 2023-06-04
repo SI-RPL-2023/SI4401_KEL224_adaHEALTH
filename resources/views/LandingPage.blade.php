@@ -17,15 +17,43 @@
                         <a href="#">Layanan kesehatan</a>
                     </li>
                     <li>
-                        <a href="#">BMI</a>
+                        <a href="{{ url('/kalkulatorbmi') }}">BMI</a>
                     </li>
                     <li>
                         <a href="#">Pelacakan kesehatan</a>
                     </li>
                 </ul>
-                <button class="w-[136px] h-[35px] border border-white rounded-[10px] text-white mt-[32px]">
+                <label for="my-modal-3" class="btn btn-outline w-[136px] h-[35px] border border-white rounded-[10px] text-white mt-[32px]">
                     Show All
-                </button>
+                </label>
+                <!-- The button to open modal -->
+
+                <!-- Put this part before </body> tag -->
+                <input type="checkbox" id="my-modal-3" class="modal-toggle" />
+                <div class="modal modal-bottom sm:modal-middle">
+                <div class="modal-box relative">
+                    <label for="my-modal-3" class="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
+                    <h3 class="font-bold text-lg">All - Services</h3>
+                    <div class="p-5 py-5 grid grid-cols-4 gap-4">
+                        <button class="btn btn-active bg-[#6A62C4] border-none"><a href="">Pelatihan</a></button>
+                        <button class="btn btn-active bg-[#6A62C4] border-none"><a href="{{ url('dokter') }}">Chat Dokter Spesialis</a></button>
+                        <button class="btn btn-active bg-[#6A62C4] border-none"><a href="">Layanan Kesehatan</a></button>
+                        <button class="btn btn-active bg-[#6A62C4] border-none"><a href="{{ url('kalkulatorbmi') }}">Kalkulator BMI</a></button>
+                        <button class="btn btn-active bg-[#6A62C4] border-none"><a href="{{ url('pelacakkesehatan') }}">Pelacakan Kesehatan</a></button>
+                        <button class="btn btn-active bg-[#6A62C4] border-none"><a href="{{ url('pelacakkesehatan') }}">Rekomendasi Rumah Sakit</a></button>
+                        <button class="btn btn-active bg-[#6A62C4] border-none"><a href="{{ url('pelacakkesehatan') }}">Rekomendasi Apotek</a></button>
+                        <button class="btn btn-active bg-[#6A62C4] border-none"><a href="{{ url('pelacakkesehatan') }}">Rekomendasi Obat</a></button>
+
+
+                    </div>
+
+                    {{--
+                    <p class="py-4">You've been selected for a chance to get one year of subscription to use Wikipedia for free!</p>
+                    <div class="modal-action">
+                    <label for="my-modal-3" class="btn">Yay!</label>
+                    </div> --}}
+                </div>
+                </div>
             </div>
             <div class="w-full h-[471px] flex flex-col justify-center ml-[100px] items-start">
                 <img src="{{ url('asset/logokepotong.png') }}" alt="">
@@ -54,9 +82,11 @@
                     </button>
                     </a>
                     <button>
-                        <div class="bg-white bg-opacity-50 w-[174px] h-[103px] rounded-[15px] flex items-end p-[15px]">
-                            Show All
-                        </div>
+                        <a href="{{ route('index.services') }}">
+                            <div class="bg-white bg-opacity-50 w-[174px] h-[103px] rounded-[15px] flex items-end p-[15px]">
+                                Show All
+                            </div>
+                        </a>
                     </button>
                 </div>
             </div>
@@ -72,7 +102,9 @@
                     promo menarik untuk mengikuti</br>
                     sesi pelatihan ini !
                 </h1>
-                <button class="w-[111px] h-[38px] rounded-[10px] mt-[54px] bg-[#B982FF] text-white">Join Now</button>
+                <button class="w-[111px] h-[38px] rounded-[10px] mt-[54px] bg-[#B982FF] text-white cursor-pointer">
+                    <a href="{{ route('landingquiz') }}" class="text-white">Join Now</a>
+                </button>
             </div>
         </div>
         <div class="w-[4px] h-[273px] bg-[#D9D9D9]"></div>

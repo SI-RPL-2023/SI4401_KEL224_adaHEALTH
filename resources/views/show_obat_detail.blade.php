@@ -86,7 +86,7 @@
         <div class="basis-3/4 p-5 w-[1366px] max-h-fit">
             <div class="bg-[#6A62C4] p-5 max-h-fit  rounded-t-lg">
                 <div class="badge badge-primary">Rekomendasi Dokter</div>
-                <img class="object-cover h-56 w-full mt-5" src="{{ asset('storage/images/'.$obat->photo) }}" alt="{{ $obat->photo }}">
+                <img class="object-cover h-56 w-full mt-5" src="{{asset('upload/obat/'.$obat->photo)}}" alt="{{ $obat->photo }}">
             </div>
             <div class="rounded-b-lg border-black p-5 bg-[#e1dff6]">
                 <p class="text-[#2fa3fc] font-medium ">adaHEALTH, <span class="text-[#817676] text-[10px]">{{ $obat->created_at }}</span></p>
@@ -111,7 +111,7 @@
                     <form method="POST" action="{{ route('obat.store_pesan', ['id' => $obat->id]) }}">
                         @csrf
                         <h2 class="mt-5">Masukkan Jumlah</h2>
-                        <input type="number" class="input input-bordered mt-3" name="qty" step="1" min="5" max="10" placeholder="5" required> / Rp.17.000
+                        <input type="number" class="input input-bordered mt-3" name="qty" step="1" min="5" max="10" placeholder="5" required> / Rp{{ number_format($obat->harga, 0, ',', '.') }}
                         <button type="submit" class="mt-10 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Pesan</button>
                     </form>
                 </div>

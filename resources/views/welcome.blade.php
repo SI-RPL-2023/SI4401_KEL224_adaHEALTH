@@ -68,7 +68,9 @@
                     promo menarik untuk mengikuti</br>
                     sesi pelatihan ini !
                 </h1>
-                <button class="w-[111px] h-[38px] rounded-[10px] mt-[54px] bg-[#B982FF] text-white">Join Now</button>
+                <button class="w-[111px] h-[38px] rounded-[10px] mt-[54px] bg-[#B982FF] text-white cursor-pointer">
+                    <a href="{{ route('landingquiz') }}" class="text-white">Join Now</a>
+                </button>
             </div>
         </div>
         <div class="w-[4px] h-[273px] bg-[#D9D9D9]"></div>

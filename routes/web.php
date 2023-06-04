@@ -1,16 +1,24 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\bmiController;
 use App\Http\Controllers\HelpController;
-use App\Http\Controllers\ObatController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ObatController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ApotekController;
 use App\Http\Controllers\DokterController;
+use App\Http\Controllers\HistoryTransaction;
 use App\Http\Controllers\HospitalController;
+use App\Http\Controllers\ServicesController;
+use App\Http\Controllers\FeedbackUserController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\SertifikasiController;
+use App\Http\Controllers\CertificateController;
+use FPDF\FPDF;;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -25,14 +33,54 @@ use App\Http\Controllers\Auth\RegisterController;
 // Route::get('/', function () {
 //     return view('welcome');
 // });
+
+// Route::get('/quiz', [SertifikasiController::class, 'index'])->name('quiz');
+// Route::get('/quizs', [SertifikasiController::class, 'start'])->name('start');
+// Route::post('/quiz/submit', [SertifikasiController::class, 'submit'])->name('quiz.submit');
+
+Route::get('/sertifikasi-home', function () {
+    return view('landingquiz');
+})->name('landingquiz');
+
+Route::get('/sertifkasi', [SertifikasiController::class, 'start'])
+    ->name('quiz.start')
+    ->middleware('auth');
+
+Route::get('/sertifikasi/{questionNumber}', [SertifikasiController::class, 'show'])
+    ->name('quiz.show')
+    ->middleware('auth');
+
+Route::post('/sertifikasi/submit', [SertifikasiController::class, 'submit'])
+    ->name('quiz.submit')
+    ->middleware('auth');
+
+Route::get('/sertifikasi/result', [SertifikasiController::class, 'showResult'])
+    ->name('quiz.result')
+    ->middleware('auth');
+
+Route::get('/sertifikasi/go-to/{questionNumber}', [SertifikasiController::class, 'goToQuestion'])
+    ->name('quiz.goToQuestion')
+    ->middleware('auth');
+
+Route::post('/certificate/generate', [CertificateController::class, 'generate'])->name('certificate.generate');
+
+Route::get('/profile/{id}', [UserController::class, 'show'])->name('profile.show');
+Route::put('/profile/{id}', [UserController::class, 'edit'])->name('updateProfile.put');
+
+// Route::get('/history', function () {
+//     return view('historytransaksi');
+// });
+Route::get('/history', [HistoryTransaction::class, 'index']);
+
 Route::get('/help', function () {
     return view('help', ['title'=>'Help']);
 });
 
+
 Route::get('/', function () {
     return view('LandingPage', ['title' => 'Home']);
 });
-
+Route::get('/services', [ServicesController::class, 'index'])->name('index.services');
 // route::get('/', [HomeController::class, "show"]);
 // route::get('/redirects', [HomeController::class, "index"]);
 
@@ -55,7 +103,7 @@ Route::post('register', [RegisterController::class, 'register']);
 
 //Apotek Route
 Route::get('/apotek', [ApotekController::class, 'index']);
-Route::get('/detail/{id}', [ApotekController::class, 'show'])->name('apotek.show');
+Route::get('/apotek/{id}', [ApotekController::class, 'show'])->name('apotek.detail');
 
 Route::get('/help', [HelpController::class, 'index'])->name('help.index');
 Route::get('apotek/{id}/rate', [ApotekController::class, 'createRating'])->name('apotek.createRating');
@@ -102,19 +150,30 @@ Route::controller(LoginController::class)->group(function () {
 
 //Middleware Group setelah login
 Route::group(['middleware' => ['auth']], function () {
-
+    Route::get('dokter', [AdminController::class, 'dokter_view']);
 
     Route::group(['middleware' => ['CekRoleMiddleware:0']], function () {
         Route::resource('/user', UserController::class);
-
+        //Route untuk Fitur Feedback CRUD
+        Route::get('/feedback', [FeedbackUserController::class, 'show'])->name('feedback.show');
+        Route::post('/feedback', [FeedbackUserController::class, 'store'])->name('feedback.store');
+        Route::put('/feedback/{id}', [FeedbackUserController::class, 'update'])->name('feedback.update');
+        // Route::delete('/feedback/{id}', [FeedbackUserController::class, 'destroy'])->name('feedback.destroy');
+        //End Route untuk Fitur Feedback CRUD
     });
 
     Route::group(['middleware' => ['CekRoleMiddleware:1']], function () {
         Route::resource('dashboard', AdminController::class);
+        Route::get('dokter/add', [AdminController::class, 'form_tambah']);
+        Route::post('dokter/save', [AdminController::class, 'form_save']);
+        Route::get('dokter/edit/{id}', [AdminController::class, 'form_edit']);
+        Route::post('dokter/update/{id}', [AdminController::class, 'form_update']);
+        Route::get('dokter/delete/{id}', [AdminController::class, 'form_delete']);
         //AddHospital
         Route::get('/add/hospital', [\App\Http\Controllers\Admin\HospitalController::class, 'show'])->name('add.hospital');
         Route::post('/add/hospital', [\App\Http\Controllers\Admin\HospitalController::class, 'store'])->name('store.hospital');
 
+        Route::get('/hospital/{hospital}/show', [\App\Http\Controllers\Admin\HospitalController::class, 'index'])->name('hospital.show');
         Route::get('/hospital/{hospital}/edit', [\App\Http\Controllers\Admin\HospitalController::class, 'edit'])->name('hospital.edit');
         Route::put('/hospital/{hospital}/edit', [\App\Http\Controllers\Admin\HospitalController::class, 'update'])->name('hospital.update');
 
@@ -125,6 +184,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/add/apotek', [\App\Http\Controllers\Admin\ApotekController::class, 'show'])->name('add.apotek');
         Route::post('/add/apotek', [\App\Http\Controllers\Admin\ApotekController::class, 'store'])->name('store.apotek');
 
+        Route::get('/apotek/{apotek}/show', [\App\Http\Controllers\Admin\ApotekController::class, 'index'])->name('apotek.show');
         Route::get('/apotek/{apotek}/edit', [\App\Http\Controllers\Admin\ApotekController::class, 'edit'])->name('apotek.edit');
         Route::put('/apotek/{apotek}/edit', [\App\Http\Controllers\Admin\ApotekController::class, 'update'])->name('apotek.update');
 
@@ -136,6 +196,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/add/obat', [\App\Http\Controllers\Admin\ObatController::class, 'show'])->name('add.obat');
         Route::post('/add/obat', [\App\Http\Controllers\Admin\ObatController::class, 'store'])->name('store.obat');
 
+        Route::get('/obat/{obat}/show', [\App\Http\Controllers\Admin\ObatController::class, 'index'])->name('obat.show');
         Route::get('/obat/{obat}/edit', [\App\Http\Controllers\Admin\ObatController::class, 'edit'])->name('obat.edit');
         Route::put('/obat/{obat}/edit', [\App\Http\Controllers\Admin\ObatController::class, 'update'])->name('obat.update');
 
@@ -145,7 +206,15 @@ Route::group(['middleware' => ['auth']], function () {
     });
 
     Route::group(['middleware' => ['CekRoleMiddleware:2']], function () {
-        Route::resource('dokter', DokterController::class);
+        // Route::resource('dokter', DokterController::class);
     });
 
+
 });
+
+
+
+Route::get('/kalkulatorbmi', [bmiController::class,'index']);
+Route::post('/kalkulatorbmi', [bmiController::class, 'CalculateBMI'])->name('kalkulatorbmi.check');
+
+Route::get('/resultbmi', [bmiController::class,'indexResult'])->name('result');
