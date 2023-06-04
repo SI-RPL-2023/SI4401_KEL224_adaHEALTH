@@ -169,11 +169,10 @@
                 </div>
             @endif
             <h2>Nilai Rata-rata: {{ $apotek->averageRating() }}</h2>
-
-            <form method="POST" action="{{ route('apotek.storeRating', ['id' => $apotek->id]) }}">
+            <form method="POST" action="{{ route('rekomendasiapotek.storeRating', ['id' => $apotek->id]) }}">
                 @csrf
                 <h2>Beri Nilai Apotek</h2>
-                <input type="number" name="rating" step="1" min="0" max="5" required>
+                <input type="number" class="input input-bordered w-full max-w-xs" name="rating" step="1" min="0" max="5" required>
                 <button type="submit" class="mt-10 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Beri Nilai</button>
             </form>
                 @if (session('error'))

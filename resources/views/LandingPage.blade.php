@@ -41,7 +41,7 @@
                         <button class="btn btn-active bg-[#6A62C4] border-none"><a href="{{ url('kalkulatorbmi') }}">Kalkulator BMI</a></button>
                         <button class="btn btn-active bg-[#6A62C4] border-none"><a href="{{ route('pelacak.view') }}">Pelacakan Kesehatan</a></button>
                         <button class="btn btn-active bg-[#6A62C4] border-none"><a href="{{ url('rekomendasirs') }}">Rekomendasi Rumah Sakit</a></button>
-                        <button class="btn btn-active bg-[#6A62C4] border-none"><a href="{{ url('/apotek') }}">Rekomendasi Apotek</a></button>
+                        <button class="btn btn-active bg-[#6A62C4] border-none"><a href="{{ url('/rekomendasiapotek') }}">Rekomendasi Apotek</a></button>
                         <button class="btn btn-active bg-[#6A62C4] border-none"><a href="{{ url('/kategoriobat') }}">Rekomendasi Obat</a></button>
 
 
@@ -67,7 +67,7 @@
                             </div>
                         </button>
                     </a>
-                    <a href="{{ url('/apotek') }}">
+                    <a href="{{ url('/rekomendasiapotek') }}">
                         <button>
                             <div class="bg-white w-[174px] h-[103px] rounded-[15px] flex text-start items-end p-[15px]">
                                 Rekomendasi</br>Apotek
@@ -102,9 +102,10 @@
                     promo menarik untuk mengikuti</br>
                     sesi pelatihan ini !
                 </h1>
-                <button class="w-[111px] h-[38px] rounded-[10px] mt-[54px] bg-[#B982FF] text-white cursor-pointer">
-                    <a href="{{ route('landingquiz') }}" class="text-white">Gabung Sekarang/a>
-                </button>
+                <a href="{{ route('landingquiz') }}">
+                    <button class="w-[111px] h-[38px] rounded-[10px] mt-[19px] bg-[#B982FF] text-white text-sm">Gabung Sekarang </button>
+                </a>
+
             </div>
         </div>
         <div class="w-[4px] h-[273px] bg-[#D9D9D9]"></div>

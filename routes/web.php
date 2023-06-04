@@ -1,27 +1,30 @@
 <?php
 
+use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AnswerController;
 use App\Http\Controllers\bmiController;
+use App\Http\Controllers\PDFController;
 use App\Http\Controllers\HelpController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ObatController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\AnswerController;
 use App\Http\Controllers\ApotekController;
 use App\Http\Controllers\DokterController;
+use App\Http\Controllers\PelacakController;
 use App\Http\Controllers\HistoryTransaction;
 use App\Http\Controllers\HospitalController;
-use App\Http\Controllers\PDFController;
 use App\Http\Controllers\ServicesController;
+use App\Http\Controllers\CertificateController;
+use App\Http\Controllers\SertifikasiController;
 use App\Http\Controllers\FeedbackUserController;
 use App\Http\Controllers\Admin\ArtikelController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ReportingController;
 use App\Http\Controllers\Admin\ConfirmationController;
-use Barryvdh\DomPDF\Facade as PDF;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -103,11 +106,10 @@ Route::post('/pelacak/request', [PelacakController::class, 'pelacakRequest'])->n
 
 //Hospital Route-----------------------------------------------------------------------------
 Route::get('/rekomendasirs', [HospitalController::class, 'index']);
-Route::get('/hospitals/{id}', [HospitalController::class, 'show'])->name('hospital.show');
+Route::get('/rekomendasirs/{id}', [HospitalController::class, 'show'])->name('rekomendasirs.show');
 
-Route::get('hospital/{id}/rate', [HospitalController::class, 'createRating'])->name('hospital.createRating');
-Route::post('hospital/{id}/rate', [HospitalController::class, 'storeRating'])->name('hospital.storeRating');
-//End Route -----------------------------------------------------------------------------------
+Route::get('rekomendasirs/{id}/create-rating', [HospitalController::class, 'createRating'])->name('rekomendasirs.createRating');
+Route::post('rekomendasirs/{id}/store-rating', [HospitalController::class, 'storeRating'])->name('rekomendasirs.storeRating');
 
 
 
@@ -115,14 +117,19 @@ Route::get('register', [RegisterController::class, 'showRegistrationForm'])->nam
 Route::post('register', [RegisterController::class, 'register']);
 
 
-//Apotek Route
-Route::get('/apotek', [ApotekController::class, 'index']);
-Route::get('/apotek/{id}', [ApotekController::class, 'show'])->name('apotek.detail');
-
 Route::get('/help', [HelpController::class, 'index'])->name('help.index');
-Route::get('apotek/{id}/rate', [ApotekController::class, 'createRating'])->name('apotek.createRating');
-Route::post('apotek/{id}/rate', [ApotekController::class, 'storeRating'])->name('apotek.storeRating');
 
+//Apotek Route
+// Route::get('/apotek', [ApotekController::class, 'index']);
+// Route::get('/detail/{id}', [ApotekController::class, 'show'])->name('apotek.show');
+
+
+//Apotek Route-----------------------------------------------------------------------------
+Route::get('/rekomendasiapotek', [ApotekController::class, 'index']);
+Route::get('/rekomendasiapotek/{id}', [ApotekController::class, 'show'])->name('rekomendasiapotek.show');
+
+Route::get('/rekomendasiapotek/{id}/create-rating', [ApotekController::class, 'createRating'])->name('rekomendasiapotek.createRating');
+Route::post('/rekomendasiapotek/{id}/store-rating', [ApotekController::class, 'storeRating'])->name('rekomendasiapotek.storeRating');
 
 Route::get('/hargadanjenisobat', function () {
     return view('hargadanjenisobat');
@@ -192,9 +199,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::group(['middleware' => ['CekRoleMiddleware:1']], function () {
         Route::resource('dashboard', \App\Http\Controllers\Admin\DashboardController::class);
 
-    
+
 ;
-        
+
 
 
         Route::get('/dashboard', [ReportingController::class, 'index'])->name('reports.index');
@@ -202,7 +209,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/download-transactions/{period?}', [\App\Http\Controllers\Admin\ReportingController::class, 'downloadTransactions'])->name('download.transactions');
 
 
-      
+
         //Add Dokter
         Route::get('dokter/add', [AdminController::class, 'form_tambah']);
         Route::post('dokter/save', [AdminController::class, 'form_save']);

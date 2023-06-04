@@ -16,7 +16,7 @@
               </div>
               <div class="group relative">
                 <h3 class="mt-3 text-lg font-semibold leading-6 text-gray-900 group-hover:text-gray-600">
-                  <a href="{{ route('apotek.detail', ['id' => $apotek->id]) }}">
+                  <a href="{{ route('rekomendasiapotek.show', ['id' => $apotek->id]) }}">
                     <span class="absolute inset-0"></span>
                     {{ $apotek->name }}
                   </a>

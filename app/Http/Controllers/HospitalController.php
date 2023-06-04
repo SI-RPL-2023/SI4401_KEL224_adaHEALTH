@@ -44,8 +44,20 @@ class HospitalController extends Controller
 
     public function createRating($id)
     {
-        $hospital = Hospital::findOrFail($id);
-        return view('detailrs', compact('hospital'), ['title'=>'Detail RS']);
+        $hospital = Hospital::find($id);
+
+        if (!$hospital) {
+            abort(404);
+        }
+
+        $ratingCount = HospitalRating::where('hospital_id', $id)->count();
+        $reviewCount = HospitalRating::where('hospital_id', $id)->whereNotNull('rating')->count();
+
+        return view('detailrs', ['hospital' => $hospital], ['title'=>'Detail RS',
+        'sum' => HospitalRating::count('hospital_id'),
+        'ratingCount' => $ratingCount,
+        'reviewCount' => $reviewCount,
+    ]);
     }
 
     public function storeRating(Request $request, $id)
@@ -64,7 +76,7 @@ class HospitalController extends Controller
             ->first();
 
         if ($existingRating) {
-            return redirect()->route('hospital.show', ['id' => $hospital->id])
+            return redirect()->route('rekomendasirs.show', ['id' => $hospital->id])
                 ->with('error', 'Anda sudah memberikan rating pada rumah sakit ini sebelumnya.');
         }
 
@@ -76,11 +88,9 @@ class HospitalController extends Controller
         $hospitalRating->user()->associate($user);
         $hospitalRating->save();
 
-        return redirect()->route('hospital.show', ['id' => $hospital->id])
+        return redirect()->route('rekomendasirs.show', ['id' => $hospital->id])
             ->with('success', 'Nilai berhasil diberikan.');
     }
 
 
 }
-
-

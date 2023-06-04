@@ -129,10 +129,13 @@
                                     <div class="absolute top-3 right-3 transform rounded-full bg-accent text-white text-xs px-2 py-1">{{ $b->user->name }}</div>
                                    @else
                                     @endif
-                                    <div class="px-6 py-4 clamp-text">
+                                    <div class="px-6 py-4">
                                       <h2 class="text-lg font-bold mb-2">{{ $b->title }}</h2>
                                       <h3 class="text-lg font-medium mb-2">{{ $b->title_content }}</h3>
-                                      <p class="text-gray-700 text-base mb-2">{!! $b->isi_content !!}</p>
+                                      <div class=" clamp-text">
+
+                                          <p class="text-gray-700 text-base mb-2">{!! $b->isi_content !!}</p>
+                                      </div>
                                       @if(Auth::user()->roles != 1)
                                       @else
                                       <div class="mt-5 mb-5 flex justify-end">
@@ -170,84 +173,7 @@
                 </style>
                 <div class="basis-1/2 ml-5 u-50-w">
                     <div class="container flex justify-end mt-32">
-                        <h1 class="text-2sm font-bold mb-4">Kalender Bulan <?php
-                            // mendapatkan bulan dan tahun dari URL atau default ke bulan dan tahun saat ini
-                            $month = isset($_GET['month']) ? $_GET['month'] : date('m');
-                            echo date('F', strtotime("2023-$month-01"));
-                            ?>
-                            <div class="badge badge-error gap-2 text-white">
-                                hari ini
-                              </div>
-                              <div class="divider"></div>
-                        </h1>
-                        <table class="table-auto border-collapse border border-gray-400">
-                            <thead>
-                                <tr>
-                                    <th class="border border-gray-400 p-2">Minggu</th>
-                                    <th class="border border-gray-400 p-2">Senin</th>
-                                    <th class="border border-gray-400 p-2">Selasa</th>
-                                    <th class="border border-gray-400 p-2">Rabu</th>
-                                    <th class="border border-gray-400 p-2">Kamis</th>
-                                    <th class="border border-gray-400 p-2">Jumat</th>
-                                    <th class="border border-gray-400 p-2">Sabtu</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php
-                                    // mendapatkan bulan dan tahun dari URL atau default ke bulan dan tahun saat ini
 
-                                    $year = isset($_GET['year']) ? $_GET['year'] : date('Y');
-
-                                    // membuat objek Carbon untuk tanggal pertama di bulan dan tahun yang dipilih
-                                    $firstDay = Carbon\Carbon::createFromDate($year, $month, 1);
-
-                                    // menghitung jumlah hari di bulan dan tahun yang dipilih
-                                    $daysInMonth = $firstDay->daysInMonth;
-
-                                    // menentukan hari pertama dalam minggu
-                                    $firstDayOfWeek = $firstDay->dayOfWeek;
-
-                                    // membuat array untuk menampung tanggal
-                                    $dates = [];
-
-                                    // menambahkan tanggal kosong untuk hari pertama dalam minggu
-                                    for ($i = 0; $i < $firstDayOfWeek; $i++) {
-                                        $dates[] = null;
-                                    }
-
-                                    // menambahkan tanggal dari bulan dan tahun yang dipilih ke dalam array
-                                    for ($i = 1; $i <= $daysInMonth; $i++) {
-                                        $dates[] = Carbon\Carbon::createFromDate($year, $month, $i);
-                                    }
-
-                                    // menambahkan tanggal kosong untuk hari terakhir dalam minggu
-                                    $lastDayOfWeek = end($dates)->dayOfWeek;
-                                    for ($i = 0; $i < 6 - $lastDayOfWeek; $i++) {
-                                        $dates[] = null;
-                                    }
-
-                                    // memecah array tanggal menjadi array mingguan
-                                    $weeks = array_chunk($dates, 7);
-
-                                    // menampilkan tanggal pada setiap sel tabel dan mewarnai tanggal hari ini dengan warna merah
-                                    foreach ($weeks as $week) {
-                                        echo '<tr>';
-                                        foreach ($week as $date) {
-                                            if ($date) {
-                                                if ($date->isToday()) {
-                                                    echo '<td class="border border-gray-400 p-2 bg-error text-white">' . $date->format('d') . '</td>';
-                                                } else {
-                                                    echo '<td class="border border-gray-400 p-2">' . $date->format('d') . '</td>';
-                                                }
-                                            } else {
-                                                echo '<td class="border border-gray-400 p-2"></td>';
-                                            }
-                                        }
-                                        echo '</tr>';
-                                    }
-                                ?>
-                            </tbody>
-                        </table>
                     </div>
                     <div class="flex flex-row justify-between items-center py-4">
                         <h2 class="text-lg font-bold">Artikel Terbaru</h2>
@@ -258,10 +184,13 @@
                             <div class="bg-white rounded-lg overflow-hidden shadow-md relative">
                                 <img src="{{ asset('upload/artikel/'.$latestArticle->images) }}" alt="{{ $latestArticle->slug }}" class="w-full h-48 object-cover">
                                 <div class="absolute top-3 right-3 transform rounded-full bg-error text-white text-xs px-2 py-1">{{ $latestArticle->user->name }}</div>
-                                <div class="p-4 clamp-text">
+                                <div class="p-4">
                                     <h3 class="font-bold text-lg mb-2">{{ $latestArticle->title }}</h3>
                                     <h3 class="font-bold text-medium mb-2">{{ $latestArticle->title_content }}</h3>
-                                    <p class="text-gray-700 text-base mb-4">{!! $latestArticle->isi_content !!}</p>
+                                    <div class=" clamp-text">
+
+                                        <p class="text-gray-700 text-base mb-4">{!! $latestArticle->isi_content !!}</p>
+                                    </div>
                                     @if(Auth::user()->roles != 1)
                                     @else
                                     <div class="mt-5 mb-5 flex justify-end">
@@ -289,7 +218,7 @@
         </section>
 
 {{-- ArtikeL Kesehatan --}}
-<section class="container mx-auto py-8">
+<section class="container mx-auto px-24">
             <h1 class="text-3xl font-bold mb-8">Artikel Kesehatan</h1>
             <div class="grid grid-cols-3 gap-8">
                 @forelse ( $articlesKesehatan as $s )
@@ -300,10 +229,13 @@
                         <div class="absolute top-3 right-3 transform rounded-full bg-primary text-white text-xs px-2 py-1">{{ $s->user->name }}</div>
                        @else
                         @endif
-                        <div class="px-6 py-4 clamp-text">
+                        <div class="px-6 py-4 ">
                         <h2 class="text-lg font-bold mb-2">{{ $s->title }}</h2>
                         <h2 class="text-medium font-bold mb-2">{{ $s->title_content }}</h2>
-                        <p class="text-gray-700 text-base mb-2">{!! $s->isi_content !!}</p>
+                        <div class=" clamp-text">
+
+                            <p class="text-gray-700 text-base mb-2">{!! $s->isi_content !!}</p>
+                        </div>
                         @if(Auth::user()->roles != 1)
                         @else
                         <div class="mt-5 mb-5 flex justify-end">
@@ -384,10 +316,13 @@
               @else
               <div class="absolute top-3 right-3 transform rounded-full bg-ghost text-white text-xs px-2 py-1">{{ $show->user->name }}</div>
               @endif
-              <div class="px-6 py-4 clamp-text">
+              <div class="px-6 py-4">
                 <h2 class="text-lg font-bold mb-2">{{ $show->title }}</h2>
                 <h2 class="text-medium font-bold mb-2">{{ $show->title_content }}</h2>
-                <p class="text-gray-700 text-base mb-2">{!! $show->isi_content !!} </p>
+                <div class=" clamp-text">
+
+                    <p class="text-gray-700 text-base mb-2">{!! $show->isi_content !!} </p>
+                </div>
                 @if(Auth::user()->roles != 1)
                 @else
                 <div class="mt-5 mb-5 flex justify-end">
