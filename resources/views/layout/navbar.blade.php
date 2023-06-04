@@ -30,6 +30,12 @@
 
                         <a href="{{ url('/help') }}" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Bantuan </a>
                     </div>
+                    <div class="group">
+                        <a href="#" class="text-gray-300 text-white rounded-md px-3 py-2 text-sm font-medium" aria-current="page">{{ Auth::user()->email }}</a>
+
+                        <div class="group-hover:block hidden w-[100px] h-[150px] bg-white shadow-lg absolute mt-[5px]">
+                        <a href="{{ route('profile.show', ['id' => Auth::user()->id]) }}"><button class="border-b border-black w-full flex items-center justify-center"> Profile</button></a>
+                            <button class="border-b border-black w-full flex items-center justify-center"> <a href="{{ url('/feedback') }}"> Feedback Application</a></button>
                 </div>
             </div>
             @auth
@@ -41,7 +47,6 @@
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-4 h-4 text-white" fill="currentColor"><title>menu-down</title><path d="M7,10L12,15L17,10H7Z" /></svg>
                     </button>
                 </div>
-
                 <ul id="user-menu" class="hidden absolute right-0 mt-2 w-52 bg-white rounded-md shadow-lg py-1" role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button">
                     <li><a href="{{ route('profile.show', ['id' => Auth::user()->id]) }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Profile</a></li>
                     <li><a href="{{ url('/feedback') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Feedback Application</a></li>

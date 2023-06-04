@@ -204,4 +204,11 @@ Route::group(['middleware' => ['auth']], function () {
 Route::get('/kalkulatorbmi', [bmiController::class,'index']);
 Route::post('/kalkulatorbmi', [bmiController::class, 'CalculateBMI'])->name('kalkulatorbmi.check');
 
+
 Route::get('/resultbmi', [bmiController::class,'indexResult'])->name('result');
+Route::get('/kategoriobat', [ObatController::class, 'kategoriobat'])->name('kategoriobat');
+Route::get('/kategoriobat/{kategori}', [ObatController::class, 'obatkategori'])->name('obatkategori');
+Route::post('/hapusfoto/{id}', [UserController::class, 'hapusfoto'])->name('hapusfoto');
+
+Route::get('/resultbmi', [bmiController::class,'indexResult'])->name('result');
+

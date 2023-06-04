@@ -77,6 +77,14 @@ class UserController extends Controller
             return redirect('/')->with('success', 'Edit Success');
         }
 
+
+    public function hapusfoto($id)
+    {
+        $user = User::find($id);
+        Storage::disk('public')->delete($user->photo);
+        
+        return redirect('/')->with('success', 'Edit Success');
+    }
         function riwayat_konsultasi() {
             $konsultasi = DB::table('konsultasi as a')
                         ->join('users as b', 'a.id_dokter', '=', 'b.id')
@@ -87,4 +95,5 @@ class UserController extends Controller
                         ->get();
             return view('riwayat-konsultasi-pasien-view', compact('konsultasi'));
         }
+
 }
