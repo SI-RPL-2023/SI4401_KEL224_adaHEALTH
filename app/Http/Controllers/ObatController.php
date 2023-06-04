@@ -142,11 +142,12 @@ class ObatController extends Controller
     public function obatkategori($kategori)
     {
         $obats = Obat::where('kategori', $kategori)->get();
+        $rekomendasi = Obat::where('rekomendasi', 'like', '%Rekomendasi Dokter%')->get();
 
-        return view('hargadanjenisobat', ['obats' => $obats, 'title' => 'Obat']);
+        return view('hargadanjenisobat', ['obats' => $obats, 'title' => 'Obat'], compact('rekomendasi'));
     }
-  
-  
+
+
     // public function recommend(Request $request)
     // {
     //     $rekomendasi = $request->get('recommend');
@@ -157,8 +158,8 @@ class ObatController extends Controller
 
     //     return view('hargadanjenisobat', compact('obats', 'title'));
 
-    
-    
+
+
     // ... method-method lainnya ...
 
 

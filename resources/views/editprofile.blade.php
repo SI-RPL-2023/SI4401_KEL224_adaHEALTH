@@ -17,7 +17,7 @@
         <div class="modal-box relative">
             <label for="my-modal-3" class="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
             <h3 class="text-lg font-bold">Change Your Password!</h3>
-            <form action="" method="POST">
+            <form action="{{ route('ganti.password', ['id' => Auth::user()->id]) }}" method="POST">
                 @csrf
                 <h1 class="text-start mt-[18px]">Password<span class="text-red-500">*</span></h1>
                 <input type="password" name="password" class="w-full focus:outline-none border-b border-black mt-[6px]" value="{{ $user->password }}">

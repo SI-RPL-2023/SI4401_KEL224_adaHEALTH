@@ -20,7 +20,15 @@
 
     </div>
 
-
+    <style>
+        .clamp-text {
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            }
+    </style>
     <form action="/obats/search" class="flex items-center justify-end" method="GET">
         <div class=" top-52 w-[300px] right-0">
             <div class="absolute mt-3 flex items-center pl-3 pointer-events-none">
@@ -42,8 +50,17 @@
                 <a href="{{ url('obats/detail/'.$obat->id) }}">
                     <div class="p-4">
                         <h2 class="text-xl font-bold mb-2">{{ $obat->nama }}</h2>
+                        @if ($obat->rekomendasi == "Tidak")
+
+                        <h2 class="text-[#6A62C4] font-bold">Tidak direkomendasikan.</h2>
+                        @else
                         <h2 class="text-[#6A62C4] font-bold">{{ $obat->rekomendasi }}</h2>
-                        <p class="text-gray-700 text-base">{{ $obat->deskripsi }}</p>
+
+                        @endif
+                        <div class="clamp-text">
+
+                            <p class="text-gray-700 text-base">{{ $obat->deskripsi }}</p>
+                        </div>
                         <p class="text-gray-700 text-base mt-2">Harga: {{ $obat->harga }}</p>
                         <p class="text-gray-700 text-base mt-2">Kategori: {{ $obat->kategori }}</p>
                     </div>
@@ -74,7 +91,10 @@
                     <div class="p-4">
                         <h2 class="text-xl font-bold mb-2">{{ $item->nama }}</h2>
                         <h2 class="text-[#6A62C4] font-bold">{{ $item->rekomendasi }}</h2>
-                        <p class="text-gray-700 text-base">{{ $item->deskripsi }}</p>
+                        <div class="clamp-text">
+
+                            <p class="text-gray-700 text-base">{{ $item->deskripsi }}</p>
+                        </div>
                         <p class="text-gray-700 text-base mt-2">Harga: {{ $item->harga }}</p>
                         <p class="text-gray-700 text-base mt-2">Kategori: {{ $item->kategori }}</p>
                     </div>
@@ -94,54 +114,6 @@
     </div>
 
 
-
-
-
-
-
-    {{-- <div class="mt-[20px]">
-        <div class="drawer">
-            <input id="my-drawer" type="checkbox" class="drawer-toggle" />
-            <div class="drawer-content">
-                <!-- Page content here -->
-                <label for="my-drawer" class="btn btn-primary drawer-button">Tampilkan Jenis Penyakit</label>
-            </div>
-            <div class="drawer-side">
-                <label for="my-drawer" class="drawer-overlay"></label>
-                <div class="menu p-4 w-80 text-base-content bg-[#6A62C4]">
-                    <label for="my-modal" class="text-white">FLU</label>
-
-                    <!-- Put this part before </body> tag -->
-                    <input type="checkbox" id="my-modal" class="modal-toggle" />
-                    <div class="modal">
-                        <div class="modal-box">
-                            <h3 class="font-bold text-lg">Jenis Obat Untuk Sakit FLU</h3>
-                            <ul class="menu text-base-content">
-                                <li><a>Loratadine</a></li>
-                                <li><a>Pseudoephedrine</a></li>
-                                <li><a>Paracetamol</a></li>
-                                <li><a>Guaifenesin</a></li>
-                                <li><a>Oseltamivir</a></li>
-                            <div class="modal-action">
-                                <label for="my-modal" class="btn">tutup</label>
-                            </div>
-                        </div>
-                    </div>
-                    <li>
-                        <a class="text-white">Sakit Gigi</a>
-                    </li>
-                    <li>
-                        <a class="text-white">Luka Kulit</a>
-                    </li>
-                    <li>
-                        <a class="text-white">Covid-19</a>
-                    </li>
-                    <label for="my-drawer" class="btn">Tutup</label>
-                </div>
-
-            </div>
-        </div>
-    </div> --}}
 </div>
 
 

@@ -58,7 +58,8 @@ class AdminController extends Controller
             'jam_tutup' => $params['jam_tutup']
         ]);
 // DOKTER CRUD
-
+            return redirect('/dokter')->with('success', 'Dokter Berhasil dibuat.');
+    }
 public function form_edit($id) {
     $id = Crypt::decryptString($id);
 
@@ -80,7 +81,7 @@ public function form_update(Request $request, User $user, $id) {
             'email' => 'required|email|unique:dokters'.',id,'.$user->id,
         ]);
 
-        if($request->hasFile('foto')) 
+        if($request->hasFile('foto'))
         {
             $image = $request->file('foto');
             // $image->store('upload/dokter', ['disk' => 'public']);
@@ -91,7 +92,7 @@ public function form_update(Request $request, User $user, $id) {
             {
                 // $path = storage_path('app/public/upload/dokter/'.$dokter->foto);
                 $path = public_path('upload/dokter/'.$dokter->foto);
-                if(file_exists($path)) 
+                if(file_exists($path))
                 {
                     unlink($path);
 
@@ -149,7 +150,7 @@ public function form_delete($id) {
             {
                 // $path = storage_path('app/public/upload/dokter/'.$dokter->foto);
                 $path = public_path('upload/dokter/'.$dokter->foto);
-                if(file_exists($path)) 
+                if(file_exists($path))
                 {
                     unlink($path);
 
@@ -158,13 +159,13 @@ public function form_delete($id) {
                     return response()->json(['message' => 'File not found.'], 404);
                 }
             }
-            
+
 
             // Delete data dokter
             Dokter::where('id', $id)->delete();
 
             return redirect()->to('dokter')->with('success', 'Data berhasil dihapus');
-        } catch(\Illuminate\Database\QueryException $e) { 
+        } catch(\Illuminate\Database\QueryException $e) {
             return redirect()->to('dokter')->with('warning', 'Gagal menghapus dokter karena data dokter sedang digunakan!');
         }
     }

@@ -20,6 +20,7 @@ class Obat extends Model
         'jenis',
         'kategori',
         'deskripsi',
+        'rekomendasi',
         'harga',
         'qty',
         'photo',
