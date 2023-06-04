@@ -24,7 +24,7 @@
         @if ($currentQuestion['number'] == $lastQuestionNumber)
         <button type="submit" class="btn btn-primary">Submit</button>
         @else
-        <button type="button" class="btn btn-primary" onclick="nextQuestion()">Next</button>
+        <button type="button" class="btn btn-primary" onclick="saveAnswerAndNext()">Next</button>
         @endif
       </form>
     </div>
