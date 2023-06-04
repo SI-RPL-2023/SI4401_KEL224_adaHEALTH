@@ -68,9 +68,7 @@ class UserController extends Controller
             $user->address = $request->input('address');
             $user->email = $request->input('email');
             $user->phone = $request->input('phone');
-            if(!empty($request->password)){
-                $user->password = Hash::make($request->password);
-            }
+
 
 
 
@@ -78,13 +76,24 @@ class UserController extends Controller
 
             return redirect('/')->with('success', 'Edit Success');
         }
+        public function gantiPass(Request $request, $id){
+            $user = User::find($id);
+
+            if (!$user) {
+                return redirect()->back()->with('error', 'User not found.');
+            }
+            $user->password = Hash::make($request->password);
+
+            $user->save();
+            return redirect('/')->with('success', 'Ganti Password Berhasil');
+        }
 
 
     public function hapusfoto($id)
     {
         $user = User::find($id);
         Storage::disk('public')->delete($user->photo);
-        
+
         return redirect('/')->with('success', 'Edit Success');
     }
         function riwayat_konsultasi() {

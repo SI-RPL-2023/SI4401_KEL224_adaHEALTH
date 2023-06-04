@@ -86,7 +86,7 @@
 
                 @empty
                   <tr>
-                    <td class="py-3 px-4 text-center" colspan="6">Tidak ada data Apotek yang ditemukan.</td>
+                    <td class="py-3 px-4 text-center" colspan="6">Tidak ada data Transaksi yang ditemukan.</td>
                   </tr>
 
                 @endforelse

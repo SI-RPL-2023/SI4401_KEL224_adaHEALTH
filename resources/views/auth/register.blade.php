@@ -30,12 +30,12 @@
                         @enderror
 
                         <label class="text-[#909090]" for="">Password</label>
-                        <input type="text" class="w-[400px] h-[38px] border-b-2 border-[#909090] focus:outline-none"  id="password" name="password" value="{{ old('password') }}">
+                        <input type="password" class="w-[400px] h-[38px] border-b-2 border-[#909090] focus:outline-none"  id="password" name="password" value="{{ old('password') }}">
                         @error('password')
                             <span>{{ $message }}</span>
                         @enderror
                         <label class="text-[#909090]" for="password_confirmation">Confirm-Password</label>
-                        <input type="text" class="w-[400px] h-[38px] border-b-2 border-[#909090] focus:outline-none"  id="password_confirmation" name="password_confirmation" value="{{ old('password_confirmation') }}">
+                        <input type="password" class="w-[400px] h-[38px] border-b-2 border-[#909090] focus:outline-none"  id="password_confirmation" name="password_confirmation" value="{{ old('password_confirmation') }}">
                         @error('password')
                             <span>{{ $message }}</span>
                         @enderror

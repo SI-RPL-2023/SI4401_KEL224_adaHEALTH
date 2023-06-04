@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AnswerController;
 use App\Http\Controllers\bmiController;
 use App\Http\Controllers\HelpController;
 use App\Http\Controllers\HomeController;
@@ -15,6 +16,7 @@ use App\Http\Controllers\HospitalController;
 use App\Http\Controllers\PDFController;
 use App\Http\Controllers\ServicesController;
 use App\Http\Controllers\FeedbackUserController;
+use App\Http\Controllers\Admin\ArtikelController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ReportingController;
@@ -39,6 +41,8 @@ use Barryvdh\DomPDF\Facade as PDF;
 Route::get('/profile/{id}', [UserController::class, 'show'])->name('profile.show');
 Route::put('/profile/{id}', [UserController::class, 'edit'])->name('updateProfile.put');
 
+Route::post('/profile/{id}', [UserController::class, 'gantiPass'])->name('ganti.password');
+
 // Route::get('/history', function () {
 //     return view('historytransaksi');
 // });
@@ -49,6 +53,10 @@ Route::get('/help', function () {
     return view('help', ['title'=>'Help']);
 });
 Route::post('/help', [HelpController::class, 'submitForm'])->name('submit.form');
+
+Route::get('/answer/{question_id}', [AnswerController::class, 'show'])->name('answer');
+Route::post('/submit/answer', [AnswerController::class, 'store'])->name('submit.answer');
+
 
 Route::get('/', function () {
     return view('LandingPage', ['title' => 'Home']);
